@@ -1,3 +1,4 @@
+import FeatureBar from "./_components/feature-bar";
 import HeroSlider from "./_components/hero-slider";
 import { Navbar } from "./_components/navbar";
 
@@ -6,6 +7,7 @@ export default function Home() {
     <div className="relative m-auto flex min-h-full w-full max-w-5xl flex-col py-12">
       <Navbar />
       <HeroSlider />
+      <FeatureBar />
     </div>
   );
 }

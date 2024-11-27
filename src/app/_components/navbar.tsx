@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const Navbar = () => {
   return (
-    <div className="flex w-full items-center justify-between p-4 py-4">
+    <div className="mb-8 flex w-full items-center justify-between p-4 py-4">
       <Image
         src={"/ESCRITA.svg"}
         alt="Logo da Zaap Eventos"

@@ -13,6 +13,9 @@ export default {
         foreground: "var(--foreground)",
         primary: "var(--primary)",
       },
+      fontSize: {
+        xss: "0.6rem",
+      },
     },
   },
   plugins: [],
