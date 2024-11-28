@@ -16,6 +16,9 @@ export default {
       fontSize: {
         xss: "0.6rem",
       },
+      screens: {
+        xss: "412px",
+      },
     },
   },
   plugins: [],

@@ -1,19 +1,17 @@
 import Image from "next/image";
 
 interface FeatureItemProps {
-  imageString: string;
+  src: string;
   title: string;
   subTitle: string;
+  alt: string;
 }
 
-const FeatureItem = ({ imageString, title, subTitle }: FeatureItemProps) => {
+const FeatureItem = ({ src, title, subTitle, alt }: FeatureItemProps) => {
   return (
     <div className="flex w-full items-center justify-center gap-2">
-      <div
-        className={`relative h-[42px] ${imageString === "/features/premium.png" ? "w-[31px]" : "w-[52px]"}`}
-      >
-        <Image src={imageString} alt={"truck"} fill />
-      </div>
+      <Image src={src} alt={alt} height={42} width={52} />
+
       <div className="leading-3">
         <p>{title}</p>
         <span className="text-xss">{subTitle}</span>

@@ -9,24 +9,28 @@ const FeatureBar = () => {
   return (
     <div className={`${raleway.className} flex gap-8 p-8 text-sm`}>
       <FeatureItem
-        imageString="/features/truck.png"
+        src="/features/truck.png"
         title="Atendemos toda região"
         subTitle="MG, ES e RJ"
+        alt="Truck"
       />
       <FeatureItem
-        imageString="/features/assessment.png"
+        src="/features/assessment.png"
         title="Equipe especializada"
         subTitle="100% Profissional"
+        alt="Assessment"
       />
       <FeatureItem
-        imageString="/features/premium.png"
+        src="/features/premium.png"
         title="Desde 2010"
         subTitle="Mais de 2.000 eventos"
+        alt="Premium"
       />
       <FeatureItem
-        imageString="/features/card.png"
+        src="/features/card.png"
         title="Parcele no cartão"
         subTitle="cartão de crédito"
+        alt="Card"
       />
     </div>
   );
