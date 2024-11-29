@@ -19,6 +19,15 @@ export default {
       screens: {
         xss: "412px",
       },
+      keyframes: {
+        scroll: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+      },
+      animation: {
+        marquee: "scroll 30s linear infinite",
+      },
     },
   },
   plugins: [],
