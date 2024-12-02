@@ -8,9 +8,15 @@ interface HeroSliderProps {
 
 const HeroSlider = ({ src, alt }: HeroSliderProps) => {
   return (
-    <div className="relative">
+    <div className="relative h-[324px] w-[1024px]">
       <Logo className="absolute left-[50%] top-[-84px] z-10 translate-x-[-50%]" />
-      <Image src={src} alt={alt} height={324} width={1024} />
+      <Image
+        className="rounded-3xl"
+        src={src}
+        alt={alt}
+        fill
+        style={{ objectFit: "cover" }}
+      />
     </div>
   );
 };

@@ -1,11 +1,65 @@
-import HeroSlider from "../hero-slider";
+"use client";
+import { useState } from "react";
 import GaleryHeader from "./_components/galery-header";
+import GaleryList from "./_components/galery-list";
+import GaleryHeroSlider from "./_components/galery-hero-slider";
+
+const events = [
+  {
+    src: "/galery-list/45.png",
+    title: "Maria Xavier",
+    type: "15 Anos",
+    locale: "Espera Feliz",
+    date: "22 de Outubro 2024",
+  },
+  {
+    src: "/galery-list/0.webp",
+    title: "Fulano 1",
+    type: "Casamento",
+    locale: "Carangola",
+    date: "20 de Novembro 2023",
+  },
+  {
+    src: "/galery-list/0.jpg",
+    title: "Maria Xavier 2",
+    type: "15 Anos",
+    locale: "Espera Feliz",
+    date: "22 de Outubro 2024",
+  },
+  {
+    src: "/galery-list/0.jpg",
+    title: "Fulano 3",
+    type: "Casamento",
+    locale: "Carangola",
+    date: "20 de Novembro 2023",
+  },
+  {
+    src: "/galery-list/0.jpg",
+    title: "Maria Xavier 4",
+    type: "15 Anos",
+    locale: "Espera Feliz",
+    date: "22 de Outubro 2024",
+  },
+  {
+    src: "/galery-list/0.jpg",
+    title: "Fulano 5",
+    type: "Casamento",
+    locale: "Carangola",
+    date: "20 de Novembro 2023",
+  },
+];
 
 const Galery = () => {
+  const [itemSelected, setItemSelected] = useState(0);
   return (
     <div>
       <GaleryHeader />
-      <HeroSlider src="/galery-picture.png" alt="Galeria de fotos" />
+      <GaleryHeroSlider event={events[itemSelected]} />
+      <GaleryList
+        events={events}
+        itemSelected={itemSelected}
+        setItemSelected={setItemSelected}
+      />
     </div>
   );
 };
