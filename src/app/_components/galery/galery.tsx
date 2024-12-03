@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GaleryHeader from "./_components/galery-header";
 import GaleryList from "./_components/galery-list";
 import GaleryHeroSlider from "./_components/galery-hero-slider";
@@ -11,6 +11,7 @@ const events = [
     type: "15 Anos",
     locale: "Espera Feliz",
     date: "22 de Outubro 2024",
+    position: "center 30%",
   },
   {
     src: "/galery-list/0.webp",
@@ -51,6 +52,15 @@ const events = [
 
 const Galery = () => {
   const [itemSelected, setItemSelected] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setItemSelected((prev) => (prev === events.length - 1 ? 0 : prev + 1));
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [itemSelected, setItemSelected]);
+
+  console.log(events[itemSelected].title);
   return (
     <div>
       <GaleryHeader />

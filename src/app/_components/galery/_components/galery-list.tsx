@@ -23,16 +23,9 @@ const GaleryList = ({
         <div
           className="relative"
           key={index}
-          onClick={() => {
-            console.log(index);
-            setItemSelected(index);
-          }}
+          onClick={() => setItemSelected(index)}
         >
-          <GaleryListItem
-            index={index}
-            selected={index === itemSelected}
-            event={event}
-          />
+          <GaleryListItem selected={index === itemSelected} event={event} />
         </div>
       ))}
     </div>

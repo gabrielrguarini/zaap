@@ -2,7 +2,6 @@
 import Image from "next/image";
 interface GaleryListProps extends React.HTMLAttributes<HTMLDivElement> {
   selected: boolean;
-  index: number;
   event: {
     src: string;
     title: string;
