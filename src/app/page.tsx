@@ -14,7 +14,16 @@ export default function Home() {
   return (
     <div className="relative m-auto flex min-h-full w-full max-w-5xl flex-col gap-2 pt-12 md:gap-4">
       <Navbar />
-      <HeroSlider src="/HeroSlider.png" alt="Hero Slider" />
+      <HeroSlider
+        slides={[
+          {
+            src: "/slide2.png",
+            alt: "Hero Slider",
+            title: "Seu evento com sonorização da mais alta qualidade!",
+            subTitle: "Conforto sonoro e qualidade no seu evento",
+          },
+        ]}
+      />
       <FeatureBar />
       <div>
         <EventsType
