@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Logo from "../../logo";
+import { useEffect, useState } from "react";
 
 interface HeroSliderProps {
   event: {
@@ -13,13 +14,26 @@ interface HeroSliderProps {
 }
 
 const GaleryHeroSlider = ({ event }: HeroSliderProps) => {
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    // Ativa a animação quando o evento muda
+    setAnimate(true);
+
+    // Remove a animação após a duração para reaplicá-la no próximo slide
+    const timeout = setTimeout(() => {
+      setAnimate(false);
+    }, 600); // 600ms, mesma duração definida no Tailwind
+
+    return () => clearTimeout(timeout);
+  }, [event]);
   return (
     <div className="relative h-[424px] w-[1024px]">
       <div
         className={`opacity-1 absolute inset-0 z-10 rounded-3xl bg-gradient-to-r from-black via-black/40 to-black`}
       ></div>
       <div
-        className={`absolute inset-0 z-10 flex flex-col justify-center rounded-3xl px-10`}
+        className={`absolute inset-0 z-10 flex flex-col justify-center rounded-3xl px-10 ${animate ? "animate-fade-up" : ""}`}
       >
         <p className="mr-auto whitespace-nowrap bg-gradient-to-r from-[#ffb400] to-[#ff4800] bg-clip-text text-start text-6xl font-bold text-transparent">
           {event.title}

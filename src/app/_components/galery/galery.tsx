@@ -41,13 +41,6 @@ const events = [
     locale: "Espera Feliz",
     date: "22 de Outubro 2024",
   },
-  {
-    src: "/galery-list/0.jpg",
-    title: "Fulano 5",
-    type: "Casamento",
-    locale: "Carangola",
-    date: "20 de Novembro 2023",
-  },
 ];
 
 const Galery = () => {
