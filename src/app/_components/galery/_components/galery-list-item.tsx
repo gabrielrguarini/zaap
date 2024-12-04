@@ -20,8 +20,8 @@ const GaleryListItem = ({
     <div
       className={`${
         selected
-          ? "relative rounded-lg bg-gradient-to-r from-[#ffb400] to-[#ff4800] p-[2px]"
-          : "relative"
+          ? "relative cursor-pointer rounded-lg bg-gradient-to-r from-[#ffb400] to-[#ff4800] p-[2px]"
+          : "relative cursor-pointer"
       }`}
       {...rest}
     >

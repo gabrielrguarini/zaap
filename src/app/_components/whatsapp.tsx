@@ -12,7 +12,7 @@ const WhatsappButton = () => {
           height={80}
           alt={"Whatsapp"}
         />
-        <div className="flex flex-col items-center rounded-full bg-background">
+        <div className="flex flex-col items-center whitespace-nowrap rounded-full bg-background">
           <div className="ml-16 p-2">
             <p className="leading-none">NÓS TE AJUDAMOS A</p>
             <p className="text-xl font-bold leading-none">
