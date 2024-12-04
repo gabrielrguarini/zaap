@@ -17,13 +17,10 @@ const GaleryHeroSlider = ({ event }: HeroSliderProps) => {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    // Ativa a animação quando o evento muda
     setAnimate(true);
-
-    // Remove a animação após a duração para reaplicá-la no próximo slide
     const timeout = setTimeout(() => {
       setAnimate(false);
-    }, 600); // 600ms, mesma duração definida no Tailwind
+    }, 600);
 
     return () => clearTimeout(timeout);
   }, [event]);
