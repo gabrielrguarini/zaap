@@ -8,7 +8,7 @@ interface EventsTypeProps {
 
 const EventsType = ({ title, subTitle, imageString }: EventsTypeProps) => {
   return (
-    <div className="col relative flex w-full p-2 md:px-8 md:py-4">
+    <div className="col relative flex w-full overflow-hidden p-2 md:px-8 md:py-4">
       <div className="relative w-full">
         <Image src={imageString} width={960} height={226} alt={"44"} />
         <div className="absolute left-[50%] top-[50%] translate-y-[-50%] leading-none">

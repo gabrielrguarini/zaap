@@ -4,7 +4,7 @@ const About = () => {
       <h2 className="bg-gradient-to-r from-[#ffb400] to-[#ff4800] bg-clip-text text-center text-4xl font-semibold text-transparent">
         Conheça um pouco da nossa história!
       </h2>
-      <div className="m-auto flex flex-col gap-6 text-2xl">
+      <div className="m-auto flex flex-col gap-6 text-lg sm:text-2xl">
         <p>
           A equipe <span className="font-bold">Zaap Eventos</span> foi{" "}
           <span className="font-bold">fundada em 2010</span> com o objetivo de

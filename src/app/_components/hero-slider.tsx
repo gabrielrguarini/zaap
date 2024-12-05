@@ -27,7 +27,7 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
 
   return (
     <div
-      className="relative h-[224px] w-full p-4 lg:h-[424px]"
+      className="relative mt-10 h-[224px] w-full p-4 sm:my-0 lg:h-[424px]"
       data-aos="zoom-in"
     >
       <Logo className="absolute left-[50%] top-[-20%] z-10 translate-x-[-50%] lg:top-[-20%]" />

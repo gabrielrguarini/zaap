@@ -12,7 +12,7 @@ import LastEvents from "./_components/last-events/last-events";
 
 export default function Home() {
   return (
-    <div className="relative m-auto flex min-h-full w-full max-w-5xl flex-col gap-2 pt-12 md:gap-4">
+    <div className="relative m-auto mt-4 flex min-h-full w-full max-w-5xl flex-col gap-2 sm:pt-12 md:gap-4">
       <Navbar />
       <HeroSlider
         slides={[
@@ -52,7 +52,7 @@ export default function Home() {
       <Structures />
       <WhatsappButton />
       <Image
-        className="m-auto my-24"
+        className="m-auto my-8 sm:my-24"
         src={"/logo3.png"}
         width={180}
         height={213}

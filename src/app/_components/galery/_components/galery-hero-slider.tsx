@@ -25,7 +25,7 @@ const GaleryHeroSlider = ({ event }: HeroSliderProps) => {
     return () => clearTimeout(timeout);
   }, [event]);
   return (
-    <div className="relative h-[212px] w-[512px] lg:h-[424px] lg:w-[1024px]">
+    <div className="relative h-[212px] w-full lg:h-[424px]">
       <div
         className={`opacity-1 absolute inset-0 z-10 rounded-3xl bg-gradient-to-r from-black via-black/40 to-black`}
       ></div>

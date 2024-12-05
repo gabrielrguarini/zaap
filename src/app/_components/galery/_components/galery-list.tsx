@@ -18,7 +18,7 @@ const GaleryList = ({
   events,
 }: GaleryListProps) => {
   return (
-    <div className="no-scrollbar flex gap-4 overflow-scroll p-2 lg:p-8">
+    <div className="no-scrollbar flex w-full gap-4 overflow-scroll p-2 lg:p-8">
       {events.map((event, index) => (
         <div
           className="relative"

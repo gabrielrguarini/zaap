@@ -7,7 +7,9 @@ const raleway = Raleway({
 });
 const FeatureBar = () => {
   return (
-    <div className={`${raleway.className} flex gap-8 p-8 text-sm`}>
+    <div
+      className={`${raleway.className} no-scrollbar flex w-full gap-8 overflow-scroll text-sm sm:p-8`}
+    >
       <FeatureItem
         src="/features/truck.png"
         title="Atendemos toda região"
