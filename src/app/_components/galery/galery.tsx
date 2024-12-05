@@ -53,7 +53,6 @@ const Galery = () => {
     return () => clearInterval(interval);
   }, [itemSelected, setItemSelected]);
 
-  console.log(events[itemSelected].title);
   return (
     <div>
       <GaleryHeader />

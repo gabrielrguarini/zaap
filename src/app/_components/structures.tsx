@@ -17,7 +17,7 @@ const Structures = () => {
   ];
 
   return (
-    <div>
+    <div className="px-8">
       <h2 className="p-8 text-center">
         <span className="font-bold">Oferecemos</span> estruturas que contam com:
       </h2>

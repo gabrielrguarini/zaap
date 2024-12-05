@@ -25,7 +25,7 @@ const GaleryHeroSlider = ({ event }: HeroSliderProps) => {
     return () => clearTimeout(timeout);
   }, [event]);
   return (
-    <div className="relative h-[424px] w-[1024px]">
+    <div className="relative h-[212px] w-[512px] lg:h-[424px] lg:w-[1024px]">
       <div
         className={`opacity-1 absolute inset-0 z-10 rounded-3xl bg-gradient-to-r from-black via-black/40 to-black`}
       ></div>
@@ -40,7 +40,7 @@ const GaleryHeroSlider = ({ event }: HeroSliderProps) => {
         </p>
         <span className="text-xs font-light">{event.date}</span>
       </div>
-      <Logo className="absolute left-[50%] top-[-84px] z-10 translate-x-[-50%]" />
+      <Logo className="absolute left-[50%] top-[-20%] z-10 translate-x-[-50%]" />
       <div className="absolute left-[20%] top-[30%] z-20 translate-x-[-50%] whitespace-nowrap leading-3"></div>
       <Image
         className="rounded-3xl"
