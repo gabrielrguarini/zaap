@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        className={`${rajdhani.className} overflow-hidden text-white antialiased`}
+        className={`${rajdhani.className} overflow-x-hidden text-white antialiased`}
       >
         {children}
       </body>
