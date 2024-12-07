@@ -19,7 +19,19 @@ export default function Home() {
           {
             src: "/slide2.png",
             alt: "Hero Slider",
-            title: "Seu evento com sonorização da mais alta qualidade!",
+            title: "Seu evento com sonorização da mais alta qualidade! 1",
+            subTitle: "Conforto sonoro e qualidade no seu evento",
+          },
+          {
+            src: "/slide2.png",
+            alt: "Hero Slider",
+            title: "Seu evento com sonorização da mais alta qualidade! 2",
+            subTitle: "Conforto sonoro e qualidade no seu evento",
+          },
+          {
+            src: "/slide2.png",
+            alt: "Hero Slider",
+            title: "Seu evento com sonorização da mais alta qualidade! 3",
             subTitle: "Conforto sonoro e qualidade no seu evento",
           },
         ]}

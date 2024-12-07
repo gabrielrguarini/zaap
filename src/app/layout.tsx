@@ -25,7 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${rajdhani.className} text-white antialiased`}>
+      <body
+        className={`${rajdhani.className} overflow-hidden text-white antialiased`}
+      >
         {children}
       </body>
     </html>
