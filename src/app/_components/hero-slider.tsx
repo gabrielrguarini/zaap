@@ -44,13 +44,13 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
         let positionClasses = "";
         if (position === 0) {
           positionClasses =
-            "translate-x-0 scale-100 z-10 opacity-100 duration-1000";
+            "translate-x-0 scale-100 z-10 opacity-100 duration-[2000ms]";
         } else if (position === 1) {
           positionClasses =
-            "translate-x-full scale-75 z-0 opacity-75 duration-1000";
+            "translate-x-full scale-75 z-0 opacity-75 duration-[2000ms]";
         } else if (position === slides.length - 1) {
           positionClasses =
-            "-translate-x-full scale-75 z-0 opacity-75 duration-1000";
+            "-translate-x-full scale-75 z-0 opacity-75 duration-[2000ms]";
         } else {
           positionClasses = "translate-x-[300%] opacity-0";
         }
@@ -60,7 +60,7 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
             <Logo className="absolute left-[50%] top-[-20%] z-10 translate-x-[-50%] lg:top-[-20%]" />
 
             <div
-              className={`absolute left-0 top-0 flex h-full w-full items-center justify-center transition-all duration-700 ease-in-out ${positionClasses}`}
+              className={`absolute left-0 top-0 flex h-full w-full items-center justify-center transition-all ${positionClasses}`}
             >
               <Image
                 className="rounded-3xl"
