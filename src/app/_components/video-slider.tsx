@@ -5,6 +5,7 @@ const VideoSlider = () => {
         className="m-auto rounded-3xl shadow-2xl shadow-black"
         autoPlay
         muted
+        controls
       >
         <source src="/video/flower.webm" type="video/webm" />
       </video>

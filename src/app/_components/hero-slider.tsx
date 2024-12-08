@@ -29,7 +29,7 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
     setCurrentIndex((prevIndex: number) => (prevIndex + 1) % slides.length);
   };
   useEffect(() => {
-    const interval = setInterval(nextSlide, 5000);
+    const interval = setInterval(nextSlide, 8000);
     return () => clearInterval(interval);
   }, []);
 
@@ -43,11 +43,14 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
 
         let positionClasses = "";
         if (position === 0) {
-          positionClasses = "translate-x-0 scale-100 z-10 opacity-100";
+          positionClasses =
+            "translate-x-0 scale-100 z-10 opacity-100 duration-1000";
         } else if (position === 1) {
-          positionClasses = "translate-x-full scale-75 z-0 opacity-75";
+          positionClasses =
+            "translate-x-full scale-75 z-0 opacity-75 duration-1000";
         } else if (position === slides.length - 1) {
-          positionClasses = "-translate-x-full scale-75 z-0 opacity-75";
+          positionClasses =
+            "-translate-x-full scale-75 z-0 opacity-75 duration-1000";
         } else {
           positionClasses = "translate-x-[300%] opacity-0";
         }
@@ -67,57 +70,65 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
                 style={{ objectFit: "cover" }}
               />
               <div className="absolute inset-0 overflow-hidden px-8">
-                <div className="flex h-full flex-col items-center justify-center sm:grid sm:grid-cols-2">
-                  <div className="flex flex-col justify-center">
-                    <div
-                      className="max-w-[380px]"
-                      data-aos="zoom-in"
-                      data-aos-delay="600"
-                    >
-                      <h3 className="text-3xl font-semibold leading-none">
-                        Seu evento com{" "}
-                        <span className="font-bold text-primary">
-                          sonorização
-                        </span>{" "}
-                        da mais alta qualidade!
-                      </h3>
-                      <p className="text-xl">{slide.subTitle}</p>
+                {position === 0 && (
+                  <div className="flex h-full flex-col items-center justify-center sm:grid sm:grid-cols-2">
+                    <div className="flex flex-col justify-center">
+                      <div
+                        className="max-w-[380px]"
+                        data-aos="zoom-in"
+                        data-aos-delay="600"
+                        data-aos-duration="2000"
+                      >
+                        <h3 className="text-3xl font-semibold leading-none">
+                          Seu evento com{" "}
+                          <span className="font-bold text-primary">
+                            sonorização
+                          </span>{" "}
+                          da mais alta qualidade!
+                        </h3>
+                        <p className="text-xl">{slide.subTitle}</p>
+                      </div>
                     </div>
+                    {
+                      <div className="hidden h-[224px] w-full items-center justify-end gap-4 sm:flex lg:h-[424px]">
+                        <div className="relative h-[300px] w-[60px] lg:h-[240px] lg:w-[90px]">
+                          <Image
+                            src={"/estrutura.png"}
+                            alt={"Som"}
+                            fill
+                            style={{ objectFit: "contain" }}
+                            data-aos="fade-right"
+                            data-aos-delay="500"
+                            data-aos-duration="2000"
+                          />
+                        </div>
+                        <div className="relative h-[225px] w-[100px] lg:h-[450px] lg:w-[200px]">
+                          <Image
+                            className=""
+                            src={"/som.png"}
+                            alt={"Som"}
+                            fill
+                            style={{ objectFit: "contain" }}
+                            data-aos="fade-down"
+                            data-aos-delay="500"
+                            data-aos-duration="2000"
+                          />
+                        </div>
+                        <div className="relative h-[183px] w-[120px]">
+                          <Image
+                            src={"/luz.png"}
+                            alt={"Som"}
+                            fill
+                            style={{ objectFit: "contain" }}
+                            data-aos="fade-left"
+                            data-aos-delay="500"
+                            data-aos-duration="2000"
+                          />
+                        </div>
+                      </div>
+                    }
                   </div>
-                  <div className="hidden h-[224px] w-full items-center justify-end gap-4 sm:flex lg:h-[424px]">
-                    <div className="relative h-[300px] w-[60px] lg:h-[240px] lg:w-[90px]">
-                      <Image
-                        src={"/estrutura.png"}
-                        alt={"Som"}
-                        fill
-                        style={{ objectFit: "contain" }}
-                        data-aos="fade-right"
-                        data-aos-delay="500"
-                      />
-                    </div>
-                    <div className="relative h-[225px] w-[100px] lg:h-[450px] lg:w-[200px]">
-                      <Image
-                        className=""
-                        src={"/som.png"}
-                        alt={"Som"}
-                        fill
-                        style={{ objectFit: "contain" }}
-                        data-aos="fade-down"
-                        data-aos-delay="500"
-                      />
-                    </div>
-                    <div className="relative h-[183px] w-[120px]">
-                      <Image
-                        src={"/luz.png"}
-                        alt={"Som"}
-                        fill
-                        style={{ objectFit: "contain" }}
-                        data-aos="fade-left"
-                        data-aos-delay="500"
-                      />
-                    </div>
-                  </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
