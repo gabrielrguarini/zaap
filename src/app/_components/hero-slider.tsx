@@ -44,7 +44,7 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
         let positionClasses = "";
         if (position === 0) {
           positionClasses =
-            "translate-x-0 scale-100 z-10 opacity-100 duration-[2000ms]";
+            "translate-x-0 scale-100 z-0 opacity-100 duration-[2000ms]";
         } else if (position === 1) {
           positionClasses =
             "translate-x-full scale-75 z-0 opacity-75 duration-[2000ms]";
@@ -76,7 +76,7 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
                       <div
                         className="max-w-[380px]"
                         data-aos="zoom-in"
-                        data-aos-delay="600"
+                        data-aos-delay="1000"
                         data-aos-duration="2000"
                       >
                         <h3 className="text-3xl font-semibold leading-none">
@@ -98,7 +98,7 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
                             fill
                             style={{ objectFit: "contain" }}
                             data-aos="fade-right"
-                            data-aos-delay="500"
+                            data-aos-delay="1000"
                             data-aos-duration="2000"
                           />
                         </div>
@@ -110,7 +110,7 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
                             fill
                             style={{ objectFit: "contain" }}
                             data-aos="fade-down"
-                            data-aos-delay="500"
+                            data-aos-delay="1000"
                             data-aos-duration="2000"
                           />
                         </div>
@@ -121,7 +121,7 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
                             fill
                             style={{ objectFit: "contain" }}
                             data-aos="fade-left"
-                            data-aos-delay="500"
+                            data-aos-delay="1000"
                             data-aos-duration="2000"
                           />
                         </div>
