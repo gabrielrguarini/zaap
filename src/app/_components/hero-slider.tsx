@@ -10,14 +10,15 @@ interface Slide {
   alt: string;
   title?: string;
   subTitle?: string;
-  item?: string;
 }
 
 interface HeroSliderProps {
   slides: Slide[];
 }
+
 const HeroSlider = ({ slides }: HeroSliderProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -26,25 +27,29 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
   }, []);
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex: number) => (prevIndex + 1) % slides.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
   };
+
   useEffect(() => {
     const interval = setInterval(nextSlide, 8000);
     return () => clearInterval(interval);
   }, []);
+
+  const imagePositions = ["estrutura", "som", "luz"];
 
   return (
     <div
       className="relative mt-10 h-[224px] w-full p-4 sm:my-0 lg:h-[424px]"
       data-aos="zoom-in"
     >
+      {/* Slides */}
       {slides.map((slide, index) => {
         const position = (index - currentIndex + slides.length) % slides.length;
-
         let positionClasses = "";
+
         if (position === 0) {
           positionClasses =
-            "translate-x-0 scale-100 z-0 opacity-100 duration-[2000ms]";
+            "translate-x-0 scale-100 z-10 opacity-100 duration-[2000ms]";
         } else if (position === 1) {
           positionClasses =
             "translate-x-full scale-75 z-0 opacity-75 duration-[2000ms]";
@@ -89,44 +94,6 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
                         <p className="text-xl">{slide.subTitle}</p>
                       </div>
                     </div>
-                    {
-                      <div className="hidden h-[224px] w-full items-center justify-end gap-4 sm:flex lg:h-[424px]">
-                        <div className="relative h-[300px] w-[60px] lg:h-[240px] lg:w-[90px]">
-                          <Image
-                            src={"/estrutura.png"}
-                            alt={"Som"}
-                            fill
-                            style={{ objectFit: "contain" }}
-                            data-aos="fade-right"
-                            data-aos-delay="1000"
-                            data-aos-duration="2000"
-                          />
-                        </div>
-                        <div className="relative h-[225px] w-[100px] lg:h-[450px] lg:w-[200px]">
-                          <Image
-                            className=""
-                            src={"/som.png"}
-                            alt={"Som"}
-                            fill
-                            style={{ objectFit: "contain" }}
-                            data-aos="fade-down"
-                            data-aos-delay="1000"
-                            data-aos-duration="2000"
-                          />
-                        </div>
-                        <div className="relative h-[183px] w-[120px]">
-                          <Image
-                            src={"/luz.png"}
-                            alt={"Som"}
-                            fill
-                            style={{ objectFit: "contain" }}
-                            data-aos="fade-left"
-                            data-aos-delay="1000"
-                            data-aos-duration="2000"
-                          />
-                        </div>
-                      </div>
-                    }
                   </div>
                 )}
               </div>
@@ -134,6 +101,35 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
           </div>
         );
       })}
+
+      <div className="relative h-[224px] w-full overflow-hidden lg:h-[424px]">
+        {imagePositions.map((image, index) => {
+          const relativePosition =
+            (index - currentIndex + imagePositions.length) %
+            imagePositions.length;
+
+          const translateX = relativePosition * 100;
+          const scale = relativePosition === 1 ? 1 : 0.75;
+
+          return (
+            <div
+              key={image}
+              style={{
+                transform: `translateX(${translateX}%) scale(${scale}) translateY(-50%) translateX(-50%)`,
+                zIndex: 10,
+              }}
+              className="absolute left-1/2 top-1/2 h-[183px] w-[120px] transition-all duration-[2000ms] ease-in-out lg:h-[300px] lg:w-[200px]"
+            >
+              <Image
+                src={`/${image}.png`}
+                alt={image}
+                fill
+                style={{ objectFit: "contain" }}
+              />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
