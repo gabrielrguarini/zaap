@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Rajdhani } from "next/font/google";
 import "./globals.css";
+import Footer from "./_components/footer";
 
 const rajdhani = Rajdhani({
   subsets: ["latin"],
@@ -29,6 +30,7 @@ export default function RootLayout({
         className={`${rajdhani.className} overflow-x-hidden text-white antialiased`}
       >
         {children}
+        <Footer />
       </body>
     </html>
   );
