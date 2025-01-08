@@ -111,12 +111,15 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
           const translateX = relativePosition * 100;
           const scale = relativePosition === 1 ? 1 : 0.75;
 
+          const zIndex =
+            relativePosition === 1 ? 20 : relativePosition === 0 ? 10 : 10;
+
           return (
             <div
               key={image}
               style={{
                 transform: `translateX(${translateX}%) scale(${scale}) translateY(-50%) translateX(-50%)`,
-                zIndex: 10,
+                zIndex,
               }}
               className="absolute left-1/2 top-1/2 h-[183px] w-[120px] transition-all duration-[2000ms] ease-in-out lg:h-[300px] lg:w-[200px]"
             >
