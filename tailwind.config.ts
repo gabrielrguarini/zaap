@@ -8,6 +8,10 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        "structrure-gradient":
+          "linear-gradient(90deg, rgba(23, 23, 23, 1) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 80%, rgba(23, 23, 23, 1) 100%)",
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

@@ -22,6 +22,7 @@ const Structures = () => {
         <span className="font-bold">Oferecemos</span> estruturas que contam com:
       </h2>
       <div className="relative overflow-hidden">
+        <div className="absolute inset-0 z-10 bg-structrure-gradient"></div>
         <div className="flex w-max animate-marquee">
           {items.map((item, index) => (
             <StructureItem
