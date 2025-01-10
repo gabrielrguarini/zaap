@@ -62,10 +62,10 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
 
         return (
           <div key={index}>
-            <Logo className="absolute left-[50%] top-[-20%] z-10 translate-x-[-50%] lg:top-[-20%]" />
+            <Logo className="absolute left-[50%] top-[-20%] z-20 translate-x-[-50%] lg:top-[-20%]" />
 
             <div
-              className={`absolute left-0 top-0 flex h-full w-full items-center justify-center transition-all ${positionClasses}`}
+              className={`absolute left-0 top-0 flex h-full w-full transition-all ${positionClasses}`}
             >
               <Image
                 className="rounded-3xl"
@@ -102,7 +102,7 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
         );
       })}
 
-      <div className="relative h-[224px] w-full overflow-hidden lg:h-[424px]">
+      <div className="relative hidden h-[224px] w-full overflow-hidden sm:flex lg:h-[424px]">
         {imagePositions.map((image, index) => {
           const relativePosition =
             (index - currentIndex + imagePositions.length) %
@@ -118,7 +118,7 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
             <div
               key={image}
               style={{
-                transform: `translateX(${translateX}%) scale(${scale}) translateY(-50%) translateX(-50%)`,
+                transform: `translateX(${translateX}%) scale(${scale}) translateX(-50%) translateY(-50%)`,
                 zIndex,
               }}
               className="absolute left-1/2 top-1/2 h-[183px] w-[120px] transition-all duration-[2000ms] ease-in-out lg:h-[300px] lg:w-[200px]"
