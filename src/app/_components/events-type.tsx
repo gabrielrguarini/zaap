@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface EventsTypeProps {
   title: string;
@@ -26,7 +27,11 @@ const EventsType = ({ title, subTitle, imageString }: EventsTypeProps) => {
           </p>
         </div>
       </div>
-      <div
+
+      <Link
+        href={"https://wa.me/+553284238232/"}
+        target="_blank"
+        rel="noopener noreferrer"
         data-aos="fade-right"
         className="absolute bottom-8 right-10 hidden items-center gap-1 sm:flex lg:bottom-12 lg:right-16"
       >
@@ -41,7 +46,7 @@ const EventsType = ({ title, subTitle, imageString }: EventsTypeProps) => {
           <p className="text-xss">Faça um</p>
           <span className="text-xss font-semibold text-primary">Orçamento</span>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };
