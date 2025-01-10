@@ -84,14 +84,41 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
                         data-aos-delay="1000"
                         data-aos-duration="2000"
                       >
-                        <h3 className="text-3xl font-semibold leading-none">
-                          Seu evento com{" "}
-                          <span className="font-bold text-primary">
-                            sonorização
-                          </span>{" "}
-                          da mais alta qualidade!
-                        </h3>
-                        <p className="text-xl">{slide.subTitle}</p>
+                        {index === 0 && (
+                          <>
+                            <h3 className="text-3xl font-semibold leading-none">
+                              Seu evento com{" "}
+                              <span className="font-bold text-primary">
+                                sonorização
+                              </span>{" "}
+                              da mais alta qualidade!
+                            </h3>
+                            <p className="text-xl">{slide.subTitle}</p>
+                          </>
+                        )}
+                        {index === 1 && (
+                          <>
+                            <h3 className="text-3xl font-semibold leading-none">
+                              <span className="font-bold text-primary">
+                                Iluminação
+                              </span>{" "}
+                              da mais alta qualidade!
+                            </h3>
+                            <p className="text-xl">{slide.subTitle}</p>
+                          </>
+                        )}
+                        {index === 2 && (
+                          <>
+                            <h3 className="text-3xl font-semibold leading-none">
+                              Seu evento com{" "}
+                              <span className="font-bold text-primary">
+                                estrutura
+                              </span>{" "}
+                              da mais alta qualidade!
+                            </h3>
+                            <p className="text-xl">{slide.subTitle}</p>
+                          </>
+                        )}
                       </div>
                     </div>
                   </div>
