@@ -1,5 +1,6 @@
-"use client";
+import { useRef, useEffect } from "react";
 import GaleryListItem from "./galery-list-item";
+
 interface GaleryListProps {
   itemSelected: number;
   setItemSelected: React.Dispatch<React.SetStateAction<number>>;
@@ -17,8 +18,38 @@ const GaleryList = ({
   setItemSelected,
   events,
 }: GaleryListProps) => {
+  const listRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (listRef.current) {
+      const selectedItem = listRef.current.children[
+        itemSelected
+      ] as HTMLElement;
+
+      if (selectedItem) {
+        const container = listRef.current;
+        const containerWidth = container.offsetWidth;
+        const itemLeft = selectedItem.offsetLeft;
+        const itemRight = itemLeft + selectedItem.offsetWidth;
+
+        if (
+          itemLeft < container.scrollLeft ||
+          itemRight > container.scrollLeft + containerWidth
+        ) {
+          container.scrollTo({
+            left: itemLeft,
+            behavior: "smooth",
+          });
+        }
+      }
+    }
+  }, [itemSelected]);
+
   return (
-    <div className="no-scrollbar flex w-full gap-4 overflow-scroll p-2 lg:p-8">
+    <div
+      ref={listRef}
+      className="no-scrollbar flex w-full gap-4 overflow-scroll p-2 lg:p-8"
+    >
       {events.map((event, index) => (
         <div
           className="relative"
