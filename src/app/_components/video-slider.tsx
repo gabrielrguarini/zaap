@@ -7,7 +7,7 @@ const VideoSlider = () => {
         muted
         controls
       >
-        <source src="/video/flower.webm" type="video/webm" />
+        <source src="/video/videoCasamento.mp4" type="video/mp4" />
       </video>
     </div>
   );
