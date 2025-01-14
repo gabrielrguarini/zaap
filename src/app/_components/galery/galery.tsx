@@ -46,20 +46,31 @@ const events = [
 const Galery = () => {
   const [itemSelected, setItemSelected] = useState(0);
   const [search, setSearch] = useState("");
+  const [filteredEvents, setFilteredEvents] = useState(events);
+
+  useEffect(() => {
+    setFilteredEvents(
+      events.filter((event) =>
+        event.title.toLowerCase().includes(search.toLowerCase()),
+      ),
+    );
+  }, [search]);
   useEffect(() => {
     const interval = setInterval(() => {
-      setItemSelected((prev) => (prev === events.length - 1 ? 0 : prev + 1));
+      setItemSelected((prev) =>
+        prev === filteredEvents.length - 1 ? 0 : prev + 1,
+      );
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [itemSelected, setItemSelected]);
+  }, [filteredEvents, setItemSelected]);
 
   return (
     <div>
       <GaleryHeader search={search} setSearch={setSearch} />
-      <GaleryHeroSlider event={events[itemSelected]} />
+      <GaleryHeroSlider event={filteredEvents[itemSelected]} />
       <GaleryList
-        events={events}
+        events={filteredEvents}
         itemSelected={itemSelected}
         setItemSelected={setItemSelected}
       />

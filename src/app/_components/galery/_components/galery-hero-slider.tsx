@@ -24,6 +24,7 @@ const GaleryHeroSlider = ({ event }: HeroSliderProps) => {
 
     return () => clearTimeout(timeout);
   }, [event]);
+  if (!event) return null;
   return (
     <div className="relative h-[212px] w-full lg:h-[424px]">
       <div
