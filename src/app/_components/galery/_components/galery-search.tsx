@@ -15,7 +15,7 @@ const GalerySearch = ({
 }: GalerySearchProps) => {
   return (
     <div
-      className={`ml-auto rounded-full bg-gradient-to-r from-[#ffb400] to-[#ff4800] p-[2px] ${isInputFocused ? "w-screen" : "w-72"} transition-all duration-300`}
+      className={`ml-auto w-72 rounded-full bg-gradient-to-r from-[#ffb400] to-[#ff4800] p-[2px] transition-all duration-300 ${isInputFocused && "w-screen sm:w-72"} `}
     >
       <div className="relative h-8 rounded-full bg-background">
         <input

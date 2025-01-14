@@ -49,6 +49,7 @@ const Galery = () => {
   const [filteredEvents, setFilteredEvents] = useState(events);
 
   useEffect(() => {
+    setItemSelected(0);
     setFilteredEvents(
       events.filter((event) =>
         event.title.toLowerCase().includes(search.toLowerCase()),
@@ -58,7 +59,7 @@ const Galery = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setItemSelected((prev) =>
-        prev === filteredEvents.length - 1 ? 0 : prev + 1,
+        prev >= filteredEvents.length - 1 ? 0 : prev + 1,
       );
     }, 4000);
 
