@@ -4,9 +4,9 @@ import "aos/dist/aos.css";
 import Image from "next/image";
 import Logo from "./logo";
 import { useEffect, useState } from "react";
-import GaleryHeroText from "./galery-hero-text/galery-hero-text";
-import GaleryHeroText2 from "./galery-hero-text/galery-hero-text-2";
-import GaleryHeroText3 from "./galery-hero-text/galery-hero-text-3";
+import GaleryHeroText from "./hero-texts/galery-hero-text";
+import GaleryHeroText2 from "./hero-texts/galery-hero-text-2";
+import GaleryHeroText3 from "./hero-texts/galery-hero-text-3";
 
 interface Slide {
   src: string;
