@@ -45,6 +45,7 @@ const events = [
 
 const Galery = () => {
   const [itemSelected, setItemSelected] = useState(0);
+  const [search, setSearch] = useState("");
   useEffect(() => {
     const interval = setInterval(() => {
       setItemSelected((prev) => (prev === events.length - 1 ? 0 : prev + 1));
@@ -55,7 +56,7 @@ const Galery = () => {
 
   return (
     <div>
-      <GaleryHeader />
+      <GaleryHeader search={search} setSearch={setSearch} />
       <GaleryHeroSlider event={events[itemSelected]} />
       <GaleryList
         events={events}

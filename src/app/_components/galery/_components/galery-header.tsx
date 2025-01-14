@@ -1,7 +1,12 @@
 import GalerySearch from "./galery-search";
 import { useState } from "react";
 
-const GaleryHeader = () => {
+interface GaleryHeaderProps {
+  search: string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const GaleryHeader = ({ search, setSearch }: GaleryHeaderProps) => {
   const [isInputFocused, setIsInputFocused] = useState(false);
 
   return (
@@ -14,6 +19,8 @@ const GaleryHeader = () => {
       <GalerySearch
         isInputFocused={isInputFocused}
         setIsInputFocused={setIsInputFocused}
+        search={search}
+        setSearch={setSearch}
       />
     </div>
   );
