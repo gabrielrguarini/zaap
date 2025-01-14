@@ -104,36 +104,40 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
         );
       })}
 
-      <div className="relative hidden h-[224px] w-full overflow-hidden sm:flex lg:h-[424px]">
-        {imagePositions.map((image, index) => {
-          const relativePosition =
-            (index - currentIndex + imagePositions.length) %
-            imagePositions.length;
+      <div className="relative hidden h-[224px] w-full overflow-hidden sm:grid sm:grid-cols-2 lg:h-[424px]">
+        <div></div>
+        <div className="">
+          {" "}
+          {imagePositions.map((image, index) => {
+            const relativePosition =
+              (index - currentIndex + imagePositions.length) %
+              imagePositions.length;
 
-          const translateX = relativePosition * 100;
-          const scale = relativePosition === 1 ? 1 : 0.75;
+            const translateX = relativePosition * 100;
+            const scale = relativePosition === 1 ? 1 : 0.75;
 
-          const zIndex =
-            relativePosition === 1 ? 20 : relativePosition === 0 ? 10 : 10;
+            const zIndex =
+              relativePosition === 1 ? 20 : relativePosition === 0 ? 10 : 10;
 
-          return (
-            <div
-              key={image}
-              style={{
-                transform: `translateX(${translateX}%) scale(${scale}) translateX(-50%) translateY(-50%)`,
-                zIndex,
-              }}
-              className="absolute left-1/2 top-1/2 h-[183px] w-[120px] transition-all duration-[2000ms] ease-in-out lg:h-[300px] lg:w-[200px]"
-            >
-              <Image
-                src={`/${image}.png`}
-                alt={image}
-                fill
-                style={{ objectFit: "contain" }}
-              />
-            </div>
-          );
-        })}
+            return (
+              <div
+                key={image}
+                style={{
+                  transform: `translateX(${translateX}%) scale(${scale}) translateX(-50%) translateY(-50%)`,
+                  zIndex,
+                }}
+                className="absolute left-1/2 top-1/2 h-[183px] w-[120px] transition-all duration-[2000ms] ease-in-out lg:h-[300px] lg:w-[200px]"
+              >
+                <Image
+                  src={`/${image}.png`}
+                  alt={image}
+                  fill
+                  style={{ objectFit: "contain" }}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
