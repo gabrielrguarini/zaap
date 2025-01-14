@@ -67,7 +67,7 @@ const Galery = () => {
   }, [filteredEvents, setItemSelected]);
 
   return (
-    <div>
+    <div id="galery">
       <GaleryHeader search={search} setSearch={setSearch} />
       <GaleryHeroSlider event={filteredEvents[itemSelected]} />
       <GaleryList

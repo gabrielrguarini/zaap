@@ -12,10 +12,10 @@ export const Navbar = () => {
         className="cursor-pointer"
       />
       <div className="hidden gap-4 font-semibold sm:flex">
-        <Link className="cursor-pointer" href={""}>
+        <Link className="cursor-pointer" href={"#events"}>
           EVENTOS
         </Link>
-        <Link className="cursor-pointer" href={""}>
+        <Link className="cursor-pointer" href={"#galery"}>
           GALERIA
         </Link>
         <Link href={""} className="cursor-pointer text-primary">

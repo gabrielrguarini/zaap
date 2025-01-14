@@ -37,7 +37,7 @@ export default function Home() {
         ]}
       />
       <FeatureBar />
-      <div>
+      <div id="events">
         <EventsType
           imageString="/events-type/44.png"
           title="Debutante"
