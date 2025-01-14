@@ -2,7 +2,7 @@ import Image from "next/image";
 import About from "./_components/about";
 import EventsType from "./_components/events-type";
 import FeatureBar from "./_components/feature-bar";
-import HeroSlider from "./_components/hero-slider";
+import HeroSlider from "./_components/hero-slider/hero-slider";
 import { Navbar } from "./_components/navbar";
 import Structures from "./_components/structures";
 import VideoSlider from "./_components/video-slider";

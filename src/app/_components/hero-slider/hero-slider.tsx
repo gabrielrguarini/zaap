@@ -2,11 +2,11 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Image from "next/image";
-import Logo from "./logo";
+import Logo from "../logo";
 import { useEffect, useState } from "react";
-import GaleryHeroText from "./hero-texts/galery-hero-text";
-import GaleryHeroText2 from "./hero-texts/galery-hero-text-2";
-import GaleryHeroText3 from "./hero-texts/galery-hero-text-3";
+import GaleryHeroText from "./galery-hero-text";
+import GaleryHeroText2 from "./galery-hero-text-2";
+import GaleryHeroText3 from "./galery-hero-text-3";
 
 interface Slide {
   src: string;
@@ -51,7 +51,6 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
       className="relative mt-10 h-[224px] w-full p-4 sm:my-0 lg:h-[424px]"
       data-aos="zoom-in"
     >
-      {/* Slides */}
       {slides.map((slide, index) => {
         const position = (index - currentIndex + slides.length) % slides.length;
         let positionClasses = "";
