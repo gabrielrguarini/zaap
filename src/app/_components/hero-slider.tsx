@@ -4,6 +4,9 @@ import "aos/dist/aos.css";
 import Image from "next/image";
 import Logo from "./logo";
 import { useEffect, useState } from "react";
+import GaleryHeroText from "./galery-hero-text/galery-hero-text";
+import GaleryHeroText2 from "./galery-hero-text/galery-hero-text-2";
+import GaleryHeroText3 from "./galery-hero-text/galery-hero-text-3";
 
 interface Slide {
   src: string;
@@ -29,6 +32,12 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
   };
+
+  const heroTexts = [
+    <GaleryHeroText key={0} />,
+    <GaleryHeroText2 key={1} />,
+    <GaleryHeroText3 key={2} />,
+  ];
 
   useEffect(() => {
     const interval = setInterval(nextSlide, 8000);
@@ -84,41 +93,7 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
                         data-aos-delay="1000"
                         data-aos-duration="2000"
                       >
-                        {index === 0 && (
-                          <>
-                            <h3 className="text-3xl font-semibold leading-none">
-                              Seu evento com{" "}
-                              <span className="font-bold text-primary">
-                                sonorização
-                              </span>{" "}
-                              da mais alta qualidade!
-                            </h3>
-                            <p className="text-xl">{slide.subTitle}</p>
-                          </>
-                        )}
-                        {index === 1 && (
-                          <>
-                            <h3 className="text-3xl font-semibold leading-none">
-                              <span className="font-bold text-primary">
-                                Iluminação
-                              </span>{" "}
-                              da mais alta qualidade!
-                            </h3>
-                            <p className="text-xl">{slide.subTitle}</p>
-                          </>
-                        )}
-                        {index === 2 && (
-                          <>
-                            <h3 className="text-3xl font-semibold leading-none">
-                              Seu evento com{" "}
-                              <span className="font-bold text-primary">
-                                estrutura
-                              </span>{" "}
-                              da mais alta qualidade!
-                            </h3>
-                            <p className="text-xl">{slide.subTitle}</p>
-                          </>
-                        )}
+                        {heroTexts[index]}
                       </div>
                     </div>
                   </div>
