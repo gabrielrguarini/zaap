@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Rajdhani } from "next/font/google";
 import "./globals.css";
 import Footer from "./_components/footer";
+import React from "react";
+import ReactQueryProvider from "@/utils/providers/ReactQueryProvider";
 
 const rajdhani = Rajdhani({
   subsets: ["latin"],
@@ -26,12 +28,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body
-        className={`${rajdhani.className} overflow-x-hidden text-white antialiased`}
-      >
-        {children}
-        <Footer />
-      </body>
+      <ReactQueryProvider>
+        <body
+          className={`${rajdhani.className} overflow-x-hidden text-white antialiased`}
+        >
+          {children}
+          <Footer />
+        </body>
+      </ReactQueryProvider>
     </html>
   );
 }

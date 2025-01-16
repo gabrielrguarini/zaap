@@ -1,0 +1,38 @@
+[
+  {
+    "src": "/galery-list/45.png",
+    "title": "Maria Xavier",
+    "type": "15 Anos",
+    "locale": "Espera Feliz",
+    "date": "22 de Outubro 2024",
+    "position": "center 30%"
+  },
+  {
+    "src": "/galery-list/0.webp",
+    "title": "Olivia",
+    "type": "Casamento",
+    "locale": "Carangola",
+    "date": "20 de Novembro 2023"
+  },
+  {
+    "src": "/galery-list/0.jpg",
+    "title": "Gabriela",
+    "type": "15 Anos",
+    "locale": "Espera Feliz",
+    "date": "22 de Outubro 2024"
+  },
+  {
+    "src": "/galery-list/0.jpg",
+    "title": "Luana",
+    "type": "Casamento",
+    "locale": "Carangola",
+    "date": "20 de Novembro 2023"
+  },
+  {
+    "src": "/galery-list/0.jpg",
+    "title": "Maria Xavier 4",
+    "type": "15 Anos",
+    "locale": "Espera Feliz",
+    "date": "22 de Outubro 2024"
+  }
+]

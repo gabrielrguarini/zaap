@@ -3,59 +3,41 @@ import { useEffect, useState } from "react";
 import GaleryHeader from "./_components/galery-header";
 import GaleryList from "./_components/galery-list";
 import GaleryHeroSlider from "./_components/galery-hero-slider";
-
-const events = [
-  {
-    src: "/galery-list/45.png",
-    title: "Maria Xavier",
-    type: "15 Anos",
-    locale: "Espera Feliz",
-    date: "22 de Outubro 2024",
-    position: "center 30%",
-  },
-  {
-    src: "/galery-list/0.webp",
-    title: "Fulano 1",
-    type: "Casamento",
-    locale: "Carangola",
-    date: "20 de Novembro 2023",
-  },
-  {
-    src: "/galery-list/0.jpg",
-    title: "Maria Xavier 2",
-    type: "15 Anos",
-    locale: "Espera Feliz",
-    date: "22 de Outubro 2024",
-  },
-  {
-    src: "/galery-list/0.jpg",
-    title: "Fulano 3",
-    type: "Casamento",
-    locale: "Carangola",
-    date: "20 de Novembro 2023",
-  },
-  {
-    src: "/galery-list/0.jpg",
-    title: "Maria Xavier 4",
-    type: "15 Anos",
-    locale: "Espera Feliz",
-    date: "22 de Outubro 2024",
-  },
-];
+import { useQuery } from "@tanstack/react-query";
+import EventType from "./EventType";
 
 const Galery = () => {
+  const fetchEvents = async (): Promise<EventType[]> => {
+    const response = await fetch("/data/events.json");
+    if (!response.ok) {
+      throw new Error("Failed to fetch events");
+    }
+    return response.json();
+  };
+
+  const {
+    data: events,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryFn: fetchEvents,
+    queryKey: ["events"],
+  });
   const [itemSelected, setItemSelected] = useState(0);
   const [search, setSearch] = useState("");
-  const [filteredEvents, setFilteredEvents] = useState(events);
+  const [filteredEvents, setFilteredEvents] = useState<EventType[]>(
+    events || [],
+  );
 
   useEffect(() => {
+    if (!events) return;
     setItemSelected(0);
     setFilteredEvents(
       events.filter((event) =>
         event.title.toLowerCase().includes(search.toLowerCase()),
       ),
     );
-  }, [search]);
+  }, [search, events]);
   useEffect(() => {
     const interval = setInterval(() => {
       setItemSelected((prev) =>
@@ -65,6 +47,13 @@ const Galery = () => {
 
     return () => clearInterval(interval);
   }, [filteredEvents, setItemSelected]);
+  if (isLoading) {
+    return <div>Carregando...</div>;
+  }
+
+  if (isError) {
+    return <div>Erro ao carregar os eventos.</div>;
+  }
 
   return (
     <div id="galery">
