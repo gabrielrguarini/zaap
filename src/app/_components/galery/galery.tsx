@@ -5,6 +5,7 @@ import GaleryList from "./_components/galery-list";
 import GaleryHeroSlider from "./_components/galery-hero-slider";
 import { useQuery } from "@tanstack/react-query";
 import EventType from "./EventType";
+import Logo from "../logo";
 
 const Galery = () => {
   const fetchEvents = async (): Promise<EventType[]> => {
@@ -47,6 +48,20 @@ const Galery = () => {
 
     return () => clearInterval(interval);
   }, [filteredEvents, setItemSelected]);
+  if (filteredEvents.length <= 0) {
+    return (
+      <div className="">
+        <GaleryHeader search={search} setSearch={setSearch} />
+        <div className="relative flex h-[212px] w-full items-center justify-center rounded-3xl bg-black/20 lg:h-[424px]">
+          <Logo className="absolute left-[50%] top-[-20%] z-10 translate-x-[-50%]" />
+          <h1 className="text-center text-3xl font-bold text-white">
+            Nenhum evento encontrado.
+          </h1>
+        </div>
+      </div>
+    );
+  }
+
   if (isLoading) {
     return <div>Carregando...</div>;
   }
