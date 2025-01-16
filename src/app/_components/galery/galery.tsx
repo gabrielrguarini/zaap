@@ -6,6 +6,7 @@ import GaleryHeroSlider from "./_components/galery-hero-slider";
 import { useQuery } from "@tanstack/react-query";
 import EventType from "./EventType";
 import Logo from "../logo";
+import GalerySkeleton from "./_components/skeleton";
 
 const Galery = () => {
   const fetchEvents = async (): Promise<EventType[]> => {
@@ -48,6 +49,15 @@ const Galery = () => {
 
     return () => clearInterval(interval);
   }, [filteredEvents, setItemSelected]);
+
+  if (isLoading) {
+    return <GalerySkeleton text="Carregando eventos..." />;
+  }
+
+  if (isError) {
+    return <GalerySkeleton text="Erro ao carregar os eventos." />;
+  }
+
   if (filteredEvents.length <= 0) {
     return (
       <div className="">
@@ -60,14 +70,6 @@ const Galery = () => {
         </div>
       </div>
     );
-  }
-
-  if (isLoading) {
-    return <div>Carregando...</div>;
-  }
-
-  if (isError) {
-    return <div>Erro ao carregar os eventos.</div>;
   }
 
   return (
