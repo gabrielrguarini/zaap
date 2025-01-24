@@ -15,7 +15,7 @@ export const Navbar = () => {
         <Link className="cursor-pointer" href={"#events"}>
           EVENTOS
         </Link>
-        <Link className="cursor-pointer" href={"#galery"}>
+        <Link className="cursor-pointer" href={"/galeria"}>
           GALERIA
         </Link>
         <Link href={""} className="cursor-pointer text-primary">

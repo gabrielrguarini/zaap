@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "./_components/footer";
 import React from "react";
 import ReactQueryProvider from "@/utils/providers/ReactQueryProvider";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const rajdhani = Rajdhani({
   subsets: ["latin"],
@@ -27,15 +28,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      <ReactQueryProvider>
-        <body
-          className={`${rajdhani.className} overflow-x-hidden text-white antialiased`}
-        >
-          {children}
-          <Footer />
-        </body>
-      </ReactQueryProvider>
-    </html>
+    <ClerkProvider>
+      <html lang="pt-BR">
+        <ReactQueryProvider>
+          <body className={`${rajdhani.className} text-white antialiased`}>
+            {children}
+            <Footer />
+          </body>
+        </ReactQueryProvider>
+      </html>
+    </ClerkProvider>
   );
 }

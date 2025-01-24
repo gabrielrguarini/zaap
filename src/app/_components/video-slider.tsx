@@ -9,7 +9,7 @@ const VideoSlider = () => {
         loop
         preload="none"
       >
-        <source src="/video/videoCasamento.mp4" type="video/mp4" />
+        <source src="video/videoCasamento.mp4" type="video/mp4" />
       </video>
     </div>
   );

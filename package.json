@@ -10,6 +10,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.9.15",
     "@prisma/client": "^6.2.1",
     "@tanstack/react-query": "^5.64.1",
     "aos": "^3.0.0-beta.6",

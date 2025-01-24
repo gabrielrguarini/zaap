@@ -10,7 +10,7 @@ export default {
     extend: {
       backgroundImage: {
         "structrure-gradient":
-          "linear-gradient(90deg, rgba(23, 23, 23, 1) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 80%, rgba(23, 23, 23, 1) 100%)",
+          "linear-gradient(90deg, var(--background) 0%, transparent 20%, transparent 80%, var(--background) 100%)",
       },
       colors: {
         background: "var(--background)",
