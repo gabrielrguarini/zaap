@@ -10,10 +10,13 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.735.0",
+    "@aws-sdk/s3-request-presigner": "^3.735.0",
     "@clerk/nextjs": "^6.9.15",
     "@prisma/client": "^6.2.1",
     "@tanstack/react-query": "^5.64.1",
     "aos": "^3.0.0-beta.6",
+    "axios": "^1.7.9",
     "next": "^15.1.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
