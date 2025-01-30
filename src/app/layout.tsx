@@ -31,7 +31,9 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="pt-BR">
         <ReactQueryProvider>
-          <body className={`${rajdhani.className} text-white antialiased`}>
+          <body
+            className={`${rajdhani.className} w-screen overflow-x-hidden text-white antialiased`}
+          >
             {children}
             <Footer />
           </body>

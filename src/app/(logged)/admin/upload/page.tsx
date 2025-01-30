@@ -1,6 +1,7 @@
 "use client";
 import { FormEvent, useState } from "react";
 import axios from "axios";
+import { saveFilesToDB } from "@/app/controllers/images";
 
 export default function UploadPage() {
   const [uploadStatus, setUploadStatus] = useState("");
@@ -10,6 +11,7 @@ export default function UploadPage() {
     e.preventDefault();
 
     const form = e.currentTarget;
+    // const title = e.currentTarget.title;
     const files = Array.from(form.file.files) as File[];
 
     if (!files.length) {
@@ -27,7 +29,6 @@ export default function UploadPage() {
 
       const { urls } = data;
 
-      // Faz o upload de cada arquivo usando a URL correspondente
       const uploadPromises = urls.map(
         (urlObj: { presignedUrl: string; key: string }, index: number) =>
           axios
@@ -43,6 +44,8 @@ export default function UploadPage() {
 
       setUploadStatus("Todos os arquivos foram enviados com sucesso!");
       setUploadedFiles(uploadedKeys);
+      const resposta = await saveFilesToDB({ title: "TEST" });
+      console.log(resposta);
     } catch (error) {
       console.error(error);
       setUploadStatus("Erro ao fazer upload dos arquivos.");
@@ -52,7 +55,12 @@ export default function UploadPage() {
   return (
     <div className="p-4">
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <input type="text" name="title" placeholder="Título do arquivo" />
+        <input
+          type="text"
+          name="title"
+          placeholder="Título do arquivo"
+          className="text-black"
+        />
         <input type="file" name="file" multiple />{" "}
         <input type="submit" value="Enviar" />
       </form>

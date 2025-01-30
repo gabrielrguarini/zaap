@@ -8,34 +8,34 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   clerkId   String?
-  email     String   @unique
+  email     String    @unique
   name      String?
   password  String
-  role      String   @default("USER")
+  role      String    @default("USER")
   galeries  Galery[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 }
 
 model Galery {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   title       String
-  description String
-  author      User     @relation(fields: [authorId], references: [id])
+  description String?
+  author      User      @relation(fields: [authorId], references: [id])
   authorId    String
   images      Image[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt
 }
 
 model Image {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   url         String
   description String
-  galery      Galery   @relation(fields: [galeryId], references: [id])
+  galery      Galery    @relation(fields: [galeryId], references: [id])
   galeryId    String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt
 }
