@@ -2,6 +2,7 @@
 import { FormEvent, useState } from "react";
 import axios from "axios";
 import { setImagesToGalery } from "@/app/controllers/images";
+import { uploadSchema } from "./uploadShema";
 
 export default function UploadPage() {
   const [uploadStatus, setUploadStatus] = useState("");
@@ -10,10 +11,22 @@ export default function UploadPage() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const form = e.currentTarget;
-    // const title = e.currentTarget.title;
-    const files = Array.from(form.file.files) as File[];
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
 
+    const filesForm = formData.getAll("files") as File[];
+    const titleForm = formData.get("title");
+    const safeData = uploadSchema.safeParse({
+      title: titleForm,
+      files: filesForm,
+    });
+
+    if (!safeData.success) {
+      setUploadStatus("Por favor, selecione pelo menos um arquivo.");
+      return;
+    }
+
+    const { files } = safeData.data;
     if (!files.length) {
       setUploadStatus("Por favor, selecione pelo menos um arquivo.");
       return;
@@ -64,7 +77,7 @@ export default function UploadPage() {
           placeholder="Título do arquivo"
           className="text-black"
         />
-        <input type="file" name="file" multiple />{" "}
+        <input type="file" name="files" multiple />{" "}
         <input type="submit" value="Enviar" />
       </form>
       {uploadStatus === "Enviando" ? <p>Enviando...</p> : <p>{uploadStatus}</p>}
