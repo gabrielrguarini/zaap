@@ -2,15 +2,13 @@
 import { prisma } from "@/utils/prisma";
 import { revalidatePath } from "next/cache";
 
-export async function saveImages({
+export async function setImagesToGalery({
   galeryId,
   files,
 }: {
   galeryId: string;
   files: string[];
 }) {
-  console.log("galeryId: ", galeryId);
-  console.log("files: ", files);
   await prisma.image.createMany({
     data: files.map((file) => ({
       url: `https://zaap-bucket.s3.sa-east-1.amazonaws.com/${file}`,

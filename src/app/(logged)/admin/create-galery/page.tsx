@@ -1,4 +1,4 @@
-import { createGalery } from "./action";
+import { createGalery } from "@/app/controllers/galery";
 
 export default function CreateGaleryPage() {
   return (
