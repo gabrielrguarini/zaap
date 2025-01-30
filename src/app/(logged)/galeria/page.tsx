@@ -1,6 +1,10 @@
+import { getImages } from "@/app/controllers/images";
 import Image from "next/image";
+import { Suspense } from "react";
+import ImageIcon from "./min-icon";
 
-export default function GaleryPage() {
+export default async function GaleryPage() {
+  const images = getImages("cm6imlgiu0001vg3lu3q0ol5s");
   return (
     <main className="m-auto mt-4 flex min-h-full w-full max-w-5xl flex-col gap-2 md:gap-4">
       <div>
@@ -14,18 +18,9 @@ export default function GaleryPage() {
             />
           </div>
           <div className="flex flex-wrap gap-2">
-            {Array.from({ length: 30 }).map((_, index) => {
-              return (
-                <div key={index} className="relative h-28 w-40">
-                  <Image
-                    src={"/galery-list/0.jpg"}
-                    alt={"Search"}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              );
-            })}
+            <Suspense fallback={<div>Carregando...</div>}>
+              <ImageIcon images={images} />
+            </Suspense>
           </div>
         </div>
       </div>

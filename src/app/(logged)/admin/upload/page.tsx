@@ -1,7 +1,7 @@
 "use client";
 import { FormEvent, useState } from "react";
 import axios from "axios";
-import { saveFilesToDB } from "@/app/controllers/images";
+import { saveImages } from "@/app/controllers/images";
 
 export default function UploadPage() {
   const [uploadStatus, setUploadStatus] = useState("");
@@ -44,7 +44,10 @@ export default function UploadPage() {
 
       setUploadStatus("Todos os arquivos foram enviados com sucesso!");
       setUploadedFiles(uploadedKeys);
-      const resposta = await saveFilesToDB({ title: "TEST" });
+      const resposta = await saveImages({
+        galeryId: "cm6imlgiu0001vg3lu3q0ol5s",
+        files: uploadedKeys,
+      });
       console.log(resposta);
     } catch (error) {
       console.error(error);
