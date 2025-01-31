@@ -3,6 +3,7 @@ import { FormEvent, useState } from "react";
 import axios from "axios";
 import { setImagesToGalery } from "@/app/controllers/images";
 import { uploadSchema } from "./uploadShema";
+import { generatePresignedUrl } from "./generate-presigned-url";
 
 export default function UploadPage() {
   const [uploadStatus, setUploadStatus] = useState("");
@@ -33,14 +34,23 @@ export default function UploadPage() {
     }
 
     try {
-      const { data } = await axios.post("/api/generate-presigned-url", {
-        files: files.map((file) => ({
-          fileName: file.name,
-          fileType: file.type,
-        })),
-      });
+      const data = await generatePresignedUrl(
+        JSON.parse(
+          JSON.stringify({
+            files: files.map((file) => ({
+              fileName: file.name,
+              fileType: file.type,
+            })),
+          }),
+        ),
+      );
 
       const { urls } = data;
+
+      if (!urls) {
+        setUploadStatus("Erro ao fazer upload dos arquivos.");
+        return;
+      }
 
       const uploadPromises = urls.map(
         (urlObj: { presignedUrl: string; key: string }, index: number) =>
@@ -77,7 +87,7 @@ export default function UploadPage() {
           placeholder="Título do arquivo"
           className="text-black"
         />
-        <input type="file" name="files" multiple />{" "}
+        <input type="file" name="files" accept="image/* video/*" multiple />{" "}
         <input type="submit" value="Enviar" />
       </form>
       {uploadStatus === "Enviando" ? <p>Enviando...</p> : <p>{uploadStatus}</p>}
