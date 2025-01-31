@@ -1,106 +1,16 @@
-"use client";
-import { FormEvent, useState } from "react";
-import axios from "axios";
-import { setImagesToGalery } from "@/app/controllers/images";
-import { uploadSchema } from "./uploadShema";
-import { generatePresignedUrl } from "./generate-presigned-url";
+import { getGalery } from "@/app/controllers/galery";
+import GaleryForm from "./galery-form";
 
-export default function UploadPage() {
-  const [uploadStatus, setUploadStatus] = useState("");
-  const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
+export default async function UploadPage() {
+  const galleries = await getGalery({ authorId: "1" });
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const form = e.target as HTMLFormElement;
-    const formData = new FormData(form);
-
-    const filesForm = formData.getAll("files") as File[];
-    const titleForm = formData.get("title");
-    const safeData = uploadSchema.safeParse({
-      title: titleForm,
-      files: filesForm,
-    });
-
-    if (!safeData.success) {
-      setUploadStatus("Por favor, selecione pelo menos um arquivo.");
-      return;
-    }
-
-    const { files } = safeData.data;
-    if (!files.length) {
-      setUploadStatus("Por favor, selecione pelo menos um arquivo.");
-      return;
-    }
-
-    try {
-      const data = await generatePresignedUrl(
-        JSON.parse(
-          JSON.stringify({
-            files: files.map((file) => ({
-              fileName: file.name,
-              fileType: file.type,
-            })),
-          }),
-        ),
-      );
-
-      const { urls } = data;
-
-      if (!urls) {
-        setUploadStatus("Erro ao fazer upload dos arquivos.");
-        return;
-      }
-
-      const uploadPromises = urls.map(
-        (urlObj: { presignedUrl: string; key: string }, index: number) =>
-          axios
-            .put(urlObj.presignedUrl, files[index], {
-              headers: {
-                "Content-Type": files[index].type,
-              },
-            })
-            .then(() => urlObj.key),
-      );
-
-      const uploadedKeys = await Promise.all(uploadPromises);
-
-      setUploadStatus("Todos os arquivos foram enviados com sucesso!");
-      setUploadedFiles(uploadedKeys);
-      const resposta = await setImagesToGalery({
-        galeryId: "cm6imlgiu0001vg3lu3q0ol5s",
-        files: uploadedKeys,
-      });
-      console.log(resposta);
-    } catch (error) {
-      console.error(error);
-      setUploadStatus("Erro ao fazer upload dos arquivos.");
-    }
-  };
+  if (!galleries) {
+    return <div>Erro ao buscar galerias.</div>;
+  }
 
   return (
     <div className="p-4">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <input
-          type="text"
-          name="title"
-          placeholder="Título do arquivo"
-          className="text-black"
-        />
-        <input type="file" name="files" accept="image/* video/*" multiple />{" "}
-        <input type="submit" value="Enviar" />
-      </form>
-      {uploadStatus === "Enviando" ? <p>Enviando...</p> : <p>{uploadStatus}</p>}
-      {uploadedFiles.length > 0 && (
-        <div className="mt-4">
-          <h2>Arquivos enviados:</h2>
-          <ul>
-            {uploadedFiles.map((file, index) => (
-              <li key={index}>{file}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <GaleryForm galleries={galleries} />
     </div>
   );
 }
