@@ -13,3 +13,8 @@ export async function createGalery(formData: FormData) {
   });
   console.log(galery);
 }
+
+export async function getGalery({ authorId }: { authorId: string }) {
+  const galery = await prisma.galery.findMany({ where: { authorId } });
+  return galery;
+}
