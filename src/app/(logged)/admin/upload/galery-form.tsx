@@ -35,7 +35,7 @@ const GaleryForm = ({ galleries }: { galleries: Galery[] }) => {
 
     try {
       const data = await generatePresignedUrl({
-        files: files.map((file) => ({
+        files: files.map((file: File) => ({
           fileName: file.name,
           fileType: file.type,
         })),
@@ -97,7 +97,9 @@ const GaleryForm = ({ galleries }: { galleries: Galery[] }) => {
         required
         multiple
       />{" "}
-      <span className="text-sm text-red-500">{errors.files?.message}</span>
+      {errors.files && (
+        <span className="text-sm text-red-500">{`${errors.files?.message}`}</span>
+      )}
       <input type="submit" value="Enviar" />
       {uploadStatus === "Enviando" ? <p>Enviando...</p> : <p>{uploadStatus}</p>}
       {uploadedFiles.length > 0 && (
