@@ -1,10 +1,11 @@
+"use client";
 import { z } from "zod";
 
 const fileSizeLimit = 5 * 1024 * 1024; // 5MB
 
 export const fileUploadSchema = z
-  .array(z.instanceof(File))
-  .refine((list) => list.length > 0, "No files selected")
+  .instanceof(FileList)
+  .refine((list) => list.length > 0, "Nenhum arquivo selecionado")
   .transform((list) => Array.from(list))
   .refine(
     (files) => {
@@ -14,20 +15,25 @@ export const fileUploadSchema = z
         "image/jpg": true,
         "video/mp4": true,
         "video/wmv": true,
+        "video/webm": true,
       };
       return files.every((file) => allowedTypes[file.type]);
     },
-    { message: "Invalid file type. Allowed types: JPG, PNG, MP4, WMV" },
+    {
+      message: "Tipo de arquivo inválido. Tipos permitidos: JPG, PNG, MP4, WMV",
+    },
   )
   .refine(
     (files) => {
       return files.every((file) => file.size <= fileSizeLimit);
     },
     {
-      message: "File size should not exceed 5MB",
+      message: "Arquivos não podem exceder 5MB",
     },
   );
 export const uploadSchema = z.object({
-  title: z.string(),
+  title: z.string().min(3, "Título muito curto").max(100, "Título muito longo"),
   files: fileUploadSchema,
 });
+
+export type UploadSchema = z.infer<typeof uploadSchema>;

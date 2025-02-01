@@ -1,50 +1,45 @@
 "use client";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { setImagesToGalery } from "@/app/controllers/images";
-import { uploadSchema } from "./uploadShema";
+import { UploadSchema, uploadSchema } from "./uploadShema";
 import { generatePresignedUrl } from "./generate-presigned-url";
 import { Galery } from "@prisma/client";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const GaleryForm = ({ galleries }: { galleries: Galery[] }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UploadSchema>({
+    resolver: zodResolver(uploadSchema),
+  });
   const [uploadStatus, setUploadStatus] = useState("");
   const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const form = e.target as HTMLFormElement;
-    const formData = new FormData(form);
-
-    const filesForm = formData.getAll("files") as File[];
-    const titleForm = formData.get("title");
-    const safeData = uploadSchema.safeParse({
-      title: titleForm,
-      files: filesForm,
-    });
-
-    if (!safeData.success) {
+  const onSubmit = async (data: UploadSchema) => {
+    console.log("Data: ", data);
+    if (data.files.length === 0) {
       setUploadStatus("Por favor, selecione pelo menos um arquivo.");
       return;
     }
 
-    const { files } = safeData.data;
-    if (!files.length) {
-      setUploadStatus("Por favor, selecione pelo menos um arquivo.");
+    const safeData = uploadSchema.safeParse(data);
+    if (!safeData) {
+      console.log("Deu erro");
       return;
     }
+    const { files } = data;
 
     try {
-      const data = await generatePresignedUrl(
-        JSON.parse(
-          JSON.stringify({
-            files: files.map((file) => ({
-              fileName: file.name,
-              fileType: file.type,
-            })),
-          }),
-        ),
-      );
+      const data = await generatePresignedUrl({
+        files: files.map((file) => ({
+          fileName: file.name,
+          fileType: file.type,
+        })),
+      });
 
       const { urls } = data;
 
@@ -79,21 +74,30 @@ const GaleryForm = ({ galleries }: { galleries: Galery[] }) => {
     }
   };
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
       <input
         type="text"
-        name="title"
+        {...register("title")}
         placeholder="Título do arquivo"
-        className="text-black"
+        className="w-full bg-foreground p-1 px-2"
       />
-      <select className="text-black">
+      <span className="text-sm text-red-500">{errors.title?.message}</span>
+      <select className="bg-foreground p-1 px-2">
         {galleries.map((galery) => (
           <option key={galery.id} value={galery.id}>
             {galery.title}
           </option>
         ))}
       </select>
-      <input type="file" name="files" accept="image/* video/*" multiple />{" "}
+      <input
+        className="bg-foreground"
+        type="file"
+        {...register("files")}
+        accept="image/* video/*"
+        required
+        multiple
+      />{" "}
+      <span className="text-sm text-red-500">{errors.files?.message}</span>
       <input type="submit" value="Enviar" />
       {uploadStatus === "Enviando" ? <p>Enviando...</p> : <p>{uploadStatus}</p>}
       {uploadedFiles.length > 0 && (

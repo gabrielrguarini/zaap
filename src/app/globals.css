@@ -18,14 +18,6 @@
   --primary: #ff4800;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --primary: #ff4800;
-  }
-}
-
 body {
   color: var(--foreground);
   background: var(--background);
