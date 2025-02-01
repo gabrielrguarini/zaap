@@ -4,7 +4,8 @@ import { z } from "zod";
 const fileSizeLimit = 5 * 1024 * 1024; // 5MB
 
 export const fileUploadSchema = z
-  .instanceof(FileList)
+  .unknown()
+  .refine((list) => list instanceof FileList, "Arquivo inválido")
   .refine((list) => list.length > 0, "Nenhum arquivo selecionado")
   .transform((list) => Array.from(list))
   .refine(
