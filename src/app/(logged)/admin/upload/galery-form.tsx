@@ -20,7 +20,6 @@ const GaleryForm = ({ galleries }: { galleries: Galery[] }) => {
   const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
 
   const onSubmit = async (data: UploadSchema) => {
-    console.log("Data: ", data);
     if (data.files.length === 0) {
       setUploadStatus("Por favor, selecione pelo menos um arquivo.");
       return;
@@ -28,7 +27,6 @@ const GaleryForm = ({ galleries }: { galleries: Galery[] }) => {
 
     const safeData = uploadSchema.safeParse(data);
     if (!safeData) {
-      console.log("Deu erro");
       return;
     }
     const { files } = data;
@@ -62,12 +60,11 @@ const GaleryForm = ({ galleries }: { galleries: Galery[] }) => {
       const uploadedKeys = await Promise.all(uploadPromises);
 
       setUploadedFiles(uploadedKeys);
-      const resposta = await setImagesToGalery({
+      await setImagesToGalery({
         galeryId: "cm6imlgiu0001vg3lu3q0ol5s",
         files: uploadedKeys,
       });
       setUploadStatus("Todos os arquivos foram enviados com sucesso!");
-      console.log(resposta);
     } catch (error) {
       console.error(error);
       setUploadStatus("Erro ao fazer upload dos arquivos.");
