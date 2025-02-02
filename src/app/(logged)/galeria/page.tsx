@@ -1,3 +1,4 @@
+"use server";
 import { getImages } from "@/app/controllers/images";
 import Image from "next/image";
 import { Suspense } from "react";
@@ -5,6 +6,7 @@ import ImageIcon from "./min-icon";
 
 export default async function GaleryPage() {
   const images = getImages("cm6imlgiu0001vg3lu3q0ol5s");
+  console.log(await images);
   return (
     <main className="m-auto mt-4 flex min-h-full w-full max-w-5xl flex-col gap-2 md:gap-4">
       <div>

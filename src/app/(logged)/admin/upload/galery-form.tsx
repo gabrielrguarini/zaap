@@ -81,7 +81,9 @@ const GaleryForm = ({ galleries }: { galleries: Galery[] }) => {
         placeholder="Título do arquivo"
         className="w-full bg-foreground p-1 px-2"
       />
-      <span className="text-sm text-red-500">{errors.title?.message}</span>
+      {errors.title && (
+        <span className="text-sm text-red-500">{errors.title.message}</span>
+      )}
       <select className="bg-foreground p-1 px-2">
         {galleries.map((galery) => (
           <option key={galery.id} value={galery.id}>
