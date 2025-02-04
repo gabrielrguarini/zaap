@@ -1,8 +1,8 @@
 import { getGalery } from "@/app/controllers/galery";
-import GaleryForm from "./galery-form";
+import UploadForm from "./upload-form";
 
 export default async function UploadPage() {
-  const galleries = await getGalery({ authorId: "1" });
+  const galleries = await getGalery({ authorId: 1 });
 
   if (!galleries) {
     return <div>Erro ao buscar galerias.</div>;
@@ -10,7 +10,7 @@ export default async function UploadPage() {
 
   return (
     <div className="p-4">
-      <GaleryForm galleries={galleries} />
+      <UploadForm galleries={galleries} />
     </div>
   );
 }

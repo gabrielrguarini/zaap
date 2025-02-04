@@ -1,18 +1,23 @@
 "use server";
 
 import { prisma } from "@/utils/prisma";
+import { GallerySchema } from "../(logged)/admin/create-galery/gallerySchema";
 
-export async function createGalery(formData: FormData) {
-  const title = formData.get("title") as string;
+export async function createGalery(data: GallerySchema) {
+  const { title, type, location, date, image } = data;
   await prisma.galery.create({
     data: {
       title,
-      authorId: "1",
+      type,
+      location,
+      date,
+      imageUrl: `https://zaap-bucket.s3.sa-east-1.amazonaws.com/${image}`,
+      authorId: 1,
     },
   });
 }
 
-export async function getGalery({ authorId }: { authorId: string }) {
+export async function getGalery({ authorId }: { authorId: number }) {
   const galery = await prisma.galery.findMany({ where: { authorId } });
   return galery;
 }

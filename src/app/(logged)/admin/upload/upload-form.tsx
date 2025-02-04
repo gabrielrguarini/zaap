@@ -8,7 +8,7 @@ import { Galery } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const GaleryForm = ({ galleries }: { galleries: Galery[] }) => {
+const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
   const {
     register,
     handleSubmit,
@@ -115,4 +115,4 @@ const GaleryForm = ({ galleries }: { galleries: Galery[] }) => {
   );
 };
 
-export default GaleryForm;
+export default UploadForm;
