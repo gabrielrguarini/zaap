@@ -1,14 +1,9 @@
 "use client";
+import { Galery } from "@prisma/client";
 import Image from "next/image";
 interface GaleryListProps extends React.HTMLAttributes<HTMLDivElement> {
   selected: boolean;
-  event: {
-    src: string;
-    title: string;
-    type: string;
-    locale: string;
-    date: string;
-  };
+  event: Galery;
 }
 
 const GaleryListItem = ({
@@ -32,7 +27,7 @@ const GaleryListItem = ({
       <div className="relative h-[95px] w-[180px]">
         <Image
           className="rounded-lg"
-          src={event.src}
+          src={`${event.imageUrl}`}
           fill
           alt={"Galeria"}
           style={{ objectFit: "cover" }}
@@ -44,9 +39,11 @@ const GaleryListItem = ({
             {event.title}
           </p>
           <p className="font-bold">
-            {event.type} <span className="font-light">- {event.locale}</span>
+            {event.type} <span className="font-light">- {event.location}</span>
           </p>
-          <span className="text-xs font-light">{event.date}</span>
+          <span className="text-xs font-light">
+            {event.date?.toDateString()}
+          </span>
         </div>
       </div>
     </div>

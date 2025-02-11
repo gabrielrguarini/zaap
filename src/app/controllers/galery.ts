@@ -21,3 +21,10 @@ export async function getGalery({ authorId }: { authorId: number }) {
   const galery = await prisma.galery.findMany({ where: { authorId } });
   return galery;
 }
+
+export async function getGalleries() {
+  const galleries = await prisma.galery.findMany({
+    take: 5,
+  });
+  return galleries;
+}

@@ -1,5 +1,5 @@
 "use server";
-import { s3 } from "@/app/s3Client";
+import { s3 } from "@/utils/s3Client";
 import { env } from "@/env";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";

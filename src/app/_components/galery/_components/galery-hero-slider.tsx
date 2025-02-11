@@ -1,16 +1,10 @@
 import Image from "next/image";
 import Logo from "../../logo";
 import { useEffect, useState } from "react";
+import { Galery } from "@prisma/client";
 
 interface HeroSliderProps {
-  event: {
-    src: string;
-    title: string;
-    type: string;
-    locale: string;
-    date: string;
-    position?: string;
-  };
+  event: Galery;
 }
 
 const GaleryHeroSlider = ({ event }: HeroSliderProps) => {
@@ -37,18 +31,25 @@ const GaleryHeroSlider = ({ event }: HeroSliderProps) => {
           {event.title}
         </p>
         <p className="text-3xl font-bold">
-          {event.type} <span className="font-light">- {event.locale}</span>
+          {event.type} <span className="font-light">- {event.location}</span>
         </p>
-        <span className="text-xs font-light">{event.date}</span>
+        <span className="text-xs font-light">
+          {event.date?.toLocaleDateString("pt-BR", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+            timeZone: "UTC",
+          })}
+        </span>
       </div>
       <Logo className="absolute left-[50%] top-[-20%] z-10 translate-x-[-50%]" />
       <div className="absolute left-[20%] top-[30%] z-20 translate-x-[-50%] whitespace-nowrap leading-3"></div>
       <Image
         className="rounded-3xl"
-        src={event.src}
+        src={`${event.imageUrl}`}
         alt={event.title}
         fill
-        style={{ objectFit: "cover", objectPosition: event.position }}
+        style={{ objectFit: "cover", objectPosition: "contain" }}
       />
     </div>
   );

@@ -1,16 +1,11 @@
 import { useRef, useEffect } from "react";
 import GaleryListItem from "./galery-list-item";
+import { Galery } from "@prisma/client";
 
 interface GaleryListProps {
   itemSelected: number;
   setItemSelected: React.Dispatch<React.SetStateAction<number>>;
-  events: {
-    src: string;
-    title: string;
-    type: string;
-    locale: string;
-    date: string;
-  }[];
+  events: Galery[];
 }
 
 const GaleryList = ({

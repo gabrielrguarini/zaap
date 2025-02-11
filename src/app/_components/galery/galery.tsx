@@ -4,30 +4,24 @@ import GaleryHeader from "./_components/galery-header";
 import GaleryList from "./_components/galery-list";
 import GaleryHeroSlider from "./_components/galery-hero-slider";
 import { useQuery } from "@tanstack/react-query";
-import EventType from "./EventType";
+// import EventType from "./EventType";
 import Logo from "../logo";
 import GalerySkeleton from "./_components/skeleton";
+import { getGalleries } from "@/app/controllers/galery";
+import { Galery as GaleryType } from "@prisma/client";
 
 const Galery = () => {
-  const fetchEvents = async (): Promise<EventType[]> => {
-    const response = await fetch("/data/events.json");
-    if (!response.ok) {
-      throw new Error("Failed to fetch events");
-    }
-    return response.json();
-  };
-
   const {
     data: events,
     isLoading,
     isError,
   } = useQuery({
-    queryFn: fetchEvents,
+    queryFn: getGalleries,
     queryKey: ["events"],
   });
   const [itemSelected, setItemSelected] = useState(0);
   const [search, setSearch] = useState("");
-  const [filteredEvents, setFilteredEvents] = useState<EventType[]>(
+  const [filteredEvents, setFilteredEvents] = useState<GaleryType[]>(
     events || [],
   );
 
@@ -50,6 +44,7 @@ const Galery = () => {
     return () => clearInterval(interval);
   }, [filteredEvents, setItemSelected]);
 
+  console.log("events ->", events);
   if (isLoading) {
     return <GalerySkeleton text="Carregando eventos..." />;
   }
