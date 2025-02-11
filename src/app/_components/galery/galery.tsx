@@ -9,18 +9,19 @@ import Logo from "../logo";
 import GalerySkeleton from "./_components/skeleton";
 import { getGalleries } from "@/app/controllers/galery";
 import { Galery as GaleryType } from "@prisma/client";
+import { useQueryState } from "nuqs";
 
 const Galery = () => {
+  const [itemSelected, setItemSelected] = useState(0);
+  const [search, setSearch] = useQueryState("search", { defaultValue: "" });
   const {
     data: events,
     isLoading,
     isError,
   } = useQuery({
-    queryFn: getGalleries,
+    queryFn: () => getGalleries({ search }),
     queryKey: ["events"],
   });
-  const [itemSelected, setItemSelected] = useState(0);
-  const [search, setSearch] = useState("");
   const [filteredEvents, setFilteredEvents] = useState<GaleryType[]>(
     events || [],
   );
@@ -44,7 +45,6 @@ const Galery = () => {
     return () => clearInterval(interval);
   }, [filteredEvents, setItemSelected]);
 
-  console.log("events ->", events);
   if (isLoading) {
     return <GalerySkeleton text="Carregando eventos..." />;
   }

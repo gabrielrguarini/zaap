@@ -22,9 +22,14 @@ export async function getGallery({ authorId }: { authorId: number }) {
   return galery;
 }
 
-export async function getGalleries() {
+export async function getGalleries({ search }: { search: string }) {
   const galleries = await prisma.galery.findMany({
     take: 5,
+    where: {
+      title: {
+        contains: search,
+      },
+    },
     orderBy: {
       createdAt: "desc",
     },

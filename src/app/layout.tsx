@@ -5,6 +5,7 @@ import Footer from "./_components/footer";
 import React from "react";
 import ReactQueryProvider from "@/utils/providers/ReactQueryProvider";
 import { ClerkProvider } from "@clerk/nextjs";
+import { NuqsAdapter } from "nuqs/adapters/next";
 
 const rajdhani = Rajdhani({
   subsets: ["latin"],
@@ -34,7 +35,7 @@ export default function RootLayout({
           <body
             className={`${rajdhani.className} w-screen overflow-x-hidden text-white antialiased`}
           >
-            {children}
+            <NuqsAdapter>{children}</NuqsAdapter>
             <Footer />
           </body>
         </ReactQueryProvider>
