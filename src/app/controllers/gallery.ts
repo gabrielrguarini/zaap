@@ -28,6 +28,7 @@ export async function getGalleries({ search }: { search: string }) {
     where: {
       title: {
         contains: search,
+        mode: "insensitive",
       },
     },
     orderBy: {

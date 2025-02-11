@@ -22,7 +22,7 @@ const GalerySearch = ({
           className="absolute inset-0 shrink-0 bg-transparent px-2 outline-none"
           type="text"
           placeholder="Ex: Casamento João"
-          value={search}
+          value={search || ""}
           onChange={(e) => setSearch(e.target.value)}
           onFocus={() => setIsInputFocused(true)}
           onBlur={() => setIsInputFocused(false)}

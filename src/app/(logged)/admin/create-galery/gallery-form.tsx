@@ -1,5 +1,5 @@
 "use client";
-import { createGallery } from "@/app/controllers/galery";
+import { createGallery } from "@/app/controllers/gallery";
 import { gallerySchema, GallerySchema } from "./gallerySchema";
 import { useForm } from "react-hook-form";
 import { generatePresignedUrl } from "../upload/generate-presigned-url";

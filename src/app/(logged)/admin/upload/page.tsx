@@ -1,4 +1,4 @@
-import { getGallery } from "@/app/controllers/galery";
+import { getGallery } from "@/app/controllers/gallery";
 import UploadForm from "./upload-form";
 
 export default async function UploadPage() {

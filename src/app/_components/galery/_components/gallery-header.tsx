@@ -1,5 +1,5 @@
 import GalerySearch from "./gallery-search";
-import { useState } from "react";
+import { memo, useState } from "react";
 
 interface GaleryHeaderProps {
   search: string;
@@ -26,4 +26,4 @@ const GaleryHeader = ({ search, setSearch }: GaleryHeaderProps) => {
   );
 };
 
-export default GaleryHeader;
+export default memo(GaleryHeader);

@@ -7,8 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 // import EventType from "./EventType";
 import Logo from "../logo";
 import GalerySkeleton from "./_components/skeleton";
-import { getGalleries } from "@/app/controllers/galery";
-import { Galery as GaleryType } from "@prisma/client";
+import { getGalleries } from "@/app/controllers/gallery";
 import { useQueryState } from "nuqs";
 
 const Galery = () => {
@@ -20,40 +19,48 @@ const Galery = () => {
     isError,
   } = useQuery({
     queryFn: () => getGalleries({ search }),
-    queryKey: ["events"],
+    queryKey: ["events", search],
   });
-  const [filteredEvents, setFilteredEvents] = useState<GaleryType[]>(
-    events || [],
-  );
 
   useEffect(() => {
     if (!events) return;
-    setItemSelected(0);
-    setFilteredEvents(
-      events.filter((event) =>
-        event.title.toLowerCase().includes(search.toLowerCase()),
-      ),
-    );
-  }, [search, events]);
-  useEffect(() => {
     const interval = setInterval(() => {
-      setItemSelected((prev) =>
-        prev >= filteredEvents.length - 1 ? 0 : prev + 1,
-      );
+      setItemSelected((prev) => (prev >= events.length - 1 ? 0 : prev + 1));
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [filteredEvents, setItemSelected]);
+  }, [events]);
 
   if (isLoading) {
-    return <GalerySkeleton text="Carregando eventos..." />;
+    return (
+      <>
+        <GaleryHeader search={search} setSearch={setSearch} />
+
+        <GalerySkeleton text="Carregando eventos..." />
+      </>
+    );
   }
 
   if (isError) {
-    return <GalerySkeleton text="Erro ao carregar os eventos." />;
+    return (
+      <>
+        <GaleryHeader search={search} setSearch={setSearch} />
+
+        <GalerySkeleton text="Erro ao carregar os eventos." />
+      </>
+    );
+  }
+  if (!events) {
+    return (
+      <>
+        <GaleryHeader search={search} setSearch={setSearch} />
+
+        <GalerySkeleton text="Eventos indefinidos..." />
+      </>
+    );
   }
 
-  if (filteredEvents.length <= 0) {
+  if (events.length <= 0) {
     return (
       <div className="">
         <GaleryHeader search={search} setSearch={setSearch} />
@@ -70,9 +77,9 @@ const Galery = () => {
   return (
     <div id="galery">
       <GaleryHeader search={search} setSearch={setSearch} />
-      <GaleryHeroSlider event={filteredEvents[itemSelected]} />
+      <GaleryHeroSlider event={events[itemSelected]} />
       <GaleryList
-        events={filteredEvents}
+        events={events}
         itemSelected={itemSelected}
         setItemSelected={setItemSelected}
       />
