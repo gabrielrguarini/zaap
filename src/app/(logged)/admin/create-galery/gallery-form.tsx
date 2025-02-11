@@ -1,5 +1,5 @@
 "use client";
-import { createGalery } from "@/app/controllers/galery";
+import { createGallery } from "@/app/controllers/galery";
 import { gallerySchema, GallerySchema } from "./gallerySchema";
 import { useForm } from "react-hook-form";
 import { generatePresignedUrl } from "../upload/generate-presigned-url";
@@ -48,7 +48,7 @@ export const GalleryForm = () => {
     const uploadedKeys = await Promise.all(uploadPromises);
     setUploadedFiles(uploadedKeys);
 
-    await createGalery({ ...safeData.data, image: uploadedKeys[0] });
+    await createGallery({ ...safeData.data, image: uploadedKeys[0] });
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">

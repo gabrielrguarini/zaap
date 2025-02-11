@@ -3,7 +3,7 @@
 import { prisma } from "@/utils/prisma";
 import { GallerySchema } from "../(logged)/admin/create-galery/gallerySchema";
 
-export async function createGalery(data: GallerySchema) {
+export async function createGallery(data: GallerySchema) {
   const { title, type, location, date, image } = data;
   await prisma.galery.create({
     data: {
@@ -17,7 +17,7 @@ export async function createGalery(data: GallerySchema) {
   });
 }
 
-export async function getGalery({ authorId }: { authorId: number }) {
+export async function getGallery({ authorId }: { authorId: number }) {
   const galery = await prisma.galery.findMany({ where: { authorId } });
   return galery;
 }
@@ -25,6 +25,9 @@ export async function getGalery({ authorId }: { authorId: number }) {
 export async function getGalleries() {
   const galleries = await prisma.galery.findMany({
     take: 5,
+    orderBy: {
+      createdAt: "desc",
+    },
   });
   return galleries;
 }

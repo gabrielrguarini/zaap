@@ -1,6 +1,6 @@
 import { GalleryForm } from "./gallery-form";
 
-export default function CreateGaleryPage() {
+export default function createGalleryPage() {
   return (
     <div className="p-4">
       <GalleryForm />
