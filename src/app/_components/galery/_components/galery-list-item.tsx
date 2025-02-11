@@ -42,7 +42,12 @@ const GaleryListItem = ({
             {event.type} <span className="font-light">- {event.location}</span>
           </p>
           <span className="text-xs font-light">
-            {event.date?.toDateString()}
+            {event.date?.toLocaleDateString("pt-BR", {
+              day: "2-digit",
+              month: "long",
+              year: "numeric",
+              timeZone: "UTC",
+            })}
           </span>
         </div>
       </div>
