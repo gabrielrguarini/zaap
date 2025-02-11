@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import GaleryListItem from "./galery-list-item";
+import GaleryListItem from "./gallery-list-item";
 import { Galery } from "@prisma/client";
 
 interface GaleryListProps {

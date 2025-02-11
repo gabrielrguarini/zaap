@@ -1,4 +1,4 @@
-import GalerySearch from "./galery-search";
+import GalerySearch from "./gallery-search";
 import { useState } from "react";
 
 interface GaleryHeaderProps {

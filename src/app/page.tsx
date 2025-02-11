@@ -7,7 +7,7 @@ import { Navbar } from "./_components/navbar";
 import Structures from "./_components/structures";
 import VideoSlider from "./_components/video-slider";
 import WhatsappButton from "./_components/whatsapp";
-import Galery from "./_components/galery/galery";
+import Galery from "./_components/galery/gallery";
 import LastEvents from "./_components/last-events/last-events";
 
 export default function Home() {

@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import GaleryHeader from "./_components/galery-header";
-import GaleryList from "./_components/galery-list";
-import GaleryHeroSlider from "./_components/galery-hero-slider";
+import GaleryHeader from "./_components/gallery-header";
+import GaleryList from "./_components/gallery-list";
+import GaleryHeroSlider from "./_components/gallery-hero-slider";
 import { useQuery } from "@tanstack/react-query";
 // import EventType from "./EventType";
 import Logo from "../logo";
