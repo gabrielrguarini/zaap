@@ -56,23 +56,33 @@ export const GalleryForm = () => {
         type="text"
         {...register("title")}
         placeholder="Nome da festa"
-        className="bg-foreground"
+        className="rounded bg-foreground p-2 text-white"
       />
       <input
         type="text"
         {...register("type")}
         placeholder="Tipo de festa"
-        className="bg-foreground"
+        className="rounded bg-foreground p-2 text-white"
       />
       <input
         type="text"
         {...register("location")}
-        placeholder="Descrição da festa"
-        className="bg-foreground"
+        placeholder="Local da festa"
+        className="rounded bg-foreground p-2 text-white"
       />
-      <input type="date" {...register("date")} className="bg-foreground" />
-      <input type="file" {...register("image")} className="bg-foreground" />
-      <button type="submit">Enviar</button>
+      <input
+        type="date"
+        {...register("date")}
+        className="rounded bg-foreground p-2 text-white"
+      />
+      <input
+        type="file"
+        {...register("image")}
+        className="rounded bg-foreground p-2 text-white"
+      />
+      <button className="text-bold rounded bg-primary px-4 py-2" type="submit">
+        Enviar
+      </button>
       {uploadedFiles}
     </form>
   );
