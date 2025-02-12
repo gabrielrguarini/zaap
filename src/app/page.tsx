@@ -7,8 +7,8 @@ import { Navbar } from "./_components/navbar";
 import Structures from "./_components/structures";
 import VideoSlider from "./_components/video-slider";
 import WhatsappButton from "./_components/whatsapp";
-import Galery from "./_components/galery/gallery";
 import LastEvents from "./_components/last-events/last-events";
+import Gallery from "./_components/galery/gallery";
 
 export default function Home() {
   return (
@@ -70,7 +70,7 @@ export default function Home() {
         height={213}
         alt="Logo da Zaap Eventos"
       />
-      <Galery />
+      <Gallery />
       <LastEvents />
     </div>
   );

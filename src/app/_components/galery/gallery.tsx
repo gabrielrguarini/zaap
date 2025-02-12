@@ -3,14 +3,13 @@ import { useEffect, useState } from "react";
 import GaleryHeader from "./_components/gallery-header";
 import GaleryList from "./_components/gallery-list";
 import GaleryHeroSlider from "./_components/gallery-hero-slider";
-import { useQuery } from "@tanstack/react-query";
-// import EventType from "./EventType";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import Logo from "../logo";
 import GalerySkeleton from "./_components/skeleton";
 import { getGalleries } from "@/app/controllers/gallery";
 import { useQueryState } from "nuqs";
 
-const Galery = () => {
+const Gallery = () => {
   const [itemSelected, setItemSelected] = useState(0);
   const [search, setSearch] = useQueryState("search", { defaultValue: "" });
   const {
@@ -20,10 +19,12 @@ const Galery = () => {
   } = useQuery({
     queryFn: () => getGalleries({ search }),
     queryKey: ["events", search],
+    placeholderData: keepPreviousData,
   });
 
   useEffect(() => {
     if (!events) return;
+    setItemSelected(0);
     const interval = setInterval(() => {
       setItemSelected((prev) => (prev >= events.length - 1 ? 0 : prev + 1));
     }, 4000);
@@ -35,7 +36,6 @@ const Galery = () => {
     return (
       <>
         <GaleryHeader search={search} setSearch={setSearch} />
-
         <GalerySkeleton text="Carregando eventos..." />
       </>
     );
@@ -45,7 +45,6 @@ const Galery = () => {
     return (
       <>
         <GaleryHeader search={search} setSearch={setSearch} />
-
         <GalerySkeleton text="Erro ao carregar os eventos." />
       </>
     );
@@ -87,4 +86,4 @@ const Galery = () => {
   );
 };
 
-export default Galery;
+export default Gallery;
