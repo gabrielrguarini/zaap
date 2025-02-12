@@ -9,6 +9,8 @@ import VideoSlider from "./_components/video-slider";
 import WhatsappButton from "./_components/whatsapp";
 import LastEvents from "./_components/last-events/last-events";
 import Gallery from "./_components/galery/gallery";
+import { Suspense } from "react";
+import GallerySkeleton from "./_components/galery/_components/skeleton";
 
 export default function Home() {
   return (
@@ -70,7 +72,9 @@ export default function Home() {
         height={213}
         alt="Logo da Zaap Eventos"
       />
-      <Gallery />
+      <Suspense fallback={<GallerySkeleton text="Carregando galeria..." />}>
+        <Gallery />
+      </Suspense>
       <LastEvents />
     </div>
   );
