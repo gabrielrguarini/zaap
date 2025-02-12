@@ -1,18 +1,18 @@
 import Image from "next/image";
 
-interface GalerySearchProps {
+interface GallerySearchProps {
   isInputFocused: boolean;
   setIsInputFocused: React.Dispatch<React.SetStateAction<boolean>>;
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const GalerySearch = ({
+const GallerySearch = ({
   isInputFocused,
   setIsInputFocused,
   search,
   setSearch,
-}: GalerySearchProps) => {
+}: GallerySearchProps) => {
   return (
     <div
       className={`ml-auto w-72 rounded-full bg-gradient-to-r from-[#ffb400] to-[#ff4800] p-[2px] transition-all duration-300 ${isInputFocused && "w-screen sm:w-72"} `}
@@ -36,4 +36,4 @@ const GalerySearch = ({
   );
 };
 
-export default GalerySearch;
+export default GallerySearch;

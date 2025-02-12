@@ -1,12 +1,12 @@
-import GalerySearch from "./gallery-search";
+import GallerySearch from "./gallery-search";
 import { memo, useState } from "react";
 
-interface GaleryHeaderProps {
+interface GalleryHeaderProps {
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const GaleryHeader = ({ search, setSearch }: GaleryHeaderProps) => {
+const GalleryHeader = ({ search, setSearch }: GalleryHeaderProps) => {
   const [isInputFocused, setIsInputFocused] = useState(false);
 
   return (
@@ -16,7 +16,7 @@ const GaleryHeader = ({ search, setSearch }: GaleryHeaderProps) => {
       >
         Galeria de fotos
       </h2>
-      <GalerySearch
+      <GallerySearch
         isInputFocused={isInputFocused}
         setIsInputFocused={setIsInputFocused}
         search={search}
@@ -26,4 +26,4 @@ const GaleryHeader = ({ search, setSearch }: GaleryHeaderProps) => {
   );
 };
 
-export default memo(GaleryHeader);
+export default memo(GalleryHeader);

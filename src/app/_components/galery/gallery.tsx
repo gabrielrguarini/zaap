@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import GaleryHeader from "./_components/gallery-header";
-import GaleryList from "./_components/gallery-list";
-import GaleryHeroSlider from "./_components/gallery-hero-slider";
+import GalleryHeader from "./_components/gallery-header";
+import GalleryList from "./_components/gallery-list";
+import GalleryHeroSlider from "./_components/gallery-hero-slider";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import Logo from "../logo";
-import GalerySkeleton from "./_components/skeleton";
+import GallerySkeleton from "./_components/skeleton";
 import { getGalleries } from "@/app/controllers/gallery";
 import { useQueryState } from "nuqs";
 
@@ -35,8 +35,8 @@ const Gallery = () => {
   if (isLoading) {
     return (
       <>
-        <GaleryHeader search={search} setSearch={setSearch} />
-        <GalerySkeleton text="Carregando eventos..." />
+        <GalleryHeader search={search} setSearch={setSearch} />
+        <GallerySkeleton text="Carregando eventos..." />
       </>
     );
   }
@@ -44,17 +44,17 @@ const Gallery = () => {
   if (isError) {
     return (
       <>
-        <GaleryHeader search={search} setSearch={setSearch} />
-        <GalerySkeleton text="Erro ao carregar os eventos." />
+        <GalleryHeader search={search} setSearch={setSearch} />
+        <GallerySkeleton text="Erro ao carregar os eventos." />
       </>
     );
   }
   if (!events) {
     return (
       <>
-        <GaleryHeader search={search} setSearch={setSearch} />
+        <GalleryHeader search={search} setSearch={setSearch} />
 
-        <GalerySkeleton text="Eventos indefinidos..." />
+        <GallerySkeleton text="Eventos indefinidos..." />
       </>
     );
   }
@@ -62,7 +62,7 @@ const Gallery = () => {
   if (events.length <= 0) {
     return (
       <div className="">
-        <GaleryHeader search={search} setSearch={setSearch} />
+        <GalleryHeader search={search} setSearch={setSearch} />
         <div className="relative flex h-[212px] w-full items-center justify-center rounded-3xl bg-black/20 lg:h-[424px]">
           <Logo className="absolute left-[50%] top-[-20%] z-10 translate-x-[-50%]" />
           <h1 className="text-center text-3xl font-bold text-white">
@@ -75,9 +75,9 @@ const Gallery = () => {
 
   return (
     <div id="galery">
-      <GaleryHeader search={search} setSearch={setSearch} />
-      <GaleryHeroSlider event={events[itemSelected]} />
-      <GaleryList
+      <GalleryHeader search={search} setSearch={setSearch} />
+      <GalleryHeroSlider event={events[itemSelected]} />
+      <GalleryList
         events={events}
         itemSelected={itemSelected}
         setItemSelected={setItemSelected}

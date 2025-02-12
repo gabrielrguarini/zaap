@@ -1,16 +1,16 @@
 "use client";
 import { Galery } from "@prisma/client";
 import Image from "next/image";
-interface GaleryListProps extends React.HTMLAttributes<HTMLDivElement> {
+interface GalleryListProps extends React.HTMLAttributes<HTMLDivElement> {
   selected: boolean;
   event: Galery;
 }
 
-const GaleryListItem = ({
+const GalleryListItem = ({
   selected = false,
   event,
   ...rest
-}: GaleryListProps) => {
+}: GalleryListProps) => {
   return (
     <div
       className={`${
@@ -55,4 +55,4 @@ const GaleryListItem = ({
   );
 };
 
-export default GaleryListItem;
+export default GalleryListItem;

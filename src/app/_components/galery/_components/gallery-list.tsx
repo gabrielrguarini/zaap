@@ -1,18 +1,18 @@
 import { useRef, useEffect } from "react";
-import GaleryListItem from "./gallery-list-item";
+import GalleryListItem from "./gallery-list-item";
 import { Galery } from "@prisma/client";
 
-interface GaleryListProps {
+interface GalleryListProps {
   itemSelected: number;
   setItemSelected: React.Dispatch<React.SetStateAction<number>>;
   events: Galery[];
 }
 
-const GaleryList = ({
+const GalleryList = ({
   itemSelected,
   setItemSelected,
   events,
-}: GaleryListProps) => {
+}: GalleryListProps) => {
   const listRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -51,11 +51,11 @@ const GaleryList = ({
           key={index}
           onClick={() => setItemSelected(index)}
         >
-          <GaleryListItem selected={index === itemSelected} event={event} />
+          <GalleryListItem selected={index === itemSelected} event={event} />
         </div>
       ))}
     </div>
   );
 };
 
-export default GaleryList;
+export default GalleryList;

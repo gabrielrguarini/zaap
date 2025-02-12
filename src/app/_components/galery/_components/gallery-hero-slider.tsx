@@ -7,7 +7,7 @@ interface HeroSliderProps {
   event: Galery;
 }
 
-const GaleryHeroSlider = ({ event }: HeroSliderProps) => {
+const GalleryHeroSlider = ({ event }: HeroSliderProps) => {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
@@ -45,14 +45,13 @@ const GaleryHeroSlider = ({ event }: HeroSliderProps) => {
       <Logo className="absolute left-[50%] top-[-20%] z-10 translate-x-[-50%]" />
       <div className="absolute left-[20%] top-[30%] z-20 translate-x-[-50%] whitespace-nowrap leading-3"></div>
       <Image
-        className="rounded-3xl"
+        className="rounded-3xl object-cover object-center"
         src={`${event.imageUrl}`}
         alt={event.title}
         fill
-        style={{ objectFit: "cover", objectPosition: "contain" }}
       />
     </div>
   );
 };
 
-export default GaleryHeroSlider;
+export default GalleryHeroSlider;

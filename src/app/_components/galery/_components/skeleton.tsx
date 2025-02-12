@@ -1,4 +1,4 @@
-const GalerySkeleton = ({ text }: { text: string }) => {
+const GallerySkeleton = ({ text }: { text: string }) => {
   return (
     <div className="">
       <div className="relative flex h-[212px] w-full items-center justify-center rounded-3xl bg-black/20 lg:h-[424px]">
@@ -8,4 +8,4 @@ const GalerySkeleton = ({ text }: { text: string }) => {
   );
 };
 
-export default GalerySkeleton;
+export default GallerySkeleton;
