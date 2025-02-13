@@ -7,6 +7,7 @@ import { generatePresignedUrl } from "./generate-presigned-url";
 import { Galery } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 
 const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
   const {
@@ -16,60 +17,55 @@ const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
   } = useForm<UploadSchema>({
     resolver: zodResolver(uploadSchema),
   });
-  const [uploadStatus, setUploadStatus] = useState("");
+
   const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
 
-  const onSubmit = async (data: UploadSchema) => {
-    if (data.files.length === 0) {
-      setUploadStatus("Por favor, selecione pelo menos um arquivo.");
-      return;
-    }
+  const uploadMutation = useMutation({
+    mutationFn: async (data: UploadSchema) => {
+      if (data.files.length === 0) {
+        throw new Error("Por favor, selecione pelo menos um arquivo.");
+      }
 
-    const safeData = uploadSchema.safeParse(data);
-    if (!safeData) {
-      return;
-    }
-    const { files } = data;
-
-    try {
-      const data = await generatePresignedUrl({
-        files: files.map((file: File) => ({
+      const presignedResponse = await generatePresignedUrl({
+        files: data.files.map((file: File) => ({
           fileName: file.name,
           fileType: file.type,
         })),
       });
 
-      const { urls } = data;
-
+      const { urls } = presignedResponse;
       if (!urls) {
-        setUploadStatus("Erro ao fazer upload dos arquivos.");
-        return;
+        throw new Error("Erro ao obter URLs pré-assinadas.");
       }
 
       const uploadPromises = urls.map(
         (urlObj: { presignedUrl: string; key: string }, index: number) =>
           axios
-            .put(urlObj.presignedUrl, files[index], {
+            .put(urlObj.presignedUrl, data.files[index], {
               headers: {
-                "Content-Type": files[index].type,
+                "Content-Type": data.files[index].type,
               },
             })
             .then(() => urlObj.key),
       );
-
       const uploadedKeys = await Promise.all(uploadPromises);
 
-      setUploadedFiles(uploadedKeys);
       await setImagesToGalery({
-        galeryId: "cm6imlgiu0001vg3lu3q0ol5s",
+        galeryId: data.galeryId,
         files: uploadedKeys,
       });
-      setUploadStatus("Todos os arquivos foram enviados com sucesso!");
-    } catch (error) {
-      console.error(error);
-      setUploadStatus("Erro ao fazer upload dos arquivos.");
-    }
+
+      return uploadedKeys;
+    },
+    onSuccess: (uploadedKeys) => {
+      setUploadedFiles(uploadedKeys);
+    },
+  });
+
+  const onSubmit = (data: UploadSchema) => {
+    uploadMutation.mutate(data);
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
       <input
@@ -81,26 +77,45 @@ const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
       {errors.title && (
         <span className="text-sm text-red-500">{errors.title.message}</span>
       )}
-      <select className="bg-foreground p-1 px-2">
+
+      <select {...register("galeryId")} className="bg-foreground p-1 px-2">
         {galleries.map((galery) => (
           <option key={galery.id} value={galery.id}>
             {galery.title}
           </option>
         ))}
       </select>
+
       <input
-        className="bg-foreground"
         type="file"
         {...register("files")}
         accept="image/* video/*"
-        required
         multiple
-      />{" "}
+        className="bg-foreground"
+      />
       {errors.files && (
-        <span className="text-sm text-red-500">{`${errors.files?.message}`}</span>
+        <span className="text-sm text-red-500">
+          {errors.files?.message as string}
+        </span>
       )}
-      <input type="submit" value="Enviar" />
-      {uploadStatus === "Enviando" ? <p>Enviando...</p> : <p>{uploadStatus}</p>}
+
+      <button
+        type="submit"
+        className="bg-primary px-4 py-2"
+        disabled={uploadMutation.isPending}
+      >
+        {uploadMutation.isPending ? "Enviando..." : "Enviar"}
+      </button>
+
+      {uploadMutation.isError && (
+        <p className="text-red-500">Erro ao fazer upload dos arquivos.</p>
+      )}
+      {uploadMutation.isSuccess && (
+        <p className="text-green-500">
+          Todos os arquivos foram enviados com sucesso!
+        </p>
+      )}
+
       {uploadedFiles.length > 0 && (
         <div className="mt-4">
           <h2>Arquivos enviados:</h2>

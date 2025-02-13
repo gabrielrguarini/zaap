@@ -1,9 +1,16 @@
 "use server";
 
 import { prisma } from "@/utils/prisma";
-import { GallerySchema } from "../(logged)/admin/create-gallery/gallerySchema";
 
-export async function createGallery(data: GallerySchema) {
+export interface CreateGalleryProps {
+  title: string;
+  type: string;
+  location: string;
+  image: string;
+  date?: Date | undefined;
+}
+
+export async function createGallery(data: CreateGalleryProps) {
   const { title, type, location, date, image } = data;
   await prisma.galery.create({
     data: {
