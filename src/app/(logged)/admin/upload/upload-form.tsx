@@ -22,6 +22,14 @@ const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
 
   const uploadMutation = useMutation({
     mutationFn: async (data: UploadSchema) => {
+      const safeData = uploadSchema.safeParse(data);
+      console.log("data ->", data);
+
+      if (!safeData.success) {
+        throw new Error(safeData.error.message);
+      }
+      console.log("safeData ->", safeData);
+
       if (data.files.length === 0) {
         throw new Error("Por favor, selecione pelo menos um arquivo.");
       }
@@ -59,6 +67,9 @@ const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
     },
     onSuccess: (uploadedKeys) => {
       setUploadedFiles(uploadedKeys);
+    },
+    onError: (error) => {
+      console.error("Erro ao fazer upload dos arquivos:", error);
     },
   });
 

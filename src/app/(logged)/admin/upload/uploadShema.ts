@@ -8,18 +8,14 @@ const allowedTypes: { [key: string]: boolean } = {
 
 export const fileUploadSchema = z.preprocess(
   (data) => {
-    // Se for um FileList (input com multiple)
     if (data instanceof FileList) {
       return Array.from(data);
     }
-    // Se for um único File (input simples)
     if (data instanceof File) {
       return [data];
     }
-    // Caso contrário, retorna o próprio valor para que a validação falhe
     return data;
   },
-  // Agora o schema espera um array de File
   z
     .array(z.instanceof(File))
     .refine((files) => files.length > 0, {
