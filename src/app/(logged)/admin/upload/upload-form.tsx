@@ -8,6 +8,7 @@ import { Galery } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
   const {
@@ -72,7 +73,11 @@ const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
   });
 
   const onSubmit = (data: UploadSchema) => {
-    uploadMutation.mutate(data);
+    toast.promise(uploadMutation.mutateAsync(data), {
+      loading: "Enviando...",
+      success: "Upload realizado com sucesso!",
+      error: "Erro ao fazer upload.",
+    });
   };
 
   return (

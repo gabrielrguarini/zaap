@@ -7,6 +7,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
+import toast from "react-hot-toast";
 
 export const GalleryForm = () => {
   const {
@@ -81,7 +82,11 @@ export const GalleryForm = () => {
   });
 
   const onSubmit = (data: GallerySchema) => {
-    uploadImagesMutation.mutate(data);
+    toast.promise(uploadImagesMutation.mutateAsync(data), {
+      loading: "Enviando...",
+      success: "Upload realizado com sucesso!",
+      error: "Erro ao fazer upload.",
+    });
   };
   const isSubmitting =
     uploadImagesMutation.isPending || createGalleryMutation.isPending;
