@@ -6,6 +6,7 @@ import React from "react";
 import ReactQueryProvider from "@/utils/providers/ReactQueryProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { NuqsAdapter } from "nuqs/adapters/next";
+import { Toaster } from "react-hot-toast";
 
 const rajdhani = Rajdhani({
   subsets: ["latin"],
@@ -35,7 +36,10 @@ export default function RootLayout({
           <body
             className={`${rajdhani.className} w-screen overflow-x-hidden text-white antialiased`}
           >
-            <NuqsAdapter>{children}</NuqsAdapter>
+            <NuqsAdapter>
+              <Toaster />
+              {children}
+            </NuqsAdapter>
             <Footer />
           </body>
         </ReactQueryProvider>
