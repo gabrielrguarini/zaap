@@ -48,7 +48,7 @@ export const GalleryForm = () => {
 
       const uploadPromises = urls.map((urlObj) =>
         axios
-          .put(urlObj.presignedUrl, safeData.data.image, {
+          .put(urlObj.presignedUrl, safeData.data.image[0], {
             headers: { "Content-Type": safeData.data.image[0].type },
           })
           .then(() => urlObj.key),
@@ -74,6 +74,7 @@ export const GalleryForm = () => {
     },
     onSuccess: () => {
       setStatusMessage("Evento salvo com sucesso!");
+      toast.success("Evento salvo com sucesso!");
       reset();
     },
     onError: () => {
@@ -82,11 +83,7 @@ export const GalleryForm = () => {
   });
 
   const onSubmit = (data: GallerySchema) => {
-    toast.promise(uploadImagesMutation.mutateAsync(data), {
-      loading: "Enviando...",
-      success: "Upload realizado com sucesso!",
-      error: "Erro ao fazer upload.",
-    });
+    uploadImagesMutation.mutate(data);
   };
   const isSubmitting =
     uploadImagesMutation.isPending || createGalleryMutation.isPending;

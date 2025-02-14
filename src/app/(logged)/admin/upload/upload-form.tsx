@@ -34,7 +34,7 @@ const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
       }
 
       const presignedResponse = await generatePresignedUrl({
-        files: data.files.map((file: File) => ({
+        files: safeData.data.files.map((file: File) => ({
           fileName: file.name,
           fileType: file.type,
         })),
@@ -48,9 +48,9 @@ const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
       const uploadPromises = urls.map(
         (urlObj: { presignedUrl: string; key: string }, index: number) =>
           axios
-            .put(urlObj.presignedUrl, data.files[index], {
+            .put(urlObj.presignedUrl, safeData.data.files[index], {
               headers: {
-                "Content-Type": data.files[index].type,
+                "Content-Type": safeData.data.files[index].type,
               },
             })
             .then(() => urlObj.key),
@@ -89,7 +89,9 @@ const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
         className="w-full bg-foreground p-1 px-2"
       />
       {errors.title && (
-        <span className="text-sm text-red-500">{errors.title.message}</span>
+        <span className="-mt-3 text-sm text-red-500">
+          {errors.title.message}
+        </span>
       )}
 
       <select {...register("galeryId")} className="bg-foreground p-1 px-2">
@@ -100,6 +102,9 @@ const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
         ))}
       </select>
 
+      <span className="-mt-3 text-sm text-red-500">
+        {errors.galeryId?.message}
+      </span>
       <input
         type="file"
         {...register("files")}
@@ -108,7 +113,7 @@ const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
         className="bg-foreground"
       />
       {errors.files && (
-        <span className="text-sm text-red-500">
+        <span className="-mt-3 text-sm text-red-500">
           {errors.files?.message as string}
         </span>
       )}

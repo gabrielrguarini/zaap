@@ -33,8 +33,8 @@ export const fileUploadSchema = z.preprocess(
 );
 
 export const uploadSchema = z.object({
-  title: z.string().nonempty("O título é obrigatório."),
-  galeryId: z.string().nonempty("O ID da galeria é obrigatório."),
+  title: z.string().min(1, "O título é obrigatório."),
+  galeryId: z.string().min(1, "O ID da galeria é obrigatório."),
   files: fileUploadSchema,
 });
 

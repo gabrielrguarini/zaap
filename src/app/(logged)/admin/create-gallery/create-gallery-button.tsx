@@ -23,7 +23,7 @@ const CreateGalleryButton = () => {
         id="create-gallery"
         ref={dialogRef}
       >
-        <div className="border-back z-50 bg-background bg-opacity-50 p-8 text-white">
+        <div className="border-back bg-background bg-opacity-50 p-8 text-white">
           <h1 className="pb-2 text-3xl font-bold text-primary">Criar Evento</h1>
           <GalleryForm />
           <button className="" onClick={closeDialog}>
