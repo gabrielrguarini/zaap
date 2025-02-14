@@ -27,8 +27,7 @@ const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
   const onSubmit = (data: UploadSchema) => {
     toast.promise(
       async () => {
-        uploadMutation(data.files);
-
+        await uploadMutation(data.files);
         if (isError) throw new Error("Erro ao fazer upload dos arquivos.");
         if (isSuccess) {
           await setImagesToGalery({

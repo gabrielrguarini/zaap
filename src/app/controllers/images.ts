@@ -17,7 +17,7 @@ export async function setImagesToGalery({
     })),
   });
 
-  revalidatePath("/admin/upload"); // Revalida a página após a atualização
+  revalidatePath("/admin/upload");
 }
 
 export async function getImages(galeryId: string) {
