@@ -1,14 +1,11 @@
 "use client";
-import { useState } from "react";
-import axios from "axios";
 import { setImagesToGalery } from "@/app/controllers/images";
 import { UploadSchema, uploadSchema } from "./uploadShema";
-import { generatePresignedUrl } from "./generate-presigned-url";
 import { Galery } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { useUploadImages } from "@/hooks/useUploadImage";
 
 const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
   const {
@@ -19,65 +16,33 @@ const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
     resolver: zodResolver(uploadSchema),
   });
 
-  const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
-
-  const uploadMutation = useMutation({
-    mutationFn: async (data: UploadSchema) => {
-      const safeData = uploadSchema.safeParse(data);
-
-      if (!safeData.success) {
-        throw new Error(safeData.error.message);
-      }
-
-      if (data.files.length === 0) {
-        throw new Error("Por favor, selecione pelo menos um arquivo.");
-      }
-
-      const presignedResponse = await generatePresignedUrl({
-        files: safeData.data.files.map((file: File) => ({
-          fileName: file.name,
-          fileType: file.type,
-        })),
-      });
-
-      const { urls } = presignedResponse;
-      if (!urls) {
-        throw new Error("Erro ao obter URLs pré-assinadas.");
-      }
-
-      const uploadPromises = urls.map(
-        (urlObj: { presignedUrl: string; key: string }, index: number) =>
-          axios
-            .put(urlObj.presignedUrl, safeData.data.files[index], {
-              headers: {
-                "Content-Type": safeData.data.files[index].type,
-              },
-            })
-            .then(() => urlObj.key),
-      );
-      const uploadedKeys = await Promise.all(uploadPromises);
-
-      await setImagesToGalery({
-        galeryId: data.galeryId,
-        files: uploadedKeys,
-      });
-
-      return uploadedKeys;
-    },
-    onSuccess: (uploadedKeys) => {
-      setUploadedFiles(uploadedKeys);
-    },
-    onError: () => {
-      console.error("Erro ao fazer upload dos arquivos.");
-    },
-  });
+  const {
+    mutateAsync: uploadMutation,
+    data: uploadedKeys,
+    isError,
+    isSuccess,
+    isPending,
+  } = useUploadImages();
 
   const onSubmit = (data: UploadSchema) => {
-    toast.promise(uploadMutation.mutateAsync(data), {
-      loading: "Enviando...",
-      success: "Upload realizado com sucesso!",
-      error: "Erro ao fazer upload.",
-    });
+    toast.promise(
+      async () => {
+        uploadMutation(data.files);
+
+        if (isError) throw new Error("Erro ao fazer upload dos arquivos.");
+        if (isSuccess) {
+          await setImagesToGalery({
+            galeryId: data.galeryId,
+            files: uploadedKeys,
+          });
+        }
+      },
+      {
+        loading: "Enviando...",
+        success: "Upload realizado com sucesso!",
+        error: "Erro ao fazer upload.",
+      },
+    );
   };
 
   return (
@@ -121,29 +86,18 @@ const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
       <button
         type="submit"
         className="bg-primary px-4 py-2"
-        disabled={uploadMutation.isPending}
+        disabled={isPending}
       >
-        {uploadMutation.isPending ? "Enviando..." : "Enviar"}
+        {isPending ? "Enviando..." : "Enviar"}
       </button>
 
-      {uploadMutation.isError && (
+      {isError && (
         <p className="text-red-500">Erro ao fazer upload dos arquivos.</p>
       )}
-      {uploadMutation.isSuccess && (
+      {isSuccess && (
         <p className="text-green-500">
           Todos os arquivos foram enviados com sucesso!
         </p>
-      )}
-
-      {uploadedFiles.length > 0 && (
-        <div className="mt-4">
-          <h2>Arquivos enviados:</h2>
-          <ul>
-            {uploadedFiles.map((file, index) => (
-              <li key={index}>{file}</li>
-            ))}
-          </ul>
-        </div>
       )}
     </form>
   );
