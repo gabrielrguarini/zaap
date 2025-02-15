@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
-import { generatePresignedUrl } from "@/app/(logged)/admin/upload/generate-presigned-url";
+import { generatePresignedUrl } from "@/utils/generate-presigned-url";
 
 export const useUploadImages = () => {
   const [statusMessage, setStatusMessage] = useState<string | null>(null);

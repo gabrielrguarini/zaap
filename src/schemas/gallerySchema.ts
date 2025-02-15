@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { fileUploadSchema } from "../upload/uploadShema";
+import { fileUploadSchema } from "./uploadShema";
 
 export const gallerySchema = z.object({
   title: z

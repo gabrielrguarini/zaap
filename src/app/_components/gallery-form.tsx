@@ -1,5 +1,5 @@
 "use client";
-import { gallerySchema, GallerySchema } from "./gallerySchema";
+import { gallerySchema, GallerySchema } from "../../schemas/gallerySchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";

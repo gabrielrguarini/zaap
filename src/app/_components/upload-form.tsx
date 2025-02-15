@@ -1,6 +1,6 @@
 "use client";
 import { setImagesToGalery } from "@/app/controllers/images";
-import { UploadSchema, uploadSchema } from "./uploadShema";
+import { UploadSchema, uploadSchema } from "../../schemas/uploadShema";
 import { Galery } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

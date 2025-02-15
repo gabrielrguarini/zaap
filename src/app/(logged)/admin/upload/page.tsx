@@ -1,5 +1,6 @@
 import { getGallery } from "@/app/controllers/gallery";
-import UploadForm from "./upload-form";
+import UploadForm from "../../../_components/upload-form";
+import { Dialog } from "@/app/_components/dialog";
 
 export default async function UploadPage() {
   const galleries = await getGallery({ authorId: 1 });
@@ -10,7 +11,9 @@ export default async function UploadPage() {
 
   return (
     <div className="p-4">
-      <UploadForm galleries={galleries} />
+      <Dialog buttonString="Enviar imagens" title="Enviar imagens">
+        <UploadForm galleries={galleries} />
+      </Dialog>
     </div>
   );
 }
