@@ -1,13 +1,13 @@
 "use client";
 import { setImagesToGalery } from "@/app/controllers/images";
 import { UploadSchema, uploadSchema } from "../../schemas/uploadShema";
-import { Galery } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import { useUploadImages } from "@/hooks/useUploadImage";
+import { useGalleries } from "@/hooks/useGalleries";
 
-const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
+const UploadForm = () => {
   const {
     register,
     handleSubmit,
@@ -22,6 +22,8 @@ const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
     isError,
     isSuccess,
   } = useUploadImages();
+
+  const { data: galleries } = useGalleries();
 
   const onSubmit = (data: UploadSchema) => {
     toast.promise(
@@ -55,7 +57,7 @@ const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
       )}
 
       <select {...register("galeryId")} className="bg-foreground p-1 px-2">
-        {galleries.map((galery) => (
+        {galleries?.map((galery) => (
           <option key={galery.id} value={galery.id}>
             {galery.title}
           </option>

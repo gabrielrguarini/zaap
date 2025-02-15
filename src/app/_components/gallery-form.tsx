@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import { useUploadImages } from "@/hooks/useUploadImage";
 import { useCreateGallery } from "@/hooks/useCreateGallery";
+import { useGalleries } from "@/hooks/useGalleries";
 
 export const GalleryForm = () => {
   const {
@@ -22,6 +23,8 @@ export const GalleryForm = () => {
     isPending: isCreating,
     statusMessage: galleryMessage,
   } = useCreateGallery();
+
+  const { refetch } = useGalleries();
   const isPending = isUploading || isCreating;
 
   const onSubmit = async (data: GallerySchema) => {
@@ -30,6 +33,7 @@ export const GalleryForm = () => {
         const uploadedKeys = await uploadImages(data.image);
         await createGallery({ ...data, image: uploadedKeys[0] });
         reset();
+        refetch();
       })(),
       {
         loading: "Enviando imagens...",
