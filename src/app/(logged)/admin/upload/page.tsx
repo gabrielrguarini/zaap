@@ -12,7 +12,7 @@ export default async function UploadPage() {
   return (
     <div className="p-4">
       <Dialog buttonString="Enviar imagens" title="Enviar imagens">
-        <UploadForm galleries={galleries} />
+        <UploadForm />
       </Dialog>
     </div>
   );
