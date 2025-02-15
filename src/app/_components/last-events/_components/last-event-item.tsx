@@ -17,11 +17,14 @@ const LastEventItem = ({
     <div className="flex items-center justify-between rounded-xl bg-black px-8 py-2">
       <div className="flex items-center justify-start gap-1 text-start">
         <p className="bg-gradient-to-r from-[#ffb400] to-[#ff4800] bg-clip-text text-center text-3xl font-bold text-transparent">
-          {date?.getDay()}
+          {date?.toLocaleDateString("pt-BR", {
+            day: "2-digit",
+            timeZone: "UTC",
+          })}
         </p>
         <span className="font-semibold">
           {date
-            ?.toLocaleDateString("pt-BR", { month: "short" })
+            ?.toLocaleDateString("pt-BR", { month: "short", timeZone: "UTC" })
             .toLocaleUpperCase()
             .slice(0, -1)}
         </span>

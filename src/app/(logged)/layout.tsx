@@ -1,6 +1,7 @@
 "use client";
 
 import { SignOutButton } from "@clerk/nextjs";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function RootLayout({
@@ -17,20 +18,20 @@ export default function RootLayout({
         <nav className="flex items-center gap-4">
           <ul className="flex gap-4">
             <li>
-              <a
+              <Link
                 href="/admin"
                 className={`${pathName === "/admin" ? "font-bold text-[#ffb400]" : ""}`}
               >
                 Admin
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="/galeria"
                 className={`${pathName === "/galeria" ? "font-bold text-[#ffb400]" : ""}`}
               >
                 Galeria
-              </a>
+              </Link>
             </li>
           </ul>
           <SignOutButton>
