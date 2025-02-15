@@ -30,6 +30,7 @@ export const useUploadImages = () => {
       );
 
       const uploadedKeys = await Promise.all(uploadPromises);
+
       return uploadedKeys;
     },
     onSuccess: () => {

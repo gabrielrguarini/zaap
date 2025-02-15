@@ -98,7 +98,9 @@ export const GalleryForm = () => {
           "Enviar"
         )}
       </button>
-      {galleryMessage && <p className="text-white">{galleryMessage}</p>}
+      {galleryMessage && (
+        <p className="text-sm text-green-500">{galleryMessage}</p>
+      )}
     </form>
   );
 };

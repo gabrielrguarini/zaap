@@ -17,24 +17,20 @@ const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
   });
 
   const {
-    mutateAsync: uploadMutation,
-    data: uploadedKeys,
+    mutateAsync: uploadImages,
+    isPending,
     isError,
     isSuccess,
-    isPending,
   } = useUploadImages();
 
   const onSubmit = (data: UploadSchema) => {
     toast.promise(
       async () => {
-        await uploadMutation(data.files);
-        if (isError) throw new Error("Erro ao fazer upload dos arquivos.");
-        if (isSuccess) {
-          await setImagesToGalery({
-            galeryId: data.galeryId,
-            files: uploadedKeys,
-          });
-        }
+        const uploadedKeys = await uploadImages(data.files);
+        await setImagesToGalery({
+          galeryId: data.galeryId,
+          files: uploadedKeys,
+        });
       },
       {
         loading: "Enviando...",
@@ -84,7 +80,7 @@ const UploadForm = ({ galleries }: { galleries: Galery[] }) => {
 
       <button
         type="submit"
-        className="bg-primary px-4 py-2"
+        className={`px-4 py-2 ${isPending ? "cursor-not-allowed bg-foreground" : "bg-primary"}`}
         disabled={isPending}
       >
         {isPending ? "Enviando..." : "Enviar"}
