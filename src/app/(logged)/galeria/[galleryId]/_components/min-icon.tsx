@@ -1,9 +1,8 @@
 import { Image as ImageType } from "@prisma/client";
 import Image from "next/image";
 
-const ImageIcon = async ({ images }: { images: Promise<ImageType[]> }) => {
-  const imagesAwait = await images;
-  return imagesAwait.map((img, index) => {
+const ImageIcon = ({ images }: { images: ImageType[] }) => {
+  return images.map((img, index) => {
     return (
       <Image
         key={index}

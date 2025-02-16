@@ -15,7 +15,7 @@ const LastEvents = () => {
           key={event.id}
           date={event.date}
           title={event.title}
-          description={event.description}
+          type={event.type}
           location={event.location}
           galeryId={event.id}
         />

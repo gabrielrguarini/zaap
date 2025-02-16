@@ -3,13 +3,13 @@ import Link from "next/link";
 const LastEventItem = ({
   date,
   title,
-  description,
+  type,
   location,
   galeryId,
 }: {
   date: Date | null;
   title: string;
-  description: string | null;
+  type: string | null;
   location: string | null;
   galeryId: string;
 }) => {
@@ -33,7 +33,7 @@ const LastEventItem = ({
         {title}
       </h4>
       <p>
-        {description} - {location}
+        <span className="font-bold">{type}</span> - {location}
       </p>
       <div className="rounded-md bg-gradient-to-r from-[#ffb400] to-[#ff4800] p-[2px]">
         <button className="rounded-md bg-black px-2">
