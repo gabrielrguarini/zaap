@@ -9,8 +9,6 @@ import GalleryHeroText from "./gallery-hero-text";
 interface Slide {
   src: string;
   alt: string;
-  title?: string;
-  subTitle?: string;
 }
 
 interface HeroSliderProps {
