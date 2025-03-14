@@ -4,12 +4,13 @@ import Image from "next/image";
 import { Suspense } from "react";
 import ImageIcon from "./min-icon";
 
-export default async function GaleryPage({
+export default async function GalleryPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ galleryId: string }>;
 }) {
-  const { slug: galleryId } = await params;
+  const { galleryId: galleryId } = await params;
+  if (!galleryId) return <div>Galeria inválida</div>;
   const images = getImages(galleryId);
   return (
     <main className="m-auto mt-4 flex min-h-full w-full max-w-5xl flex-col gap-2 md:gap-4">
