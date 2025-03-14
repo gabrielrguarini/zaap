@@ -4,9 +4,7 @@ import "aos/dist/aos.css";
 import Image from "next/image";
 import Logo from "../logo";
 import { useEffect, useState } from "react";
-import GaleryHeroText from "./galery-hero-text";
-import GaleryHeroText2 from "./galery-hero-text-2";
-import GaleryHeroText3 from "./galery-hero-text-3";
+import GalleryHeroText from "./gallery-hero-text";
 
 interface Slide {
   src: string;
@@ -34,9 +32,30 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
   };
 
   const heroTexts = [
-    <GaleryHeroText key={0} />,
-    <GaleryHeroText2 key={1} />,
-    <GaleryHeroText3 key={2} />,
+    <GalleryHeroText
+      string1="Seu evento com "
+      string2="da mais alta qualidade!"
+      span="sonorização "
+      subString="Conforto sonoro e qualidade
+no seu evento."
+      key={0}
+    />,
+    <GalleryHeroText
+      string1="1 - Seu evento com "
+      string2="da mais alta qualidade!"
+      span="sonorização "
+      subString="Conforto sonoro e qualidade
+no seu evento."
+      key={0}
+    />,
+    <GalleryHeroText
+      string1="2 - Seu evento com "
+      string2="da mais alta qualidade!"
+      span="sonorização "
+      subString="Conforto sonoro e qualidade
+no seu evento."
+      key={0}
+    />,
   ];
 
   useEffect(() => {
