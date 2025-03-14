@@ -18,7 +18,7 @@ const Structures = () => {
 
   return (
     <div className="sm:px-8">
-      <h2 className="p-8 text-center">
+      <h2 className="p-8 text-center text-2xl">
         <span className="font-bold">Oferecemos</span> estruturas que contam com:
       </h2>
       <div className="relative overflow-hidden">

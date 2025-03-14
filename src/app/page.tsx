@@ -1,4 +1,3 @@
-import Image from "next/image";
 import About from "./_components/about";
 import EventsType from "./_components/events-type";
 import FeatureBar from "./_components/feature-bar";
@@ -59,13 +58,13 @@ export default function Home() {
       <About />
       <Structures />
       <WhatsappButton />
-      <Image
+      {/* <Image
         className="m-auto my-8 sm:my-24"
         src={"/logo3.png"}
         width={180}
         height={213}
         alt="Logo da Zaap Eventos"
-      />
+      /> */}
       <Suspense fallback={<GallerySkeleton text="Carregando galeria..." />}>
         <Gallery />
       </Suspense>
