@@ -3,6 +3,7 @@
 import { SignOutButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export default function RootLayout({
   children,
@@ -14,7 +15,15 @@ export default function RootLayout({
   return (
     <>
       <header className="m-auto mt-4 flex min-h-full w-full max-w-5xl justify-between gap-2 p-2 md:gap-4">
-        <h1 className="text-3xl">Galeria</h1>
+        <Link href="/">
+          <Image
+            src={"/ESCRITA.svg"}
+            alt="Logo da Zaap Eventos"
+            width={200}
+            height={50}
+            className="cursor-pointer"
+          />
+        </Link>
         <nav className="flex items-center gap-4">
           <ul className="flex gap-4">
             <li>
