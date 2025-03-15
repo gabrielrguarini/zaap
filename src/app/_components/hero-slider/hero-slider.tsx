@@ -39,20 +39,18 @@ no seu evento."
       key={0}
     />,
     <GalleryHeroText
-      string1="1 - Seu evento com "
-      string2="da mais alta qualidade!"
-      span="sonorização "
-      subString="Conforto sonoro e qualidade
-no seu evento."
-      key={0}
+      string1=""
+      string2="profissional com a mais alta tecnologia!"
+      span="Iluminação "
+      subString="Seu evento com um brilho especial para se destacar!"
+      key={1}
     />,
     <GalleryHeroText
-      string1="2 - Seu evento com "
-      string2="da mais alta qualidade!"
-      span="sonorização "
-      subString="Conforto sonoro e qualidade
-no seu evento."
-      key={0}
+      string1=""
+      string2="completa para garantir o sucesso do seu evento!"
+      span="Estrutura "
+      subString="Tendas, Palco, Estrutura Boxtruss e muito mais!"
+      key={2}
     />,
   ];
 
