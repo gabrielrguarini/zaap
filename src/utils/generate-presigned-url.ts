@@ -3,7 +3,7 @@ import { s3 } from "@/utils/s3Client";
 import { env } from "@/env";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { auth } from "@clerk/nextjs/server";
+// import { auth } from "@clerk/nextjs/server";
 
 interface FilesProps {
   files: {
@@ -13,10 +13,10 @@ interface FilesProps {
 }
 
 export async function generatePresignedUrl({ files }: FilesProps) {
-  const { userId } = await auth.protect();
-  if (!userId) {
-    return { error: "Unauthorized", status: 401 };
-  }
+  // const { userId } = await auth.protect();
+  // if (!userId) {
+  //   return { error: "Unauthorized", status: 401 };
+  // }
 
   const urls = await Promise.all(
     files.map(async (file: { fileName: string; fileType: string }) => {
