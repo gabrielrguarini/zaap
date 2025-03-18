@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { signOut } from "next-auth/react";
 
 export default function RootLayout({
   children,
@@ -46,7 +47,12 @@ export default function RootLayout({
           <div
             className={`h-full rounded-full bg-gradient-to-r from-[#ffb400] to-[#ff4800] p-[2px]`}
           >
-            <button className="w-ful h-full rounded-full bg-background px-8">
+            <button
+              onClick={() => {
+                signOut();
+              }}
+              className="w-ful h-full rounded-full bg-background px-8"
+            >
               Sair
             </button>
           </div>
