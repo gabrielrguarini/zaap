@@ -4,7 +4,6 @@ import "./globals.css";
 import Footer from "./_components/footer";
 import React from "react";
 import ReactQueryProvider from "@/utils/providers/ReactQueryProvider";
-import { ClerkProvider } from "@clerk/nextjs";
 import { NuqsAdapter } from "nuqs/adapters/next";
 import { Toaster } from "react-hot-toast";
 
@@ -30,20 +29,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="pt-BR">
-        <ReactQueryProvider>
-          <body
-            className={`${rajdhani.className} w-screen overflow-x-hidden text-white antialiased`}
-          >
-            <NuqsAdapter>
-              <Toaster />
-              {children}
-            </NuqsAdapter>
-            <Footer />
-          </body>
-        </ReactQueryProvider>
-      </html>
-    </ClerkProvider>
+    <html lang="pt-BR">
+      <ReactQueryProvider>
+        <body
+          className={`${rajdhani.className} min-h-screen w-screen overflow-x-hidden text-white antialiased`}
+        >
+          <NuqsAdapter>
+            <Toaster />
+            <main className="flex-grow">{children}</main>
+          </NuqsAdapter>
+          <Footer />
+        </body>
+      </ReactQueryProvider>
+    </html>
   );
 }

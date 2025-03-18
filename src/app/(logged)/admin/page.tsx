@@ -1,8 +1,15 @@
+import { CreateUserButton } from "@/app/_components/create-user-button";
 import { Dialog } from "@/app/_components/dialog";
 import { GalleryForm } from "@/app/_components/gallery-form";
 import UploadForm from "@/app/_components/upload-form";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 export default async function AdminPage() {
+  const sessao = await auth();
+  if (!sessao) {
+    redirect("/sign-in");
+  }
   return (
     <div>
       <Dialog
@@ -15,6 +22,8 @@ export default async function AdminPage() {
       <Dialog buttonString="Adicionar Imagens" title="Adicionar Imagens">
         <UploadForm />
       </Dialog>
+
+      <CreateUserButton />
     </div>
   );
 }

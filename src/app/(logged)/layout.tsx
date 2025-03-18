@@ -1,6 +1,5 @@
 "use client";
 
-import { SignOutButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
@@ -43,15 +42,14 @@ export default function RootLayout({
               </Link>
             </li>
           </ul>
-          <SignOutButton>
-            <div
-              className={`h-full rounded-full bg-gradient-to-r from-[#ffb400] to-[#ff4800] p-[2px]`}
-            >
-              <button className="w-ful h-full rounded-full bg-background px-8">
-                Sair
-              </button>
-            </div>
-          </SignOutButton>
+          {/* <SignOutButton> */}
+          <div
+            className={`h-full rounded-full bg-gradient-to-r from-[#ffb400] to-[#ff4800] p-[2px]`}
+          >
+            <button className="w-ful h-full rounded-full bg-background px-8">
+              Sair
+            </button>
+          </div>
         </nav>
       </header>
       {children}
