@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import ImageIcon from "./min-icon";
 import { useImages } from "@/hooks/useImages";
+import ImageIconList from "./min-icon-list";
 const GalleryImages = ({ galleryId }: { galleryId: string }) => {
   const { data: images, isLoading } = useImages({ galleryId });
   if (isLoading) return <h1>Carregando...</h1>;
@@ -17,7 +17,7 @@ const GalleryImages = ({ galleryId }: { galleryId: string }) => {
         />
       </div>
       <div className="flex flex-wrap gap-2">
-        <ImageIcon images={images} />
+        <ImageIconList images={images} />
       </div>
     </div>
   );

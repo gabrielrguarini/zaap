@@ -7,7 +7,7 @@ export default async function AdminPage() {
     <div>
       <Dialog
         className="mx-4"
-        title="Adiconar Evento"
+        title="Adicionar Evento"
         buttonString="Adicionar Evento"
       >
         <GalleryForm />
