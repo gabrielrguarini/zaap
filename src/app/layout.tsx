@@ -36,7 +36,9 @@ export default function RootLayout({
         >
           <NuqsAdapter>
             <Toaster />
-            <main className="flex-grow">{children}</main>
+            <main className="flex flex-grow items-center justify-center">
+              {children}
+            </main>
           </NuqsAdapter>
           <Footer />
         </body>
