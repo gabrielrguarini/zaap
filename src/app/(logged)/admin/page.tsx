@@ -1,4 +1,3 @@
-import { CreateUserButton } from "@/app/_components/create-user-button";
 import { Dialog } from "@/app/_components/dialog";
 import { GalleryForm } from "@/app/_components/gallery-form";
 import UploadForm from "@/app/_components/upload-form";
@@ -22,8 +21,6 @@ export default async function AdminPage() {
       <Dialog buttonString="Adicionar Imagens" title="Adicionar Imagens">
         <UploadForm />
       </Dialog>
-
-      <CreateUserButton />
     </div>
   );
 }
