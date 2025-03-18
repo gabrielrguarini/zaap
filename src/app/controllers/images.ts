@@ -1,4 +1,5 @@
 "use server";
+import { auth } from "@/auth";
 import { env } from "@/env";
 import { prisma } from "@/utils/prisma";
 import { s3 } from "@/utils/s3Client";
@@ -12,6 +13,10 @@ export async function setImagesToGalery({
   galleryId: string;
   files: string[];
 }) {
+  const session = await auth();
+  if (!session) {
+    throw new Error("Usuário sem permissão para deletar imagem");
+  }
   await prisma.image.createMany({
     data: files.map((file) => ({
       url: `https://zaap-bucket.s3.sa-east-1.amazonaws.com/${file}`,
@@ -24,6 +29,10 @@ export async function setImagesToGalery({
 }
 
 export async function deleteImage(id: string) {
+  const session = await auth();
+  if (!session) {
+    throw new Error("Usuário sem permissão para deletar imagem");
+  }
   console.log("deleta imagem -> ", id);
   const imageDb = await prisma.image.delete({
     where: {

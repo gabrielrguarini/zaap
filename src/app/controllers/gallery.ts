@@ -2,6 +2,7 @@
 
 import { prisma } from "@/utils/prisma";
 import { generateRandomId } from "@/utils/generate-random-id";
+import { auth } from "@/auth";
 
 export interface CreateGalleryProps {
   title: string;
@@ -12,6 +13,10 @@ export interface CreateGalleryProps {
 }
 
 export async function createGallery(data: CreateGalleryProps) {
+  const session = await auth();
+  if (!session) {
+    throw new Error("Usuário sem permissão para deletar imagem");
+  }
   const { title, type, location, date, image } = data;
   const galleriesId = await getGalleriesIds();
   const id = generateRandomId(galleriesId);
