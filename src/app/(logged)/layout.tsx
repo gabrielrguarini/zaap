@@ -13,7 +13,7 @@ export default function RootLayout({
 
   return (
     <>
-      <header className="m-auto mt-4 flex min-h-full w-full max-w-5xl justify-between gap-2 p-2 md:gap-4">
+      <header className="mx-auto mt-0 mt-4 flex min-h-full w-full max-w-5xl justify-between gap-2 p-2 md:gap-4">
         <Link href="/">
           <Image
             src={"/ESCRITA.svg"}
