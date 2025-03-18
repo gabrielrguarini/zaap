@@ -1,9 +1,9 @@
 "use client";
-import { Galery } from "@prisma/client";
+import { Gallery } from "@prisma/client";
 import Image from "next/image";
 interface GalleryListProps extends React.HTMLAttributes<HTMLDivElement> {
   selected: boolean;
-  event: Galery;
+  event: Gallery;
 }
 
 const GalleryListItem = ({

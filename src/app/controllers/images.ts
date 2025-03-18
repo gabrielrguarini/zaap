@@ -6,17 +6,17 @@ import { DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { revalidatePath } from "next/cache";
 
 export async function setImagesToGalery({
-  galeryId,
+  galleryId,
   files,
 }: {
-  galeryId: string;
+  galleryId: string;
   files: string[];
 }) {
   await prisma.image.createMany({
     data: files.map((file) => ({
       url: `https://zaap-bucket.s3.sa-east-1.amazonaws.com/${file}`,
       description: file,
-      galeryId: galeryId,
+      galleryId,
     })),
   });
 
@@ -55,10 +55,10 @@ export async function deleteImage(id: string) {
   }
 }
 
-export async function getImages(galeryId: string) {
+export async function getImages(galleryId: string) {
   const images = await prisma.image.findMany({
     where: {
-      galeryId,
+      galleryId,
     },
   });
 

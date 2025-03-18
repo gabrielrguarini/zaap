@@ -14,13 +14,13 @@ model User {
   name      String?
   password  String
   role      String    @default("USER")
-  galeries  Galery[]
+  galleries  Gallery[]
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 }
 
-model Galery {
-  id          String    @id @default(cuid())
+model Gallery {
+  id          String    @id
   title       String
   type        String?
   location    String?
@@ -38,8 +38,8 @@ model Image {
   id          String    @id @default(cuid())
   url         String
   description String
-  galery      Galery    @relation(fields: [galeryId], references: [id])
-  galeryId    String
+  gallery      Gallery    @relation(fields: [galleryId], references: [id])
+  galleryId    String
   createdAt   DateTime  @default(now())
   updatedAt   DateTime? @updatedAt
 }

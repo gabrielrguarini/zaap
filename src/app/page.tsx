@@ -1,4 +1,3 @@
-import Image from "next/image";
 import About from "./_components/about";
 import EventsType from "./_components/events-type";
 import FeatureBar from "./_components/feature-bar";
@@ -21,20 +20,14 @@ export default function Home() {
           {
             src: "/slides/2.png",
             alt: "Hero Slider",
-            title: "Seu evento com sonorização da mais alta qualidade! 1",
-            subTitle: "Conforto sonoro e qualidade no seu evento",
           },
           {
             src: "/slides/21.png",
             alt: "Hero Slider",
-            title: "Seu evento com sonorização da mais alta qualidade! 2",
-            subTitle: "Conforto sonoro e qualidade no seu evento",
           },
           {
             src: "/slides/30.png",
             alt: "Hero Slider",
-            title: "Seu evento com sonorização da mais alta qualidade! 3",
-            subTitle: "Conforto sonoro e qualidade no seu evento",
           },
         ]}
       />
@@ -65,13 +58,13 @@ export default function Home() {
       <About />
       <Structures />
       <WhatsappButton />
-      <Image
+      {/* <Image
         className="m-auto my-8 sm:my-24"
         src={"/logo3.png"}
         width={180}
         height={213}
         alt="Logo da Zaap Eventos"
-      />
+      /> */}
       <Suspense fallback={<GallerySkeleton text="Carregando galeria..." />}>
         <Gallery />
       </Suspense>

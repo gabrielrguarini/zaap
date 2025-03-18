@@ -30,7 +30,7 @@ const UploadForm = () => {
       async () => {
         const uploadedKeys = await uploadImages(data.files);
         await setImagesToGalery({
-          galeryId: data.galeryId,
+          galleryId: data.galeryId,
           files: uploadedKeys,
         });
       },
@@ -44,22 +44,10 @@ const UploadForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-      <input
-        type="text"
-        {...register("title")}
-        placeholder="Título do arquivo"
-        className="w-full bg-foreground p-1 px-2"
-      />
-      {errors.title && (
-        <span className="-mt-3 text-sm text-red-500">
-          {errors.title.message}
-        </span>
-      )}
-
       <select {...register("galeryId")} className="bg-foreground p-1 px-2">
-        {galleries?.map((galery) => (
-          <option key={galery.id} value={galery.id}>
-            {galery.title}
+        {galleries?.map((gallery) => (
+          <option key={gallery.id} value={gallery.id}>
+            {gallery.title}
           </option>
         ))}
       </select>

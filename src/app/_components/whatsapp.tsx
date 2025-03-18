@@ -3,7 +3,11 @@ import Link from "next/link";
 
 const WhatsappButton = () => {
   return (
-    <Link className="m-auto my-8" href={"https://wa.me/+553284238232/"}>
+    <Link
+      className="m-auto my-20"
+      href={"https://wa.me/+553284238232/"}
+      target="_blank"
+    >
       <div className="relative max-w-[330px] rounded-full bg-gradient-to-r from-[#ffb400] to-[#ff4800] p-[3px]">
         <Image
           className="absolute left-[-10px] top-[-5px]"

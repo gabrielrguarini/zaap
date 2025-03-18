@@ -4,15 +4,11 @@ import "aos/dist/aos.css";
 import Image from "next/image";
 import Logo from "../logo";
 import { useEffect, useState } from "react";
-import GaleryHeroText from "./galery-hero-text";
-import GaleryHeroText2 from "./galery-hero-text-2";
-import GaleryHeroText3 from "./galery-hero-text-3";
+import GalleryHeroText from "./gallery-hero-text";
 
 interface Slide {
   src: string;
   alt: string;
-  title?: string;
-  subTitle?: string;
 }
 
 interface HeroSliderProps {
@@ -34,9 +30,28 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
   };
 
   const heroTexts = [
-    <GaleryHeroText key={0} />,
-    <GaleryHeroText2 key={1} />,
-    <GaleryHeroText3 key={2} />,
+    <GalleryHeroText
+      string1="Seu evento com "
+      string2="da mais alta qualidade!"
+      span="sonorização "
+      subString="Conforto sonoro e qualidade
+no seu evento."
+      key={0}
+    />,
+    <GalleryHeroText
+      string1=""
+      string2="profissional com a mais alta tecnologia!"
+      span="Iluminação "
+      subString="Seu evento com um brilho especial para se destacar!"
+      key={1}
+    />,
+    <GalleryHeroText
+      string1=""
+      string2="completa para garantir o sucesso do seu evento!"
+      span="Estrutura "
+      subString="Tendas, Palco, Estrutura Boxtruss e muito mais!"
+      key={2}
+    />,
   ];
 
   useEffect(() => {

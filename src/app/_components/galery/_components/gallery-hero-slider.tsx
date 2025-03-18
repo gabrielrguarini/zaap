@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Logo from "../../logo";
 import { useEffect, useState } from "react";
-import { Galery } from "@prisma/client";
+import { Gallery } from "@prisma/client";
 
 interface HeroSliderProps {
-  event: Galery;
+  event: Gallery;
 }
 
 const GalleryHeroSlider = ({ event }: HeroSliderProps) => {

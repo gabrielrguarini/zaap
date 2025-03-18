@@ -1,6 +1,7 @@
 "use server";
 
 import { prisma } from "@/utils/prisma";
+import { generateRandomId } from "@/utils/generate-random-id";
 
 export interface CreateGalleryProps {
   title: string;
@@ -12,8 +13,11 @@ export interface CreateGalleryProps {
 
 export async function createGallery(data: CreateGalleryProps) {
   const { title, type, location, date, image } = data;
-  await prisma.galery.create({
+  const galleriesId = await getGalleriesIds();
+  const id = generateRandomId(galleriesId);
+  await prisma.gallery.create({
     data: {
+      id,
       title,
       type,
       location,
@@ -25,12 +29,20 @@ export async function createGallery(data: CreateGalleryProps) {
 }
 
 export async function getGallery({ authorId }: { authorId: number }) {
-  const galery = await prisma.galery.findMany({ where: { authorId } });
-  return galery;
+  const gallery = await prisma.gallery.findMany({ where: { authorId } });
+  return gallery;
 }
 
+export async function getGalleriesIds() {
+  const galleries = await prisma.gallery.findMany({
+    select: {
+      id: true,
+    },
+  });
+  return galleries.map((gallery) => gallery.id);
+}
 export async function getGalleries({ search }: { search: string }) {
-  const galleries = await prisma.galery.findMany({
+  const galleries = await prisma.gallery.findMany({
     take: 5,
     where: {
       title: {
