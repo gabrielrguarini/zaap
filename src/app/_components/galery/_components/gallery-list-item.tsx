@@ -38,8 +38,8 @@ const GalleryListItem = ({
           <p className="whitespace-nowrap bg-gradient-to-r from-[#ffb400] to-[#ff4800] bg-clip-text text-center text-2xl font-bold text-transparent">
             {event.title}
           </p>
-          <p className="font-bold">
-            {event.type} <span className="font-light">- {event.location}</span>
+          <p className="flex flex-col gap-1 font-bold">
+            {event.type} <span className="font-light">{event.location}</span>
           </p>
           <span className="text-xs font-light">
             {event.date?.toLocaleDateString("pt-BR", {

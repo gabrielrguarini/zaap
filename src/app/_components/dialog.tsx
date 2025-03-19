@@ -25,7 +25,7 @@ export const Dialog = ({
   return (
     <>
       <button
-        className={`rounded bg-foreground px-4 py-2 ${className} hover:bg-zinc-700`}
+        className={`rounded bg-foreground px-4 py-2 hover:bg-zinc-700 ${className}`}
         data-modal={buttonString}
         onClick={openDialog}
       >
