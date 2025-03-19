@@ -21,8 +21,8 @@ export const fileUploadSchema = z.preprocess(
     .refine((files) => files.length > 0, {
       message: "Nenhum arquivo selecionado",
     })
-    .refine((files) => files.length <= 5, {
-      message: "Máximo de 5 arquivos permitidos",
+    .refine((files) => files.length <= 50, {
+      message: "Máximo de 50 arquivos permitidos",
     })
     .refine((files) => files.every((file) => allowedTypes[file.type]), {
       message: "Tipo de arquivo inválido. Tipos permitidos: JPG, PNG",
