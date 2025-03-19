@@ -74,7 +74,7 @@ const Gallery = () => {
   }
 
   return (
-    <div id="galery">
+    <div id="galeria">
       <GalleryHeader search={search} setSearch={setSearch} />
       <GalleryHeroSlider event={events[itemSelected]} />
       <GalleryList

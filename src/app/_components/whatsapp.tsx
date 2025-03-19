@@ -4,6 +4,7 @@ import Link from "next/link";
 const WhatsappButton = () => {
   return (
     <Link
+      id="contato"
       className="m-auto my-20"
       href={"https://wa.me/+553284238232/"}
       target="_blank"
