@@ -5,8 +5,19 @@ import { TrashIcon } from "lucide-react";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
+import { Dispatch, SetStateAction } from "react";
 
-export const MinIcon = ({ id, src }: { src: string; id: string }) => {
+export const MinIcon = ({
+  id,
+  src,
+  setImageSelected,
+  index,
+}: {
+  src: string;
+  id: string;
+  setImageSelected: Dispatch<SetStateAction<number>>;
+  index: number;
+}) => {
   const queryCliente = useQueryClient();
   const { status } = useSession();
   return (
@@ -16,7 +27,9 @@ export const MinIcon = ({ id, src }: { src: string; id: string }) => {
         alt={"Search"}
         width={160}
         height={120}
-        className="object-contain"
+        className="cursor-pointer object-contain"
+        onClick={() => setImageSelected(index)}
+        quality={30}
       />
       {status === "authenticated" && (
         <TrashIcon
