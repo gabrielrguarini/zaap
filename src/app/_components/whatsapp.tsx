@@ -5,7 +5,7 @@ const WhatsappButton = () => {
   return (
     <Link
       id="contato"
-      className="m-auto my-20"
+      className="mx-auto my-20 scroll-m-20"
       href={"https://wa.me/+553284238232/"}
       target="_blank"
     >
