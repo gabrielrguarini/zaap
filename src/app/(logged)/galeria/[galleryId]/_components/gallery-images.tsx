@@ -10,7 +10,7 @@ const GalleryImages = ({ galleryId }: { galleryId: string }) => {
     <div className="flex flex-col gap-2">
       <div className={`relative h-72`}>
         <Image
-          src={"/galery-list/0.jpg"}
+          src={images[0].url}
           alt={"Search"}
           fill
           className="object-contain"
