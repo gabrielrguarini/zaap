@@ -20,7 +20,7 @@ export const MinIcon = ({ id, src }: { src: string; id: string }) => {
       />
       {status === "authenticated" && (
         <TrashIcon
-          className="absolute right-1 top-1 cursor-pointer rounded-full bg-black/80 p-1"
+          className="absolute right-1 top-1 cursor-pointer rounded-full bg-black/80 p-1 hover:bg-red-700/80"
           onClick={() => {
             toast.promise(
               async () => {
