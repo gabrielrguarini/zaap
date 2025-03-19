@@ -38,7 +38,7 @@ const LastEventItem = ({
       <div className="rounded-md bg-gradient-to-r from-[#ffb400] to-[#ff4800] p-[2px]">
         <div className="rounded-md bg-black px-2">
           <Dialog
-            title="Difite o código do evento"
+            title="Digite o código do evento"
             buttonString="Ver evento"
             className="bg-transparent hover:bg-transparent"
           >
