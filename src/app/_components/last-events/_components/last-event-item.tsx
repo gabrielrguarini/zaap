@@ -29,10 +29,10 @@ const LastEventItem = ({
             .slice(0, -1)}
         </span>
       </div>
-      <h4 className="bg-gradient-to-r from-[#ffb400] to-[#ff4800] bg-clip-text text-center text-3xl font-bold text-transparent">
+      <h4 className="min-w-52 bg-gradient-to-r from-[#ffb400] to-[#ff4800] bg-clip-text text-start text-3xl font-bold text-transparent">
         {title}
       </h4>
-      <p>
+      <p className="min-w-[250px]">
         <span className="font-bold">{type}</span> - {location}
       </p>
       <div className="rounded-md bg-gradient-to-r from-[#ffb400] to-[#ff4800] p-[2px]">
