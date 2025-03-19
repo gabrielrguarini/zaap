@@ -5,7 +5,7 @@ import GalleryImages from "./_components/gallery-images";
 import { auth } from "@/auth";
 import { getGalleryById } from "@/app/controllers/gallery";
 
-export default async function GaleryPage({
+export default async function GalleryPage({
   params,
 }: {
   params: Promise<{ galleryId: string }>;

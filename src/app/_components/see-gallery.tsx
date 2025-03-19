@@ -3,10 +3,24 @@
 import { useState } from "react";
 import { getGalleryById } from "../controllers/gallery";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { LoaderIcon } from "lucide-react";
 
 export const SeeGallery = () => {
   const [gallery, setGallery] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    const galleryFromDb = await getGalleryById(gallery);
+    if (!galleryFromDb) {
+      toast.error("Galeria não encontrada");
+      setIsLoading(false);
+      return;
+    }
+    router.push(`/galeria/${galleryFromDb.id}`);
+  };
   return (
     <div className="flex flex-col gap-2">
       <input
@@ -16,17 +30,18 @@ export const SeeGallery = () => {
         maxLength={6}
         value={gallery}
         onChange={(e) => setGallery(e.target.value)}
-      />
-      <button
-        onClick={async () => {
-          const galleryFromDb = await getGalleryById(gallery);
-          if (galleryFromDb) {
-            router.push(`/galeria/${gallery}`);
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            handleSubmit();
           }
         }}
-        className="text-bold mt-4 rounded bg-primary px-4 py-2"
+      />
+      <button
+        onClick={handleSubmit}
+        className={`text-bold mt-4 flex justify-center rounded px-4 py-2 ${isLoading ? "bg-gray-600" : "bg-primary hover:opacity-90"}`}
+        disabled={isLoading}
       >
-        Ver galeria
+        {isLoading && <LoaderIcon className="mx-2 animate-spin" />} Ver galeria
       </button>
     </div>
   );
