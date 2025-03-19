@@ -1,11 +1,11 @@
-import Link from "next/link";
+import { Dialog } from "../../dialog";
+import { SeeGallery } from "../../see-gallery";
 
 const LastEventItem = ({
   date,
   title,
   type,
   location,
-  galeryId,
 }: {
   date: Date | null;
   title: string;
@@ -36,9 +36,15 @@ const LastEventItem = ({
         <span className="font-bold">{type}</span> - {location}
       </p>
       <div className="rounded-md bg-gradient-to-r from-[#ffb400] to-[#ff4800] p-[2px]">
-        <button className="rounded-md bg-black px-2">
-          <Link href={`/galeria/${galeryId}`}>Ver evento</Link>
-        </button>
+        <div className="rounded-md bg-black px-2">
+          <Dialog
+            title="Difite o código do evento"
+            buttonString="Ver evento"
+            className="bg-transparent hover:bg-transparent"
+          >
+            <SeeGallery />
+          </Dialog>
+        </div>
       </div>
     </div>
   );

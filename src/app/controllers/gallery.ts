@@ -46,6 +46,15 @@ export async function getGalleriesIds() {
   });
   return galleries.map((gallery) => gallery.id);
 }
+
+export async function getGalleryById(galleryId: string) {
+  const gallery = await prisma.gallery.findUnique({
+    where: {
+      id: galleryId,
+    },
+  });
+  return gallery;
+}
 export async function getGalleries({ search }: { search: string }) {
   const galleries = await prisma.gallery.findMany({
     take: 5,
