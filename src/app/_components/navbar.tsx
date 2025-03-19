@@ -18,7 +18,13 @@ export const Navbar = () => {
         <Link className="cursor-pointer hover:font-bold" href={"#galeria"}>
           GALERIA
         </Link>
-        <Link href={"#contato"} className="cursor-pointer hover:font-bold">
+        <Link
+          href={
+            "https://api.whatsapp.com/send/?phone=%2B553284238232&text&type=phone_number&app_absent=0"
+          }
+          className="cursor-pointer hover:font-bold"
+          target="_blank"
+        >
           CONTATO
         </Link>
       </div>
