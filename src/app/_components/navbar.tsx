@@ -9,16 +9,16 @@ export const Navbar = () => {
         alt="Logo da Zaap Eventos"
         width={200}
         height={50}
-        className="cursor-pointer"
+        className="transform cursor-pointer transition-transform hover:scale-105"
       />
       <div className="hidden gap-4 font-semibold sm:flex">
-        <Link className="cursor-pointer" href={"#events"}>
+        <Link className="cursor-pointer hover:font-bold" href={"#events"}>
           EVENTOS
         </Link>
-        <Link className="cursor-pointer" href={"#galeria"}>
+        <Link className="cursor-pointer hover:font-bold" href={"#galeria"}>
           GALERIA
         </Link>
-        <Link href={"#contato"} className="cursor-pointer text-primary">
+        <Link href={"#contato"} className="cursor-pointer hover:font-bold">
           CONTATO
         </Link>
       </div>
