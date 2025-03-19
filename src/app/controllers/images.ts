@@ -28,36 +28,56 @@ export async function setImagesToGalery({
   revalidatePath("/admin/upload");
 }
 
+export async function getImageById(id: string) {
+  try {
+    const image = await prisma.image.findUnique({
+      where: {
+        id,
+      },
+    });
+    return image;
+  } catch (error) {
+    throw new Error(`Erro ao buscar imagem por id --> ${error}`);
+  }
+}
+
+export async function deleteImageByIdFromDb(id: string) {
+  try {
+    const image = await prisma.image.delete({
+      where: {
+        id,
+      },
+    });
+    return image;
+  } catch (error) {
+    throw new Error(`Erro ao deletar imagem por id --> ${error}`);
+  }
+}
+
 export async function deleteImage(id: string) {
   const session = await auth();
   if (!session) {
     throw new Error("Usuário sem permissão para deletar imagem");
   }
-  console.log("deleta imagem -> ", id);
-  const imageDb = await prisma.image.delete({
-    where: {
-      id,
-    },
-  });
-
-  if (!imageDb) {
-    throw new Error("Imagem não encontrada no banco");
-  }
-
-  console.log("imageDb -> ", imageDb);
-  const urlImage = new URL(imageDb.url);
-  const keyImage = urlImage.pathname.slice(1);
-  console.log("keyImage -> ", keyImage);
-
-  const deleteCommand = new DeleteObjectCommand({
-    Bucket: env.AWS_BUCKET_NAME,
-    Key: keyImage,
-  });
   try {
+    const imageDb = await getImageById(id);
+
+    if (!imageDb) {
+      throw new Error("Imagem não encontrada no banco");
+    }
+
+    const urlImage = new URL(imageDb.url);
+    const keyImage = urlImage.pathname.slice(1);
+
+    const deleteCommand = new DeleteObjectCommand({
+      Bucket: env.AWS_BUCKET_NAME,
+      Key: keyImage,
+    });
+
     const imageDeleted = await s3.send(deleteCommand);
-    console.log("imageDeleted -> ", imageDeleted);
-    // revalidatePath(`/galeria`);
-    return { imageDeleted, imageDb };
+    const imageDeletedFromDb = await deleteImageByIdFromDb(id);
+
+    return { imageDeleted, imageDeletedFromDb };
   } catch (error) {
     console.error("Erro ao excluir imagem do S3:", error);
     throw new Error("Erro ao excluir a imagem do S3.");
