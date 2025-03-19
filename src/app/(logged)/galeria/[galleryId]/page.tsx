@@ -7,9 +7,9 @@ import { auth } from "@/auth";
 export default async function GaleryPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ galleryId: string }>;
 }) {
-  const { slug: galleryId } = await params;
+  const { galleryId: galleryId } = await params;
   const session = await auth();
   return (
     <SessionProvider session={session}>
