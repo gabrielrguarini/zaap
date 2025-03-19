@@ -2,9 +2,7 @@
 import Image from "next/image";
 import { useImages } from "@/hooks/useImages";
 import ImageIconList from "./min-icon-list";
-import { useSession } from "next-auth/react";
 const GalleryImages = ({ galleryId }: { galleryId: string }) => {
-  const session = useSession();
   const { data: images, isLoading } = useImages({ galleryId });
   if (isLoading) return <h1>Carregando...</h1>;
   if (!images) return;
@@ -19,7 +17,7 @@ const GalleryImages = ({ galleryId }: { galleryId: string }) => {
         />
       </div>
       <div className="flex flex-wrap gap-2">
-        {session && <ImageIconList images={images} />}
+        <ImageIconList images={images} />
       </div>
     </div>
   );
