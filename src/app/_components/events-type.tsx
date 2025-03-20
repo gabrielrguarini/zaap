@@ -11,6 +11,7 @@ const EventsType = ({ title, subTitle, imageString }: EventsTypeProps) => {
   return (
     <Link
       href={`https://wa.me/+553284238232/?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20or%C3%A7amento%20para%20uma%20festa%20de%20${title.toUpperCase()}`}
+      rel="noopener noreferrer"
       target="_blank"
       className="col relative flex w-full cursor-pointer overflow-hidden p-2 md:px-8 md:py-4"
     >
