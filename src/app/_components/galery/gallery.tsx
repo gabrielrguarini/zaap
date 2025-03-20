@@ -27,7 +27,7 @@ const Gallery = () => {
     setItemSelected(0);
     const interval = setInterval(() => {
       setItemSelected((prev) => (prev >= events.length - 1 ? 0 : prev + 1));
-    }, 4000);
+    }, 6000);
 
     return () => clearInterval(interval);
   }, [events]);

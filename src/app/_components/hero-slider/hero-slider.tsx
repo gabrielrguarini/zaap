@@ -5,6 +5,7 @@ import Image from "next/image";
 import Logo from "../logo";
 import { useEffect, useState } from "react";
 import GalleryHeroText from "./gallery-hero-text";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Slide {
   src: string;
@@ -27,6 +28,12 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + slides.length) % slides.length,
+    );
   };
 
   const heroTexts = [
@@ -66,6 +73,14 @@ no seu evento."
       className="relative mt-10 h-[224px] w-full p-4 sm:my-0 lg:h-[424px]"
       data-aos="zoom-in"
     >
+      <ChevronLeft
+        onClick={prevSlide}
+        className="absolute left-0 top-[50%] z-20 translate-y-[50%] cursor-pointer"
+      />
+      <ChevronRight
+        onClick={nextSlide}
+        className="absolute right-0 top-[50%] z-20 translate-y-[50%] cursor-pointer"
+      />
       {slides.map((slide, index) => {
         const position = (index - currentIndex + slides.length) % slides.length;
         let positionClasses = "";
