@@ -25,7 +25,7 @@ export const SeeGallery = () => {
     <div className="flex flex-col gap-2">
       <input
         type="text"
-        placeholder="Digite o código"
+        placeholder="Digite a chave de acesso"
         className="rounded bg-foreground p-2 text-white"
         maxLength={6}
         value={gallery}
@@ -36,6 +36,11 @@ export const SeeGallery = () => {
           }
         }}
       />
+      <span className="max-w-80 text-xss text-zinc-400">
+        {
+          "FOTOS EXCLUSIVAS DO CONTRATANTE (ZAAPEVENTOS) PARA ACESSA-LAS SOLICITE A CHAVE DE ACESSO AOS DONOS DESSE EVENTO."
+        }
+      </span>
       <button
         onClick={handleSubmit}
         className={`text-bold mt-4 flex justify-center rounded px-4 py-2 ${isLoading ? "bg-gray-600" : "bg-primary hover:opacity-90"}`}
