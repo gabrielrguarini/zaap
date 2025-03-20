@@ -9,7 +9,11 @@ interface EventsTypeProps {
 
 const EventsType = ({ title, subTitle, imageString }: EventsTypeProps) => {
   return (
-    <div className="col relative flex w-full overflow-hidden p-2 md:px-8 md:py-4">
+    <Link
+      href={`https://wa.me/+553284238232/?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20or%C3%A7amento%20para%20uma%20festa%20de%20${title.toUpperCase()}`}
+      target="_blank"
+      className="col relative flex w-full overflow-hidden p-2 md:px-8 md:py-4"
+    >
       <div className="relative w-full">
         <Image src={imageString} width={960} height={226} alt={"44"} />
         <div className="absolute left-[50%] top-[50%] translate-y-[-50%] leading-none">
@@ -28,10 +32,7 @@ const EventsType = ({ title, subTitle, imageString }: EventsTypeProps) => {
         </div>
       </div>
 
-      <Link
-        href={"https://wa.me/+553284238232/"}
-        target="_blank"
-        rel="noopener noreferrer"
+      <div
         data-aos="fade-right"
         className="absolute bottom-8 right-10 hidden items-center gap-1 sm:flex lg:bottom-12 lg:right-16"
       >
@@ -46,8 +47,8 @@ const EventsType = ({ title, subTitle, imageString }: EventsTypeProps) => {
           <p className="text-xss">Faça um</p>
           <span className="text-xss font-semibold text-primary">Orçamento</span>
         </div>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };
 

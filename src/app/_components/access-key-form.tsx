@@ -33,7 +33,7 @@ export const AccessKeyForm = () => {
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="mt-2 flex flex-col gap-2">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
         <input
           type="text"
@@ -48,7 +48,7 @@ export const AccessKeyForm = () => {
           </span>
         )}
 
-        <span className="max-w-80 text-xss text-zinc-400">
+        <span className="my-4 max-w-80 text-xs text-zinc-400">
           {
             "FOTOS EXCLUSIVAS DO CONTRATANTE (ZAAPEVENTOS) PARA ACESSA-LAS SOLICITE A CHAVE DE ACESSO AOS DONOS DESSE EVENTO."
           }
