@@ -3,7 +3,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Image from "next/image";
 import Logo from "../logo";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import GalleryHeroText from "./gallery-hero-text";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -18,22 +18,40 @@ interface HeroSliderProps {
 
 const HeroSlider = ({ slides }: HeroSliderProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    AOS.init({
-      duration: 800,
-      delay: 100,
-    });
+    AOS.init({ duration: 800, delay: 100 });
+    startInterval();
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
   }, []);
+
+  const startInterval = () => {
+    intervalRef.current = setInterval(nextSlide, 8000);
+  };
+
+  const resetInterval = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    startInterval();
+  };
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    resetInterval();
   };
 
   const prevSlide = () => {
     setCurrentIndex(
       (prevIndex) => (prevIndex - 1 + slides.length) % slides.length,
     );
+    resetInterval();
   };
 
   const heroTexts = [
@@ -60,11 +78,6 @@ no seu evento."
       key={2}
     />,
   ];
-
-  useEffect(() => {
-    const interval = setInterval(nextSlide, 8000);
-    return () => clearInterval(interval);
-  }, []);
 
   const imagePositions = ["estrutura", "som", "luz"];
 
