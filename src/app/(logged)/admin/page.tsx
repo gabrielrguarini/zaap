@@ -6,6 +6,7 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { TableRow } from "./_components/table-row";
 import { getGalleries } from "@/app/controllers/gallery";
+import { Calendar, ImagePlus, KeyRound, Map, PartyPopper } from "lucide-react";
 
 export default async function AdminPage() {
   const sessao = await auth();
@@ -26,26 +27,36 @@ export default async function AdminPage() {
         <UploadForm />
       </Dialog>
       <div className="mx-auto flex max-w-7xl flex-col px-4 py-8">
-        <h2>Galerias Cadastradas</h2>
+        <h2 className="text-3xl">Galerias Cadastradas</h2>
         <div className="flex-1 rounded-lg border border-gray-200 dark:border-gray-700">
           <div className="overflow-x-auto rounded-t-lg">
             <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm dark:divide-gray-700 dark:bg-gray-900">
               <thead className="rtl:textRight ltr:text-left">
                 <tr>
-                  <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
-                    Código
+                  <th className="whitespace-nowrap px-4 py-2 text-center font-medium text-gray-900 dark:text-white">
+                    <span className="inline-flex items-center justify-center">
+                      <KeyRound />
+                    </span>
                   </th>
-                  <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
-                    Nome da festa
+                  <th className="whitespace-nowrap px-4 py-2 text-center font-medium text-gray-900 dark:text-white">
+                    <span className="inline-flex items-center justify-center">
+                      <PartyPopper />
+                    </span>
                   </th>
-                  <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
-                    Local
+                  <th className="whitespace-nowrap px-4 py-2 text-center font-medium text-gray-900 dark:text-white">
+                    <span className="inline-flex items-center justify-center">
+                      <Map />
+                    </span>
                   </th>
-                  <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
-                    Data
+                  <th className="whitespace-nowrap px-4 py-2 text-center font-medium text-gray-900 dark:text-white">
+                    <span className="inline-flex items-center justify-center">
+                      <Calendar />
+                    </span>
                   </th>
-                  <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
-                    Adicionar Imagens
+                  <th className="whitespace-nowrap px-4 py-2 text-center font-medium text-gray-900 dark:text-white">
+                    <span className="inline-flex items-center justify-center">
+                      <ImagePlus />
+                    </span>
                   </th>
                 </tr>
               </thead>

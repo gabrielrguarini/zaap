@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { useUploadImages } from "@/hooks/useUploadImage";
 import { useGalleries } from "@/hooks/useGalleries";
 
-const UploadForm = () => {
+const UploadForm = ({ galleryId }: { galleryId?: string }) => {
   const {
     register,
     handleSubmit,
@@ -47,13 +47,17 @@ const UploadForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-      <select {...register("galeryId")} className="bg-foreground p-1 px-2">
-        {galleries?.map((gallery) => (
-          <option key={gallery.id} value={gallery.id}>
-            {gallery.title}
-          </option>
-        ))}
-      </select>
+      {!galleryId ? (
+        <select {...register("galeryId")} className="bg-foreground p-1 px-2">
+          {galleries?.map((gallery) => (
+            <option key={gallery.id} value={gallery.id}>
+              {gallery.title}
+            </option>
+          ))}
+        </select>
+      ) : (
+        <input type="hidden" value={galleryId} {...register("galeryId")} />
+      )}
       <span className="-mt-3 text-sm text-red-500">
         {errors.galeryId?.message}
       </span>

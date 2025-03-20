@@ -28,7 +28,7 @@ export const TableRow = ({
       </td>
       <td className="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
         <Dialog buttonString="Adicionar Imagens" title="Adicionar Imagens">
-          <UploadForm />
+          <UploadForm galleryId={id} />
         </Dialog>
       </td>
     </tr>
