@@ -28,7 +28,10 @@ const UploadForm = () => {
   const onSubmit = (data: UploadSchema) => {
     toast.promise(
       async () => {
-        const uploadedKeys = await uploadImages(data.files);
+        const uploadedKeys = await uploadImages({
+          galleryId: data.galeryId,
+          files: data.files,
+        });
         await setImagesToGalery({
           galleryId: data.galeryId,
           files: uploadedKeys,
@@ -51,7 +54,6 @@ const UploadForm = () => {
           </option>
         ))}
       </select>
-
       <span className="-mt-3 text-sm text-red-500">
         {errors.galeryId?.message}
       </span>
@@ -67,15 +69,15 @@ const UploadForm = () => {
           {errors.files?.message as string}
         </span>
       )}
-
       <button
         type="submit"
-        className={`px-4 py-2 ${isPending ? "cursor-not-allowed bg-foreground" : "bg-primary"}`}
+        className={`px-4 py-2 ${
+          isPending ? "cursor-not-allowed bg-foreground" : "bg-primary"
+        }`}
         disabled={isPending}
       >
         {isPending ? "Enviando..." : "Enviar"}
       </button>
-
       {isError && (
         <p className="text-red-500">Erro ao fazer upload dos arquivos.</p>
       )}

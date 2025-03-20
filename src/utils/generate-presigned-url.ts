@@ -5,18 +5,17 @@ import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 interface FilesProps {
+  galleryId: string;
   files: {
     fileName: string;
     fileType: string;
   }[];
 }
 
-export async function generatePresignedUrl({ files }: FilesProps) {
-  // colocar auth
-
+export async function generatePresignedUrl({ galleryId, files }: FilesProps) {
   const urls = await Promise.all(
-    files.map(async (file: { fileName: string; fileType: string }) => {
-      const key = `${file.fileName}-${Date.now()}`;
+    files.map(async (file) => {
+      const key = `${galleryId}/${file.fileName}-${Date.now()}`;
 
       const command = new PutObjectCommand({
         Bucket: env.AWS_BUCKET_NAME,

@@ -1,10 +1,10 @@
 "use server";
 
 import { prisma } from "@/utils/prisma";
-import { generateRandomId } from "@/utils/generate-random-id";
 import { auth } from "@/auth";
 
 export interface CreateGalleryProps {
+  id: string;
   title: string;
   type: string;
   location: string;
@@ -17,9 +17,7 @@ export async function createGallery(data: CreateGalleryProps) {
   if (!session) {
     throw new Error("Usuário sem permissão para deletar imagem");
   }
-  const { title, type, location, date, image } = data;
-  const galleriesId = await getGalleriesIds();
-  const id = generateRandomId(galleriesId);
+  const { title, type, location, date, image, id } = data;
   await prisma.gallery.create({
     data: {
       id,

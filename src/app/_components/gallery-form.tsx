@@ -6,6 +6,8 @@ import toast from "react-hot-toast";
 import { useUploadImages } from "@/hooks/useUploadImage";
 import { useCreateGallery } from "@/hooks/useCreateGallery";
 import { useGalleries } from "@/hooks/useGalleries";
+import { getGalleriesIds } from "../controllers/gallery";
+import { generateRandomId } from "@/utils/generate-random-id";
 
 export const GalleryForm = () => {
   const {
@@ -30,8 +32,13 @@ export const GalleryForm = () => {
   const onSubmit = async (data: GallerySchema) => {
     toast.promise(
       (async () => {
-        const uploadedKeys = await uploadImages(data.image);
-        await createGallery({ ...data, image: uploadedKeys[0] });
+        const galleriesId = await getGalleriesIds();
+        const galleryId = generateRandomId(galleriesId);
+        const uploadedKeys = await uploadImages({
+          galleryId,
+          files: data.image,
+        });
+        await createGallery({ ...data, image: uploadedKeys[0], id: galleryId });
         reset();
         refetch();
       })(),

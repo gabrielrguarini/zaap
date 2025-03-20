@@ -88,11 +88,11 @@ no seu evento."
     >
       <ChevronLeft
         onClick={prevSlide}
-        className="absolute left-0 top-[50%] z-20 translate-y-[50%] cursor-pointer"
+        className="absolute left-0 top-[50%] z-20 translate-x-[50%] cursor-pointer"
       />
       <ChevronRight
         onClick={nextSlide}
-        className="absolute right-0 top-[50%] z-20 translate-y-[50%] cursor-pointer"
+        className="absolute right-0 top-[50%] z-20 translate-x-[-50%] cursor-pointer"
       />
       {slides.map((slide, index) => {
         const position = (index - currentIndex + slides.length) % slides.length;

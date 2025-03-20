@@ -67,8 +67,9 @@ export async function deleteImage(id: string) {
     }
 
     const urlImage = new URL(imageDb.url);
-    const keyImage = urlImage.pathname.slice(1);
+    const keyImage = decodeURIComponent(urlImage.pathname.slice(1));
 
+    console.log("keyImage ->", keyImage);
     const deleteCommand = new DeleteObjectCommand({
       Bucket: env.AWS_BUCKET_NAME,
       Key: keyImage,
@@ -77,6 +78,8 @@ export async function deleteImage(id: string) {
     const imageDeleted = await s3.send(deleteCommand);
     const imageDeletedFromDb = await deleteImageByIdFromDb(id);
 
+    console.log("Imagem deletada do S3:", imageDeleted);
+    console.log("Imagem deletada do banco:", imageDeletedFromDb);
     return { imageDeleted, imageDeletedFromDb };
   } catch (error) {
     console.error("Erro ao excluir imagem do S3:", error);

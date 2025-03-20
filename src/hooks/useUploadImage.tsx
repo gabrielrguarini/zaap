@@ -3,15 +3,21 @@ import axios from "axios";
 import { useState } from "react";
 import { generatePresignedUrl } from "@/utils/generate-presigned-url";
 
+interface UploadData {
+  galleryId: string;
+  files: File[];
+}
+
 export const useUploadImages = () => {
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
 
-  const mutation = useMutation<string[], Error, File[]>({
-    mutationFn: async (files) => {
+  const mutation = useMutation<string[], Error, UploadData>({
+    mutationFn: async ({ galleryId, files }) => {
       if (files.length === 0) throw new Error("Nenhum arquivo selecionado");
 
       setStatusMessage("Obtendo URLs de upload...");
       const dataUrl = await generatePresignedUrl({
+        galleryId,
         files: files.map((file) => ({
           fileName: file.name,
           fileType: file.type,

@@ -21,7 +21,6 @@ export async function createUser(email: string, password: string) {
         password: hashedPassword,
       },
     });
-    console.log(newUser);
     return { email: newUser.email, id: newUser.id };
   } catch (error) {
     throw new Error(`Error creating user: ${error}`);
