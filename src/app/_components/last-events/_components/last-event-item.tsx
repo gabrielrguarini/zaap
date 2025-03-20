@@ -1,5 +1,5 @@
+import { AccessKeyForm } from "../../access-key-form";
 import { Dialog } from "../../dialog";
-import { SeeGallery } from "../../see-gallery";
 
 const LastEventItem = ({
   date,
@@ -42,7 +42,7 @@ const LastEventItem = ({
             buttonString="Ver evento"
             className="bg-transparent py-1 hover:bg-transparent"
           >
-            <SeeGallery />
+            <AccessKeyForm />
           </Dialog>
         </div>
       </div>
