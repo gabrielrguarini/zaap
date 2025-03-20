@@ -60,12 +60,12 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
       string2="da mais alta qualidade!"
       span="sonorização "
       subString="Conforto sonoro e qualidade
-no seu evento."
+no seu evento!"
       key={0}
     />,
     <GalleryHeroText
       string1=""
-      string2="profissional com a mais alta tecnologia!"
+      string2={`profissional com a mais alta tecnologia!`}
       span="Iluminação "
       subString="Seu evento com um brilho especial para se destacar!"
       key={1}

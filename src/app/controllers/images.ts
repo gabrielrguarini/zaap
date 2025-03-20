@@ -28,6 +28,26 @@ export async function setImagesToGalery({
   revalidatePath("/admin/upload");
 }
 
+export async function createImage({
+  url,
+  galleryId,
+}: {
+  url: string;
+  galleryId: string;
+}) {
+  const session = await auth();
+  if (!session) {
+    throw new Error("Usuário sem permissão para deletar imagem");
+  }
+  await prisma.image.create({
+    data: {
+      galleryId,
+      url,
+      description: url,
+    },
+  });
+}
+
 export async function getImageById(id: string) {
   try {
     const image = await prisma.image.findUnique({
@@ -51,6 +71,20 @@ export async function deleteImageByIdFromDb(id: string) {
     return image;
   } catch (error) {
     throw new Error(`Erro ao deletar imagem por id --> ${error}`);
+  }
+}
+export async function deleteAllImagesByGalleryIdFromDb(galleryId: string) {
+  try {
+    const deletedImages = await prisma.image.deleteMany({
+      where: {
+        galleryId,
+      },
+    });
+
+    return deletedImages;
+  } catch (error) {
+    console.error("Erro ao deletar imagens:", error);
+    throw new Error("Erro ao deletar imagens");
   }
 }
 
@@ -87,7 +121,7 @@ export async function deleteImage(id: string) {
   }
 }
 
-export async function getImages(galleryId: string) {
+export async function getImagesByGalleryId(galleryId: string) {
   const images = await prisma.image.findMany({
     where: {
       galleryId,
