@@ -25,12 +25,12 @@ const GalleryHeroSlider = ({ event }: HeroSliderProps) => {
         className={`opacity-1 absolute inset-0 z-10 rounded-3xl bg-gradient-to-r from-black via-black/40 to-black`}
       ></div>
       <div
-        className={`absolute inset-0 z-10 flex flex-col justify-center rounded-3xl px-10 ${animate ? "animate-fade-up" : ""}`}
+        className={`absolute inset-0 z-10 flex flex-col justify-center rounded-3xl px-5 sm:px-10 ${animate ? "animate-fade-up" : ""}`}
       >
-        <p className="mr-auto whitespace-nowrap bg-gradient-to-r from-[#ffb400] to-[#ff4800] bg-clip-text text-start text-6xl font-bold text-transparent">
+        <p className="mr-auto whitespace-nowrap bg-gradient-to-r from-[#ffb400] to-[#ff4800] bg-clip-text text-start text-5xl font-bold text-transparent sm:text-6xl">
           {event.title}
         </p>
-        <p className="text-3xl font-bold">
+        <p className="text-2xl font-bold sm:text-3xl">
           {event.type} <span className="font-light">- {event.location}</span>
         </p>
         <span className="text-xs font-light">
