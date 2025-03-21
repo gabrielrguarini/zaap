@@ -14,7 +14,10 @@ const LastEventItem = ({
   galeryId: string;
 }) => {
   return (
-    <div className="flex items-center justify-between rounded-xl bg-black px-8 py-1">
+    <div
+      data-aos="fade-down"
+      className="flex items-center justify-between rounded-xl bg-black px-8 py-1"
+    >
       <div className="flex items-center justify-center gap-1 text-start">
         <p className="bg-gradient-to-r from-[#ffb400] to-[#ff4800] bg-clip-text text-center text-3xl font-bold text-transparent">
           {date?.toLocaleDateString("pt-BR", {
