@@ -21,6 +21,16 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Zaap Eventos",
   description: "Uma empresa que garante qualidade para seu evento",
+  authors: {
+    name: "Gabriel Guarini",
+    url: "https://gabrielguarini.vercel.app/",
+  },
+  creator: "Gabriel Guarini",
+  keywords: ["zaap", "eventos", "fotografia", "vídeo", "eventos", "casamento"],
+  viewport,
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
