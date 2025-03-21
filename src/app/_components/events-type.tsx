@@ -13,7 +13,7 @@ const EventsType = ({ title, subTitle, imageString }: EventsTypeProps) => {
       href={`https://wa.me/+553284238232/?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20or%C3%A7amento%20para%20uma%20festa%20de%20${title.toUpperCase()}`}
       rel="noopener noreferrer"
       target="_blank"
-      className="col relative flex w-full cursor-pointer overflow-hidden p-2 md:px-8 md:py-4"
+      className="col relative m-2 flex w-full cursor-pointer overflow-hidden md:mx-8 md:my-4"
     >
       <div className="relative w-full">
         <Image src={imageString} width={960} height={226} alt={"44"} />
@@ -35,7 +35,7 @@ const EventsType = ({ title, subTitle, imageString }: EventsTypeProps) => {
 
       <div
         data-aos="fade-right"
-        className="absolute bottom-8 right-10 hidden items-center gap-1 sm:flex lg:bottom-12 lg:right-16"
+        className="absolute bottom-8 right-10 hidden items-center gap-1 sm:flex lg:bottom-6 lg:right-24"
       >
         <Image
           className=""
