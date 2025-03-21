@@ -65,7 +65,7 @@ no seu evento!"
     />,
     <GalleryHeroText
       string1=""
-      string2={`profissional com a mais alta tecnologia!`}
+      string2={`profissional com \na mais alta tecnologia!`}
       span="Iluminação "
       subString="Seu evento com um brilho especial para se destacar!"
       key={1}

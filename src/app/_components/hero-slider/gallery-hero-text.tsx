@@ -11,7 +11,7 @@ const GalleryHeroText = ({
 }) => {
   return (
     <>
-      <h3 className="text-3xl font-semibold leading-none">
+      <h3 className="whitespace-pre-line text-3xl font-semibold leading-none">
         {string1}
         <span className="font-bold text-primary">{span}</span>
         {string2}
