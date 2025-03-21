@@ -1,16 +1,18 @@
 "use client";
-import { useRef } from "react";
 import { X } from "lucide-react";
+import { useRef } from "react";
 
 interface DialogProps {
   children: React.ReactNode;
   buttonString: string;
+  buttonElement?: React.ReactNode;
   title: string;
   className?: string;
 }
 export const Dialog = ({
   children,
   buttonString,
+  buttonElement,
   title,
   className,
 }: DialogProps) => {
@@ -24,13 +26,23 @@ export const Dialog = ({
   };
   return (
     <>
-      <button
-        className={`rounded bg-foreground px-4 py-2 hover:bg-zinc-700 ${className}`}
-        data-modal={buttonString}
-        onClick={openDialog}
-      >
-        {buttonString}
-      </button>
+      {buttonElement ? (
+        <div
+          className={className}
+          data-modal={buttonString}
+          onClick={openDialog}
+        >
+          {buttonElement}
+        </div>
+      ) : (
+        <div
+          className={`rounded bg-foreground px-4 py-2 hover:bg-zinc-700 ${className}`}
+          data-modal={buttonString}
+          onClick={openDialog}
+        >
+          {buttonString}
+        </div>
+      )}
       <dialog
         onClick={(e) => e.currentTarget === e.target && closeDialog()}
         className="backdrop:bg-black/70"

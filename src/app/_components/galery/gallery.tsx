@@ -8,6 +8,8 @@ import Logo from "../logo";
 import GallerySkeleton from "./_components/skeleton";
 import { getGalleries } from "@/app/controllers/gallery";
 import { useQueryState } from "nuqs";
+import { Dialog } from "../dialog";
+import { AccessKeyForm } from "../access-key-form";
 
 const Gallery = () => {
   const [itemSelected, setItemSelected] = useState(0);
@@ -76,7 +78,14 @@ const Gallery = () => {
   return (
     <div id="galeria">
       <GalleryHeader search={search} setSearch={setSearch} />
-      <GalleryHeroSlider event={events[itemSelected]} />
+      <Dialog
+        className="cursor-pointer"
+        buttonString="Ver evento"
+        title="Digite o código do evento"
+        buttonElement={<GalleryHeroSlider event={events[itemSelected]} />}
+      >
+        <AccessKeyForm />
+      </Dialog>
       <GalleryList
         events={events}
         itemSelected={itemSelected}
