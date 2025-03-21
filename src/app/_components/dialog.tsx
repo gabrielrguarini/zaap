@@ -35,13 +35,13 @@ export const Dialog = ({
           {buttonElement}
         </div>
       ) : (
-        <div
-          className={`rounded bg-foreground px-4 py-2 hover:bg-zinc-700 ${className}`}
+        <button
+          className={`cursor-pointer rounded bg-foreground px-4 py-2 ${className}`}
           data-modal={buttonString}
           onClick={openDialog}
         >
           {buttonString}
-        </div>
+        </button>
       )}
       <dialog
         onClick={(e) => e.currentTarget === e.target && closeDialog()}

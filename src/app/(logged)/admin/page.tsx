@@ -17,13 +17,17 @@ export default async function AdminPage() {
   return (
     <div>
       <Dialog
-        className="mx-4"
+        className="mx-4 hover:bg-zinc-700"
         title="Adicionar Evento"
         buttonString="Adicionar Evento"
       >
         <GalleryForm />
       </Dialog>
-      <Dialog buttonString="Adicionar Imagens" title="Adicionar Imagens">
+      <Dialog
+        className="hover:bg-zinc-700"
+        buttonString="Adicionar Imagens"
+        title="Adicionar Imagens"
+      >
         <UploadForm />
       </Dialog>
       <div className="mx-auto flex max-w-7xl flex-col px-4 py-8">
