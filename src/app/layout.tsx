@@ -26,8 +26,16 @@ export const metadata: Metadata = {
     url: "https://gabrielguarini.vercel.app/",
   },
   creator: "Gabriel Guarini",
-  keywords: ["zaap", "eventos", "fotografia", "vídeo", "eventos", "casamento"],
-  viewport,
+  keywords: [
+    "zaap",
+    "eventos",
+    "fotografia",
+    "vídeo",
+    "eventos",
+    "casamento",
+    "estrutura",
+    "qualidade",
+  ],
   icons: {
     icon: "/favicon.ico",
   },
