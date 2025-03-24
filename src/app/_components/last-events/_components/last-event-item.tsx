@@ -17,7 +17,7 @@ const LastEventItem = ({
     <div
       data-aos="fade-down"
       data-aos-once="true"
-      className="flex items-center justify-between rounded-xl bg-black px-8 py-1"
+      className="flex items-center justify-between rounded-xl bg-black px-2 py-1 lg:px-8"
     >
       <div className="flex items-center justify-center gap-1 text-start">
         <p className="bg-gradient-to-r from-[#ffb400] to-[#ff4800] bg-clip-text text-center text-3xl font-bold text-transparent">
@@ -44,7 +44,7 @@ const LastEventItem = ({
           <Dialog
             title="Digite o código do evento"
             buttonString="Ver evento"
-            className="bg-transparent py-1 hover:bg-transparent"
+            className="bg-transparent hover:bg-transparent lg:py-1"
           >
             <AccessKeyForm />
           </Dialog>
