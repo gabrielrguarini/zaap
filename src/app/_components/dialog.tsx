@@ -36,7 +36,7 @@ export const Dialog = ({
         </div>
       ) : (
         <button
-          className={`cursor-pointer rounded bg-foreground py-1 leading-3 lg:px-4 lg:py-2 ${className}`}
+          className={`cursor-pointer rounded bg-foreground py-1 leading-3 focus:outline-none lg:px-4 lg:py-2 ${className}`}
           data-modal={buttonString}
           onClick={openDialog}
         >
