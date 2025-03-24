@@ -30,7 +30,7 @@ const GalleryHeroSlider = ({ event }: HeroSliderProps) => {
         <p className="mr-auto whitespace-nowrap bg-gradient-to-r from-[#ffb400] to-[#ff4800] bg-clip-text text-start text-5xl font-bold text-transparent sm:text-6xl">
           {event.title}
         </p>
-        <p className="text-2xl font-bold sm:text-3xl">
+        <p className="text-2xl font-bold leading-5 sm:text-3xl">
           {event.type} <span className="font-light">- {event.location}</span>
         </p>
         <span className="text-xs font-light">
