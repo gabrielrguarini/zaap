@@ -18,15 +18,15 @@ export default function Home() {
       <HeroSlider
         slides={[
           {
-            src: "/slides/2.png",
+            src: "/slides/sonorizacao.png",
             alt: "Hero Slider",
           },
           {
-            src: "/slides/21.png",
+            src: "/slides/iluminacao.png",
             alt: "Hero Slider",
           },
           {
-            src: "/slides/30.png",
+            src: "/slides/estrutura.png",
             alt: "Hero Slider",
           },
         ]}
