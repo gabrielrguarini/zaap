@@ -3,9 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const videoSlides = [
-  "video/videoCasamento.mp4",
-  "video/videoEvento.mp4",
-  "video/videoEvento2.mp4",
+  "https://zaap-bucket.s3.sa-east-1.amazonaws.com/videos/videoCasamento.mp4",
+  "https://zaap-bucket.s3.sa-east-1.amazonaws.com/videos/videoEvento.mp4",
+  "https://zaap-bucket.s3.sa-east-1.amazonaws.com/videos/videoEvento2.mp4",
 ];
 
 const VideoSlider = () => {
