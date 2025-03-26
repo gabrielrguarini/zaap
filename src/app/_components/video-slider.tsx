@@ -44,13 +44,13 @@ const VideoSlider = () => {
     <div className="relative w-full p-2 md:p-8">
       <ChevronLeft
         onClick={prevSlide}
-        className="absolute left-4 top-[50%] z-20 cursor-pointer"
+        className="absolute left-0 top-[50%] z-20 translate-x-[50%] cursor-pointer lg:-left-12"
       />
       <ChevronRight
         onClick={nextSlide}
-        className="absolute right-4 top-[50%] z-20 cursor-pointer"
+        className="absolute right-0 top-[50%] z-20 translate-x-[-50%] cursor-pointer lg:-right-12"
       />
-      <div className="relative h-[224px] w-full overflow-hidden md:h-[424px]">
+      <div className="relative h-[224px] w-full md:h-[424px]">
         {videoSlides.map((video, index) => {
           const position =
             (index - currentIndex + videoSlides.length) % videoSlides.length;
