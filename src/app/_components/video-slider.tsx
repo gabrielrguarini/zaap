@@ -78,7 +78,7 @@ const VideoSlider = () => {
               className={`absolute left-0 top-0 h-full w-full rounded-3xl object-cover shadow-2xl shadow-black transition-all ${positionClasses}`}
               muted
               controls
-              preload={position === 0 ? "auto" : "none"}
+              preload={position === 0 ? "auto" : "metadata"}
             >
               <source src={video} type="video/mp4" />
             </video>
