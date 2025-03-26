@@ -34,22 +34,23 @@ export default function Home() {
       <FeatureBar />
       <div id="events">
         <EventsType
-          imageString="/events-type/44.png"
-          title="Debutante"
-          subTitle="Sua festa de 15 anos impecável"
-        />
-        <EventsType
-          imageString="/events-type/50.png"
+          imageString="/events-type/casameno.png"
           title="Casamento"
           subTitle="Perfeição até os mínimos detalhes"
         />
         <EventsType
-          imageString="/events-type/54.png"
+          imageString="/events-type/debutante.png"
+          title="Debutante"
+          subTitle="Sua festa de 15 anos impecável"
+        />
+
+        <EventsType
+          imageString="/events-type/formatura.png"
           title="Formatura"
           subTitle="Estrutura completa para a grande festa"
         />
         <EventsType
-          imageString="/events-type/59.png"
+          imageString="/events-type/corporativo.png"
           title="Corporativo"
           subTitle="Competência e profissionalismo"
         />
