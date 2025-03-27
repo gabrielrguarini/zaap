@@ -8,18 +8,20 @@ export const TableRow = ({
   name,
   location,
   date,
+  isPublic,
 }: {
   id: string;
   name: string;
   location: string;
   date: string;
+  isPublic?: boolean;
 }) => {
   const { mutate, isPending, isError } = useDeleteGallery({ galleryId: id });
   const handleDelete = () => {
     mutate();
   };
   return (
-    <tr>
+    <tr className={isPublic ? `bg-stone-900` : ``}>
       <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
         {id}
       </td>

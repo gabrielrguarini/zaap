@@ -13,7 +13,7 @@ export default async function AdminPage() {
   if (!sessao) {
     redirect("/sign-in");
   }
-  const galleries = await getGalleries({ search: "" });
+  const galleries = await getGalleries({ search: "", isPublicFilter: false });
   return (
     <div>
       <Dialog
@@ -68,6 +68,7 @@ export default async function AdminPage() {
               <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                 {galleries.map((gallery) => (
                   <TableRow
+                    isPublic={gallery.isPublic}
                     key={gallery.id}
                     id={gallery.id}
                     name={gallery.title}
