@@ -50,7 +50,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <ReactQueryProvider>
         <body
-          className={`${rajdhani.className} flex min-h-screen w-screen flex-col overflow-x-hidden text-white antialiased`}
+          className={`${rajdhani.className} flex min-h-screen w-full flex-col overflow-x-hidden text-white antialiased`}
         >
           <NuqsAdapter>
             <Toaster />

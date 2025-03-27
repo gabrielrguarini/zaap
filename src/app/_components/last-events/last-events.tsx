@@ -6,7 +6,7 @@ const LastEvents = () => {
   const { data: events } = useGalleries();
   if (!events) return;
   return (
-    <div className="flex flex-col gap-2">
+    <div className="m-2 flex flex-col gap-2 md:mx-8 md:my-4">
       <h2 className="m-auto bg-gradient-to-r from-[#ffb400] to-[#ff4800] bg-clip-text text-center text-5xl font-bold text-transparent">
         Últimos Eventos
       </h2>

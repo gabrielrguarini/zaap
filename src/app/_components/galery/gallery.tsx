@@ -63,7 +63,7 @@ const Gallery = () => {
 
   if (events.length <= 0) {
     return (
-      <div className="">
+      <div className="m-2 md:mx-8 md:my-4">
         <GalleryHeader search={search} setSearch={setSearch} />
         <div className="relative flex h-[212px] w-full items-center justify-center rounded-3xl bg-black/20 lg:h-[424px]">
           <Logo className="absolute left-[50%] top-[-20%] z-10 translate-x-[-50%]" />
@@ -76,7 +76,7 @@ const Gallery = () => {
   }
 
   return (
-    <div id="galeria">
+    <div id="galeria" className="m-2 md:mx-8 md:my-4">
       <GalleryHeader search={search} setSearch={setSearch} />
       <Dialog
         className="cursor-pointer"
