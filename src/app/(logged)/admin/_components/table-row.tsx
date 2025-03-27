@@ -2,6 +2,7 @@
 import { Dialog, useModal } from "@/app/_components/dialog";
 import UploadForm from "@/app/_components/upload-form";
 import { useDeleteGallery } from "@/hooks/useDeleteGallery";
+import { Trash } from "lucide-react";
 
 export const TableRow = ({
   id,
@@ -77,9 +78,10 @@ export const TableRow = ({
           buttonElement={
             <button
               disabled={isPending}
-              className="rounded bg-red-500 p-2 text-white disabled:bg-gray-400"
+              className="flex items-center rounded bg-red-500 p-2 text-white disabled:bg-gray-400"
             >
-              {isPending ? "Excluindo..." : "Excluir"}
+              {!isPending && <Trash />}
+              {isPending ? "Excluindo..." : " Excluir"}
             </button>
           }
         >
