@@ -5,15 +5,15 @@ interface EventsTypeProps {
   title: string;
   subTitle: string;
   imageString: string;
+  url: string;
 }
 
-const EventsType = ({ title, subTitle, imageString }: EventsTypeProps) => {
+const EventsType = ({ title, subTitle, imageString, url }: EventsTypeProps) => {
   return (
     <div className="m-2 overflow-hidden md:mx-8 md:my-4">
       <Link
-        href={`https://wa.me/+553284238232/?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20or%C3%A7amento%20para%20uma%20festa%20de%20${title.toUpperCase()}`}
+        href={url}
         rel="noopener noreferrer"
-        target="_blank"
         className="col relative flex w-full cursor-pointer"
       >
         <div className="relative w-full">

@@ -26,7 +26,7 @@ export const GalleryForm = () => {
     statusMessage: galleryMessage,
   } = useCreateGallery();
 
-  const { refetch } = useGalleries();
+  const { refetch } = useGalleries("", undefined);
   const isPending = isUploading || isCreating;
 
   const onSubmit = async (data: GallerySchema) => {

@@ -37,22 +37,26 @@ export default function Home() {
           imageString="/events-type/casameno.png"
           title="Casamento"
           subTitle="Perfeição até os mínimos detalhes"
+          url="galeria/casamento"
         />
         <EventsType
           imageString="/events-type/debutante.png"
           title="Debutante"
           subTitle="Sua festa de 15 anos impecável"
+          url="galeria/debutante"
         />
 
         <EventsType
           imageString="/events-type/formatura.png"
           title="Formatura"
           subTitle="Estrutura completa para a grande festa"
+          url="galeria/formatura"
         />
         <EventsType
           imageString="/events-type/corporativo.png"
           title="Corporativo"
           subTitle="Competência e profissionalismo"
+          url="galeria/corporativo"
         />
       </div>
       <VideoSlider />

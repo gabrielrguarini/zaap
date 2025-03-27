@@ -74,7 +74,13 @@ export async function getGalleryById(galleryId: string) {
   });
   return gallery;
 }
-export async function getGalleries({ search }: { search: string }) {
+export async function getGalleries({
+  search,
+  isPublicFilter,
+}: {
+  search: string;
+  isPublicFilter?: boolean;
+}) {
   const galleries = await prisma.gallery.findMany({
     take: 5,
     where: {
@@ -82,11 +88,13 @@ export async function getGalleries({ search }: { search: string }) {
         contains: search,
         mode: "insensitive",
       },
+      ...(isPublicFilter !== undefined && { isPublic: isPublicFilter }),
     },
     orderBy: {
       createdAt: "desc",
     },
   });
+
   return galleries;
 }
 

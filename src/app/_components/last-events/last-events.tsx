@@ -3,7 +3,7 @@ import LastEventItem from "./_components/last-event-item";
 import { useGalleries } from "@/hooks/useGalleries";
 
 const LastEvents = () => {
-  const { data: events } = useGalleries();
+  const { data: events } = useGalleries("", false);
   if (!events) return;
   return (
     <div className="m-2 flex flex-col gap-2 md:mx-8 md:my-4">

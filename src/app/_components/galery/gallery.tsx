@@ -19,7 +19,7 @@ const Gallery = () => {
     isLoading,
     isError,
   } = useQuery({
-    queryFn: () => getGalleries({ search }),
+    queryFn: () => getGalleries({ search, isPublicFilter: false }),
     queryKey: ["events", search],
     placeholderData: keepPreviousData,
   });

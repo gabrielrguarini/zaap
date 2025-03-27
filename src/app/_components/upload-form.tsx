@@ -23,7 +23,7 @@ const UploadForm = ({ galleryId }: { galleryId?: string }) => {
     isSuccess,
   } = useUploadImages();
 
-  const { data: galleries } = useGalleries();
+  const { data: galleries } = useGalleries("", undefined);
 
   const onSubmit = (data: UploadSchema) => {
     toast.promise(
