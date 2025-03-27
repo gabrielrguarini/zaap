@@ -78,9 +78,9 @@ export const TableRow = ({
           buttonElement={
             <button
               disabled={isPending}
-              className="flex items-center rounded bg-red-500 p-2 text-white disabled:bg-gray-400"
+              className="flex items-center gap-1 rounded bg-red-500 p-2 text-white disabled:bg-gray-400"
             >
-              {!isPending && <Trash />}
+              {!isPending && <Trash size={20} />}
               {isPending ? "Excluindo..." : " Excluir"}
             </button>
           }
