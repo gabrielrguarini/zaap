@@ -21,6 +21,7 @@ export default async function GalleryPage({
     <SessionProvider session={session}>
       <main className="m-auto mt-4 flex min-h-full w-full max-w-5xl flex-col gap-2 md:gap-4">
         <div>
+          <h1 className="text-6xl font-bold">{gallery.title}</h1>
           <GalleryImages galleryId={galleryId} />
         </div>
       </main>

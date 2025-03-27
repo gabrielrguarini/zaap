@@ -1,28 +1,11 @@
 "use client";
-import Image from "next/image";
 import { useImages } from "@/hooks/useImages";
-import ImageIconList from "./min-icon-list";
-import { useState } from "react";
+import PhotoGallery from "@/app/_components/GalleryTeste";
 const GalleryImages = ({ galleryId }: { galleryId: string }) => {
-  const { data: images, isLoading } = useImages({ galleryId });
-  const [imageSelected, setImageSelected] = useState(0);
+  const { data, isLoading } = useImages({ galleryId });
   if (isLoading) return <h1>Carregando...</h1>;
-  if (!images || images.length === 0) return;
-  return (
-    <div className="flex flex-col gap-2">
-      <div className={`relative h-72`}>
-        <Image
-          src={images[imageSelected].url}
-          alt={"Search"}
-          fill
-          className="object-contain"
-        />
-      </div>
-      <div className="flex flex-wrap gap-2">
-        <ImageIconList images={images} setImageSelected={setImageSelected} />
-      </div>
-    </div>
-  );
+  if (!data || data.length === 0) return;
+  return <PhotoGallery images={data} />;
 };
 
 export default GalleryImages;
