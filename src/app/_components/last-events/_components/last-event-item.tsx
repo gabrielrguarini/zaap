@@ -19,20 +19,22 @@ const LastEventItem = ({
       data-aos-once="true"
       className="flex items-center justify-between rounded-xl bg-black px-2 py-1 lg:px-8"
     >
-      <div className="flex items-center justify-center gap-1 text-start">
-        <p className="bg-gradient-to-r from-[#ffb400] to-[#ff4800] bg-clip-text text-center text-3xl font-bold text-transparent">
-          {date?.toLocaleDateString("pt-BR", {
-            day: "2-digit",
-            timeZone: "UTC",
-          })}
-        </p>
-        <span className="font-semibold">
-          {date
-            ?.toLocaleDateString("pt-BR", { month: "short", timeZone: "UTC" })
-            .toLocaleUpperCase()
-            .slice(0, -1)}
-        </span>
-      </div>
+      {date && (
+        <div className="flex items-center justify-center gap-1 text-start">
+          <p className="bg-gradient-to-r from-[#ffb400] to-[#ff4800] bg-clip-text text-center text-3xl font-bold text-transparent">
+            {date?.toLocaleDateString("pt-BR", {
+              day: "2-digit",
+              timeZone: "UTC",
+            })}
+          </p>
+          <span className="font-semibold">
+            {date
+              ?.toLocaleDateString("pt-BR", { month: "short", timeZone: "UTC" })
+              .toLocaleUpperCase()
+              .slice(0, -1)}
+          </span>
+        </div>
+      )}
       <h4 className="min-w-52 bg-gradient-to-r from-[#ffb400] to-[#ff4800] bg-clip-text text-center text-2xl font-bold text-transparent xss:text-start xss:text-3xl">
         {title}
       </h4>
