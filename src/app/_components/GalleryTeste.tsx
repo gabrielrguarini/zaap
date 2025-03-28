@@ -127,7 +127,7 @@ const PhotoGallery = ({ images }: { images: ImageProps[] }) => {
                   <button className="">
                     <Trash
                       size={30}
-                      className="absolute right-0 top-0 z-20 cursor-pointer rounded-full bg-zinc-500/50 p-1 hover:bg-red-500/50"
+                      className="absolute right-0 top-0 cursor-pointer rounded-full bg-zinc-500/50 p-1 hover:bg-red-500/50"
                     />
                   </button>
                 }
