@@ -113,19 +113,15 @@ export async function deleteGallery(galleryId: string) {
 
     const images = await getImagesByGalleryId(galleryId);
 
-    if (!images || images.length === 0) {
-      deleteGalleryFromDb({ id: galleryId });
-      revalidatePath("/admin");
+    let objectsToDelete: { Key: string }[] = [];
 
-      return { message: "Nenhuma imagem encontrada na galeria." };
+    if (images && images.length > 0) {
+      objectsToDelete = images.map((image) => {
+        const urlImage = new URL(image.url);
+        const keyImage = decodeURIComponent(urlImage.pathname.slice(1));
+        return { Key: keyImage };
+      });
     }
-
-    const objectsToDelete = images.map((image) => {
-      const urlImage = new URL(image.url);
-
-      const keyImage = decodeURIComponent(urlImage.pathname.slice(1));
-      return { Key: keyImage };
-    });
 
     if (gallery && gallery.imageUrl) {
       const urlImage = new URL(gallery.imageUrl);
@@ -133,22 +129,25 @@ export async function deleteGallery(galleryId: string) {
       objectsToDelete.push({ Key: keyCover });
     }
 
-    const deleteCommand = new DeleteObjectsCommand({
-      Bucket: env.AWS_BUCKET_NAME,
-      Delete: {
-        Objects: objectsToDelete,
-        Quiet: false,
-      },
-    });
+    if (objectsToDelete.length > 0) {
+      const deleteCommand = new DeleteObjectsCommand({
+        Bucket: env.AWS_BUCKET_NAME,
+        Delete: {
+          Objects: objectsToDelete,
+          Quiet: false,
+        },
+      });
 
-    const s3Response = await s3.send(deleteCommand);
+      const s3Response = await s3.send(deleteCommand);
+      console.log("Resposta do S3:", s3Response);
+    }
 
     const dbResponse = await deleteAllImagesByGalleryIdFromDb(galleryId);
-    console.log("Registros excluídos do banco:", dbResponse);
-    deleteGalleryFromDb({ id: galleryId });
+    console.log("Registros de imagens excluídos do banco:", dbResponse);
+    await deleteGalleryFromDb({ id: galleryId });
     revalidatePath("/admin");
 
-    return { s3Response, dbResponse };
+    return { message: "Galeria e imagens excluídas com sucesso." };
   } catch (error) {
     console.error("Erro ao excluir a galeria:", error);
     throw new Error("Erro ao excluir a galeria.");
