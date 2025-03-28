@@ -77,12 +77,14 @@ export async function getGalleryById(galleryId: string) {
 export async function getGalleries({
   search,
   isPublicFilter,
+  take,
 }: {
   search: string;
   isPublicFilter?: boolean;
+  take?: number;
 }) {
   const galleries = await prisma.gallery.findMany({
-    take: 5,
+    take,
     where: {
       title: {
         contains: search,
