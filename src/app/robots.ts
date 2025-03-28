@@ -5,9 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/admin", "/galeria", "/galeria/*"],
+      disallow: ["/admin", "/galeria", "/galeria/"],
     },
-
-    sitemap: "https://www.zaapeventos.com.br/",
   };
 }
