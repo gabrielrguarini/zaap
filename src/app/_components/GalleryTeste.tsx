@@ -174,6 +174,7 @@ const PhotoGallery = ({ images }: { images: ImageProps[] }) => {
             style={{
               transform: `translateX(${swipeOffset}px)`,
               transition: isSwiping ? "none" : "transform 0.3s ease-out",
+              objectFit: "contain",
             }}
             className="max-h-[80vh] max-w-[100%] rounded-lg"
           />
