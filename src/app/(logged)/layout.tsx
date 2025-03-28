@@ -23,15 +23,7 @@ export default async function RootLayout({
           />
         </Link>
         <nav className="flex items-center gap-4">
-          <ul className="flex gap-4">
-            <li>
-              <Link href="/admin">Admin</Link>
-            </li>
-            <li>
-              <Link href="/galeria">Galeria</Link>
-            </li>
-          </ul>
-          {/* <SignOutButton> */}
+          {session && <Link href="/admin">Admin</Link>}
           {session ? (
             <div
               className={`h-full rounded-full bg-gradient-to-r from-[#ffb400] to-[#ff4800] p-[2px]`}
@@ -40,9 +32,14 @@ export default async function RootLayout({
             </div>
           ) : (
             <div
-              className={`h-full rounded-full bg-gradient-to-r from-[#ffb400] to-[#ff4800] p-[2px]`}
+              className={`h-full rounded-full bg-gradient-to-r from-[#ffb400] to-[#ff4800] p-[1px]`}
             >
-              <Link href="/sign-in">Entrar</Link>
+              <Link
+                href="/sign-in"
+                className="rounded-full bg-background px-2 py-[1px]"
+              >
+                Entrar
+              </Link>
             </div>
           )}
         </nav>

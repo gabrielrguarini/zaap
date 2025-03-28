@@ -1,7 +1,10 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export const Navbar = () => {
+  const pathname = usePathname();
   return (
     <div className="flex w-full items-center justify-center px-8 py-4 sm:justify-between">
       <Image
@@ -15,9 +18,12 @@ export const Navbar = () => {
         <Link className="cursor-pointer hover:font-bold" href={"#events"}>
           EVENTOS
         </Link>
-        <Link className="cursor-pointer hover:font-bold" href={"#galeria"}>
-          GALERIA
-        </Link>
+        {pathname === "/" && (
+          <Link className="cursor-pointer hover:font-bold" href={"#galeria"}>
+            GALERIA
+          </Link>
+        )}
+
         <Link
           href={
             "https://api.whatsapp.com/send/?phone=%2B553284238232&text&type=phone_number&app_absent=0"
