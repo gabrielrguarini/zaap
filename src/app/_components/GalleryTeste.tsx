@@ -1,13 +1,19 @@
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Trash, X } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
+import { Dialog, useModal } from "./dialog";
+import { useDeleteImage } from "@/hooks/useDeleteImage";
+import { useSession } from "next-auth/react";
 
 interface ImageProps {
   url: string;
   description: string;
+  id: string;
 }
 
 const PhotoGallery = ({ images }: { images: ImageProps[] }) => {
+  const { status } = useSession();
+  const isAuth = status === "authenticated";
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
     null,
   );
@@ -72,19 +78,64 @@ const PhotoGallery = ({ images }: { images: ImageProps[] }) => {
     setIsSwiping(false);
   };
 
+  const ConfirmDelete = ({ id }: { id: string }) => {
+    const { closeDialog } = useModal();
+    const { mutate, isPending } = useDeleteImage({ imageId: id });
+
+    return (
+      <div>
+        <p>Tem certeza que deseja excluir?</p>
+        <div className="mt-4 flex gap-2">
+          <button
+            onClick={closeDialog}
+            className="rounded bg-gray-500 px-4 py-2 text-white"
+          >
+            Cancelar
+          </button>
+          <button
+            onClick={async () => {
+              mutate();
+              if (!isPending) closeDialog();
+            }}
+            className="rounded bg-red-500 px-4 py-2 text-white"
+          >
+            {isPending ? "Excluindo..." : "Confirmar"}
+          </button>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="flex min-h-screen flex-col items-center bg-[#171717] p-8 text-white">
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         {images.map((img, index) => (
-          <Image
-            key={index}
-            src={img.url}
-            alt={img.description}
-            width={200}
-            height={128}
-            className="h-32 w-full cursor-pointer rounded-md object-cover hover:opacity-80"
-            onClick={() => setSelectedImageIndex(index)}
-          />
+          <div key={index} className="relative">
+            <Image
+              src={img.url}
+              alt={img.description}
+              width={200}
+              height={128}
+              className="h-32 w-full cursor-pointer rounded-md object-cover hover:opacity-80"
+              onClick={() => setSelectedImageIndex(index)}
+            />
+            {isAuth && (
+              <Dialog
+                title="Excluir"
+                buttonString="Excluir"
+                buttonElement={
+                  <button className="">
+                    <Trash
+                      size={30}
+                      className="absolute right-0 top-0 z-20 cursor-pointer rounded-full bg-zinc-500/50 p-1 hover:bg-red-500/50"
+                    />
+                  </button>
+                }
+              >
+                <ConfirmDelete id={img.id} />
+              </Dialog>
+            )}
+          </div>
         ))}
       </div>
       {selectedImageIndex !== null && (
