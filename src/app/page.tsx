@@ -34,7 +34,7 @@ export default function Home() {
       <FeatureBar />
       <div id="events">
         <EventsType
-          imageString="/events-type/casameno.png"
+          imageString="/events-type/casamento.png"
           title="Casamento"
           subTitle="Perfeição até os mínimos detalhes"
           url="galeria/casamento"
