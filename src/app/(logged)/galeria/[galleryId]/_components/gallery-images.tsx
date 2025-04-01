@@ -1,6 +1,6 @@
 "use client";
 import { useImages } from "@/hooks/useImages";
-import PhotoGallery from "@/app/_components/GalleryTeste";
+import PhotoGallery from "@/app/_components/PhotoGallery";
 const GalleryImages = ({ galleryId }: { galleryId: string }) => {
   const { data, isLoading } = useImages({ galleryId });
   if (isLoading) return <h1>Carregando...</h1>;
