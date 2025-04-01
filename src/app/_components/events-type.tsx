@@ -46,9 +46,9 @@ const EventsType = ({ title, subTitle, imageString, url }: EventsTypeProps) => {
             alt="Orçamento"
           />
           <div className="flex flex-col leading-none">
-            <p className="text-xss">Faça um</p>
+            <p className="text-xss">Clique aqui e</p>
             <span className="text-xss font-semibold text-primary">
-              Orçamento
+              Veja mais
             </span>
           </div>
         </div>

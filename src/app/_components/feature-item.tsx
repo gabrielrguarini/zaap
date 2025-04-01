@@ -10,7 +10,7 @@ interface FeatureItemProps {
 const FeatureItem = ({ src, title, subTitle, alt }: FeatureItemProps) => {
   return (
     <div className="flex w-full items-center justify-center gap-2">
-      <Image src={src} alt={alt} height={42} width={52} />
+      <Image src={src} alt={alt} height={42} width={52} className="h-10 w-12" />
       <div className="hidden leading-3 sm:flex sm:flex-col">
         <p>{title}</p>
         <span className="text-xss">{subTitle}</span>

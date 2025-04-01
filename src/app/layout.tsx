@@ -51,11 +51,11 @@ export default function RootLayout({
     <html lang="pt-BR">
       <ReactQueryProvider>
         <body
-          className={`${rajdhani.className} flex min-h-screen w-full flex-col overflow-x-hidden text-white antialiased`}
+          className={`${rajdhani.className} flex min-h-screen w-full flex-col overflow-x-hidden scroll-smooth text-white antialiased`}
         >
           <NuqsAdapter>
             <Toaster />
-            <main className="flex flex-grow flex-col items-center">
+            <main className="flex flex-grow flex-col items-center overflow-x-hidden">
               {children}
             </main>
           </NuqsAdapter>
