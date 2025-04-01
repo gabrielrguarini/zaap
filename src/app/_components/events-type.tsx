@@ -18,7 +18,7 @@ const EventsType = ({ title, subTitle, imageString, url }: EventsTypeProps) => {
       >
         <div className="relative w-full">
           <Image src={imageString} width={960} height={226} alt={"44"} />
-          <div className="absolute left-[50%] top-[50%] translate-y-[-50%] leading-none">
+          <div className="absolute left-[50%] top-[50%] translate-y-[-70%] leading-none lg:translate-y-[-50%]">
             <h3
               data-aos="fade-left"
               className="bg-gradient-to-r from-[#ffb400] to-[#ff4800] bg-clip-text text-3xl font-semibold text-transparent xss:text-4xl md:text-7xl lg:text-[5.5rem]"
@@ -36,10 +36,10 @@ const EventsType = ({ title, subTitle, imageString, url }: EventsTypeProps) => {
 
         <div
           data-aos="fade-right"
-          className="absolute bottom-8 right-10 hidden items-center gap-1 sm:flex lg:bottom-6 lg:right-24"
+          className="absolute bottom-2 right-4 flex items-center gap-1 lg:bottom-6 lg:right-8"
         >
           <Image
-            className=""
+            className="h-4 w-4 lg:h-6 lg:w-6"
             src={"/events-type/pointer.png"}
             width={25}
             height={19}
