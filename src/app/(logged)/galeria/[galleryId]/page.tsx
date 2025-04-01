@@ -4,6 +4,8 @@ import { SessionProvider } from "next-auth/react";
 import GalleryImages from "./_components/gallery-images";
 import { auth } from "@/auth";
 import { getGalleryById } from "@/app/controllers/gallery";
+import Link from "next/link";
+import Image from "next/image";
 
 export default async function GalleryPage({
   params,
@@ -24,6 +26,17 @@ export default async function GalleryPage({
           <h1 className="text-6xl font-bold">{gallery.title}</h1>
           <GalleryImages galleryId={galleryId} />
         </div>
+        <Link
+          href="https://wa.me/+553284238232/"
+          className="text-blue-500 underline"
+        >
+          <Image
+            src={"/FALE CONOSCO ZAAP.png"}
+            alt="Fale conosco pelo Whatsapp"
+            height={111}
+            width={1113}
+          />
+        </Link>
       </main>
     </SessionProvider>
   );
