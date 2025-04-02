@@ -21,7 +21,7 @@ export default async function GalleryPage({
   }
   return (
     <SessionProvider session={session}>
-      <main className="m-auto mt-4 flex min-h-full w-full max-w-5xl flex-col gap-2 md:gap-4">
+      <main className="mx-auto mt-4 flex min-h-full w-full max-w-5xl flex-col gap-2">
         <div>
           <h1 className="text-6xl font-bold">{gallery.title}</h1>
           <GalleryImages galleryId={galleryId} />
@@ -33,8 +33,9 @@ export default async function GalleryPage({
           <Image
             src={"/FALE CONOSCO ZAAP.png"}
             alt="Fale conosco pelo Whatsapp"
+            className="mx-auto"
             height={111}
-            width={1113}
+            width={400}
           />
         </Link>
       </main>

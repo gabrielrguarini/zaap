@@ -107,7 +107,7 @@ const PhotoGallery = ({ images }: { images: ImageProps[] }) => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center bg-[#171717] p-8 text-white">
+    <div className="flex flex-col items-center bg-[#171717] text-white">
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         {images.map((img, index) => (
           <div key={index} className="relative">
