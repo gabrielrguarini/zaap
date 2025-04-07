@@ -10,6 +10,7 @@ import LastEvents from "./_components/last-events/last-events";
 import Gallery from "./_components/galery/gallery";
 import { Suspense } from "react";
 import GallerySkeleton from "./_components/galery/_components/skeleton";
+import InstagramCarousel from "./_components/InstagramCarousel";
 
 export default function Home() {
   return (
@@ -74,6 +75,7 @@ export default function Home() {
         <Gallery />
       </Suspense>
       <LastEvents />
+      <InstagramCarousel />
     </div>
   );
 }
