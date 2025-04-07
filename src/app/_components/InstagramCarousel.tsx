@@ -12,6 +12,9 @@ const images = [
   "/som.png",
   "/estrutura.png",
   "/luz.png",
+  "/insta1.png",
+  "/insta2.png",
+  "/insta3.png",
 ];
 const IMAGES_PER_PAGE = 3;
 const AUTO_SLIDE_INTERVAL = 4000; // 4s
@@ -34,7 +37,6 @@ export default function InstagramCarousel() {
 
   return (
     <div className="bg-[#171717] px-4 py-12 text-center text-white">
-      {/* Títulos */}
       <h2 className="bg-gradient-to-r from-[#ffb400] to-primary bg-clip-text text-lg uppercase tracking-widest text-transparent">
         Fique por dentro das
       </h2>
@@ -43,9 +45,13 @@ export default function InstagramCarousel() {
       </h3>
       <div className="mx-auto mb-6 h-1 w-16 rounded bg-white" />
 
-      {/* Carrossel */}
       <div className="relative mx-auto w-full max-w-6xl overflow-hidden">
-        <div className="flex transition-transform duration-700 ease-in-out">
+        <div
+          className="flex transition-transform duration-700 ease-in-out"
+          style={{
+            transform: `translateX(-${currentPage * 100}%)`,
+          }}
+        >
           {[...Array(totalPages)].map((_, pageIndex) => {
             const pageImages = images.slice(
               pageIndex * IMAGES_PER_PAGE,
@@ -79,7 +85,6 @@ export default function InstagramCarousel() {
         </div>
       </div>
 
-      {/* Navegação por bolinhas */}
       <div className="mb-4 mt-6 flex justify-center gap-2">
         {[...Array(totalPages)].map((_, index) => (
           <button
@@ -88,18 +93,19 @@ export default function InstagramCarousel() {
             className={`h-3 w-3 rounded-full transition-all duration-300 ${
               currentPage === index ? "bg-orange-500" : "bg-white/40"
             }`}
-            aria-label={`Ir para página ${index + 1}`}
           />
         ))}
       </div>
 
-      {/* Instagram */}
-      <div className="flex items-center justify-center gap-2 text-xl font-bold text-orange-500">
+      <Link
+        href={"https://www.instagram.com/zaapeventos/"}
+        className="flex items-center justify-center gap-2 text-xl font-bold text-orange-500"
+      >
         <Instagram className="size-20 text-[#ffb400]" />
         <span className="bg-gradient-to-r from-[#ffb400] to-primary bg-clip-text text-4xl text-transparent">
           @zaapeventos
         </span>
-      </div>
+      </Link>
     </div>
   );
 }
