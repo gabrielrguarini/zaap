@@ -19,20 +19,33 @@ model User {
   updatedAt DateTime? @updatedAt
 }
 
+enum ImagePosition {
+  TOP
+  CENTER
+  BOTTOM
+  LEFT
+  RIGHT
+  LEFT_TOP
+  RIGHT_TOP
+  LEFT_BOTTOM
+  RIGHT_BOTTOM
+}
+
 model Gallery {
-  id          String    @id
-  title       String
-  type        String?
-  location    String?
-  description String?
-  imageUrl    String?
-  isPublic    Boolean   @default(false)
-  author      User      @relation(fields: [authorId], references: [id])
-  authorId    Int
-  images      Image[]
-  date        DateTime?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime? @updatedAt
+  id            String         @id
+  title         String
+  type          String?
+  location      String?
+  description   String?
+  imageUrl      String?
+  imagePosition ImagePosition?
+  isPublic      Boolean        @default(false)
+  author        User           @relation(fields: [authorId], references: [id])
+  authorId      Int
+  images        Image[]
+  date          DateTime?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime?      @updatedAt
 }
 
 model Image {

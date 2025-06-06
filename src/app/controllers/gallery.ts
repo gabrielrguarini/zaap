@@ -96,7 +96,6 @@ export async function getGalleries({
       createdAt: "desc",
     },
   });
-
   return galleries;
 }
 

@@ -1,10 +1,25 @@
 import Image from "next/image";
 import Logo from "../../logo";
 import { useEffect, useState } from "react";
-import { Gallery } from "@prisma/client";
+import { Gallery, ImagePosition } from "@prisma/client";
 
 interface HeroSliderProps {
   event: Gallery;
+}
+const imagePositionClasses: Record<ImagePosition, string> = {
+  TOP: "object-top",
+  BOTTOM: "object-bottom",
+  CENTER: "object-center",
+  LEFT: "object-left",
+  RIGHT: "object-right",
+  LEFT_TOP: "object-left-top",
+  RIGHT_TOP: "object-right-top",
+  LEFT_BOTTOM: "object-left-bottom",
+  RIGHT_BOTTOM: "object-right-bottom",
+};
+
+function getImagePositionClass(position?: ImagePosition | null): string {
+  return position ? imagePositionClasses[position] : "object-center";
 }
 
 const GalleryHeroSlider = ({ event }: HeroSliderProps) => {
@@ -19,6 +34,8 @@ const GalleryHeroSlider = ({ event }: HeroSliderProps) => {
     return () => clearTimeout(timeout);
   }, [event]);
   if (!event) return null;
+  console.log("event position -> ", event.imagePosition);
+  console.log("Função -> ", getImagePositionClass(event.imagePosition));
   return (
     <div className="relative h-[212px] w-full lg:h-[424px]">
       <div
@@ -45,7 +62,7 @@ const GalleryHeroSlider = ({ event }: HeroSliderProps) => {
       <Logo className="absolute left-[50%] top-[-20%] z-10 translate-x-[-50%]" />
       <div className="absolute left-[20%] top-[30%] z-20 translate-x-[-50%] whitespace-nowrap leading-3"></div>
       <Image
-        className="rounded-3xl object-cover object-center"
+        className={`rounded-3xl object-cover ${getImagePositionClass(event.imagePosition)}`}
         src={`${event.imageUrl}`}
         alt={event.title}
         fill
