@@ -116,6 +116,7 @@ const PhotoGallery = ({ images }: { images: ImageProps[] }) => {
               alt={img.description}
               width={200}
               height={128}
+              quality={20}
               className="h-32 w-full cursor-pointer rounded-md object-cover hover:opacity-80"
               onClick={() => setSelectedImageIndex(index)}
             />
