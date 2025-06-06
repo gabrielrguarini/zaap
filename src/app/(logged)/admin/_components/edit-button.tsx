@@ -1,14 +1,19 @@
 "use client";
 import { Dialog } from "@/app/_components/dialog";
 import { GalleryForm } from "@/app/_components/gallery-form";
+import { useGalleryById } from "@/hooks/useGalleryById";
 import { Pen } from "lucide-react";
 
 const EditButton = ({ id }: { id: string }) => {
+  const { data: gallery, isLoading, isError } = useGalleryById(id);
+  if (isLoading) return "Carregando...";
+  if (isError) return "Erro..";
+  if (!gallery) return "Galeria não existe";
   const testValues = {
     id,
-    title: "",
-    type: "",
-    location: "",
+    title: gallery.id,
+    type: gallery.type,
+    location: gallery.location,
     image: [],
   };
   return (
