@@ -4,7 +4,15 @@ import { Dialog } from "@/app/_components/dialog";
 import { GalleryForm } from "@/app/_components/gallery-form";
 import UploadForm from "@/app/_components/upload-form";
 import { useGalleries } from "@/hooks/useGalleries";
-import { Calendar, ImagePlus, KeyRound, PartyPopper, Map } from "lucide-react";
+import {
+  Calendar,
+  ImagePlus,
+  KeyRound,
+  PartyPopper,
+  Map,
+  Trash,
+  Pen,
+} from "lucide-react";
 import { TableRow } from "./table-row";
 
 export const AdminTable = () => {
@@ -58,6 +66,16 @@ export const AdminTable = () => {
                   <th className="whitespace-nowrap px-4 py-2 text-center font-medium text-gray-900 dark:text-white">
                     <span className="inline-flex items-center justify-center">
                       <ImagePlus />
+                    </span>
+                  </th>
+                  <th className="whitespace-nowrap px-4 py-2 text-center font-medium text-gray-900 dark:text-white">
+                    <span className="inline-flex items-center justify-center">
+                      <Pen />
+                    </span>
+                  </th>
+                  <th className="whitespace-nowrap px-4 py-2 text-center font-medium text-gray-900 dark:text-white">
+                    <span className="inline-flex items-center justify-center">
+                      <Trash />
                     </span>
                   </th>
                 </tr>
