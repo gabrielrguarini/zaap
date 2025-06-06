@@ -9,7 +9,11 @@ import { useGalleries } from "@/hooks/useGalleries";
 import { getGalleriesIds } from "../controllers/gallery";
 import { generateRandomId } from "@/utils/generate-random-id";
 
-export const GalleryForm = () => {
+type GalleryFormProps = {
+  defaultValues?: GallerySchema & { id: string };
+};
+
+export const GalleryForm = ({ defaultValues }: GalleryFormProps) => {
   const {
     register,
     handleSubmit,
@@ -30,24 +34,30 @@ export const GalleryForm = () => {
   const isPending = isUploading || isCreating;
 
   const onSubmit = async (data: GallerySchema) => {
-    toast.promise(
-      (async () => {
-        const galleriesId = await getGalleriesIds();
-        const galleryId = generateRandomId(galleriesId);
-        const uploadedKeys = await uploadImages({
-          galleryId,
-          files: data.image,
-        });
-        await createGallery({ ...data, image: uploadedKeys[0], id: galleryId });
-        reset();
-        refetch();
-      })(),
-      {
-        loading: "Enviando imagens...",
-        success: "Evento criado com sucesso!",
-        error: "Erro ao criar evento",
-      },
-    );
+    if (!defaultValues?.id) {
+      toast.promise(
+        (async () => {
+          const galleriesId = await getGalleriesIds();
+          const galleryId = generateRandomId(galleriesId);
+          const uploadedKeys = await uploadImages({
+            galleryId,
+            files: data.image,
+          });
+          await createGallery({
+            ...data,
+            image: uploadedKeys[0],
+            id: galleryId,
+          });
+          reset();
+          refetch();
+        })(),
+        {
+          loading: "Enviando imagens...",
+          success: "Evento criado com sucesso!",
+          error: "Erro ao criar evento",
+        },
+      );
+    }
   };
 
   return (

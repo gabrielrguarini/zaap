@@ -1,11 +1,20 @@
+"use client";
 import { Dialog } from "@/app/_components/dialog";
+import { GalleryForm } from "@/app/_components/gallery-form";
 import { Pen } from "lucide-react";
 
 const EditButton = ({ id }: { id: string }) => {
+  const testValues = {
+    id,
+    title: "",
+    type: "",
+    location: "",
+    image: [],
+  };
   return (
     <Dialog
       buttonString="Editar"
-      title="Editar"
+      title="Editar Galeria"
       buttonElement={
         <Pen
           size={40}
@@ -13,9 +22,7 @@ const EditButton = ({ id }: { id: string }) => {
         />
       }
     >
-      <button className="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
-        {id}
-      </button>
+      <GalleryForm defaultValues={testValues} />
     </Dialog>
   );
 };
