@@ -67,6 +67,7 @@ export const GalleryForm = ({ defaultValues }: GalleryFormProps) => {
         {...register("title")}
         placeholder="Nome da festa"
         className="rounded bg-foreground p-2 text-white"
+        defaultValue={defaultValues?.title || ""}
       />
       {errors.title && (
         <p className="text-sm text-red-500">{errors.title.message}</p>
@@ -76,6 +77,7 @@ export const GalleryForm = ({ defaultValues }: GalleryFormProps) => {
         {...register("type")}
         placeholder="Tipo de festa"
         className="rounded bg-foreground p-2 text-white"
+        defaultValue={defaultValues?.type || ""}
       />
       {errors.type && (
         <p className="text-sm text-red-500">{errors.type.message}</p>
@@ -85,6 +87,7 @@ export const GalleryForm = ({ defaultValues }: GalleryFormProps) => {
         {...register("location")}
         placeholder="Local da festa"
         className="rounded bg-foreground p-2 text-white"
+        defaultValue={defaultValues?.location || ""}
       />
       {errors.location && (
         <p className="text-sm text-red-500">{errors.location.message}</p>
@@ -93,6 +96,14 @@ export const GalleryForm = ({ defaultValues }: GalleryFormProps) => {
         type="date"
         {...register("date")}
         className="rounded bg-foreground p-2 text-white"
+        defaultValue={
+          defaultValues?.date?.toLocaleDateString("us-EN", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            timeZone: "UTC",
+          }) || ""
+        }
       />
       {errors.date && (
         <p className="text-sm text-red-500">{errors.date.message}</p>
@@ -101,6 +112,7 @@ export const GalleryForm = ({ defaultValues }: GalleryFormProps) => {
         type="file"
         {...register("image")}
         className="rounded bg-foreground p-2 text-white"
+        disabled={defaultValues?.id ? true : false}
       />
       {errors.image?.message && (
         <p className="text-sm text-red-500">{`${errors.image.message}`}</p>
