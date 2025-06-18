@@ -8,6 +8,7 @@ const envSchema = z.object({
   AWS_REGION: z.string(),
   AWS_BUCKET_NAME: z.string(),
   AUTH_SECRET: z.string(),
+  FB_ACCESS_TOKEN: z.string(),
 });
 
 export const env = envSchema.parse(process.env);
