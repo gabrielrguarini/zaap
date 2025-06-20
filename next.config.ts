@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { hostname: "zaap-bucket.s3.sa-east-1.amazonaws.com" },
       { hostname: "scontent.cdninstagram.com" },
+      { hostname: "**.cdninstagram.com" },
     ],
   },
 };
