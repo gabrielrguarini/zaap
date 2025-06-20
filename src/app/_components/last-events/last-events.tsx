@@ -10,14 +10,14 @@ const LastEvents = () => {
       <h2 className="m-auto bg-gradient-to-r from-[#ffb400] to-[#ff4800] bg-clip-text text-center text-5xl font-bold text-transparent">
         Últimos Eventos
       </h2>
-      {events.map((event) => (
+      {events.slice(0, 5).map((event) => (
         <LastEventItem
           key={event.id}
           date={event.date}
           title={event.title}
           type={event.type}
           location={event.location}
-          galeryId={event.id}
+          galleryId={event.id}
         />
       ))}
     </div>
