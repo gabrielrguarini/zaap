@@ -1,17 +1,19 @@
-import { AccessKeyForm } from "../../access-key-form";
-import { Dialog } from "../../dialog";
+import Link from "next/link";
+// import { AccessKeyForm } from "../../access-key-form";
+// import { Dialog } from "../../dialog";
 
 const LastEventItem = ({
   date,
   title,
   type,
   location,
+  galleryId,
 }: {
   date: Date | null;
   title: string;
   type: string | null;
   location: string | null;
-  galeryId: string;
+  galleryId: string;
 }) => {
   return (
     <div
@@ -43,13 +45,14 @@ const LastEventItem = ({
       </p>
       <div className="rounded-md bg-gradient-to-r from-[#ffb400] to-[#ff4800] p-[1px]">
         <div className="rounded-md bg-black px-2">
-          <Dialog
+          {/* <Dialog
             title="Digite o código do evento"
             buttonString="Ver evento"
             className="bg-transparent hover:bg-transparent lg:py-1"
           >
             <AccessKeyForm />
-          </Dialog>
+          </Dialog>  FORMA ANTIGA PARA ENTRAR NA PÁGINA GALERIA, ERA NECESSÁRIO SABER O CÓDIGO DO EVENTO*/}
+          <Link href={`galeria/${galleryId}`}>Ver evento</Link>
         </div>
       </div>
     </div>
