@@ -5,18 +5,25 @@ import Image from "next/image";
 import { Instagram } from "lucide-react";
 import Link from "next/link";
 
-const IMAGES_PER_PAGE = 3;
 const AUTO_SLIDE_INTERVAL = 4000; // 4s
 
 type InstagramImage = {
   url: string;
   link: string;
 };
+const getImagesPerPage = () => {
+  if (typeof window !== "undefined") {
+    return window.innerWidth < 768 ? 1 : 3;
+  }
+  return 3;
+};
 
 export default function InstagramCarousel() {
+  const [imagesPerPage, setImagesPerPage] = useState(getImagesPerPage());
+
   const [images, setImages] = useState<InstagramImage[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const totalPages = Math.ceil(images.length / IMAGES_PER_PAGE);
+  const totalPages = Math.ceil(images.length / imagesPerPage);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -26,6 +33,16 @@ export default function InstagramCarousel() {
     };
 
     fetchImages();
+  }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      const newImagesPerPage = getImagesPerPage();
+      setImagesPerPage(newImagesPerPage);
+      setCurrentPage(0);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
@@ -61,8 +78,8 @@ export default function InstagramCarousel() {
         >
           {[...Array(totalPages)].map((_, pageIndex) => {
             const pageImages = images.slice(
-              pageIndex * IMAGES_PER_PAGE,
-              pageIndex * IMAGES_PER_PAGE + IMAGES_PER_PAGE,
+              pageIndex * imagesPerPage,
+              pageIndex * imagesPerPage + imagesPerPage,
             );
 
             return (
