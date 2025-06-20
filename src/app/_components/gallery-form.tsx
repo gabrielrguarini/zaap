@@ -9,7 +9,11 @@ import { useGalleries } from "@/hooks/useGalleries";
 import { getGalleriesIds } from "../controllers/gallery";
 import { generateRandomId } from "@/utils/generate-random-id";
 
-export const GalleryForm = () => {
+type GalleryFormProps = {
+  defaultValues?: GallerySchema & { id: string };
+};
+
+export const GalleryForm = ({ defaultValues }: GalleryFormProps) => {
   const {
     register,
     handleSubmit,
@@ -30,24 +34,30 @@ export const GalleryForm = () => {
   const isPending = isUploading || isCreating;
 
   const onSubmit = async (data: GallerySchema) => {
-    toast.promise(
-      (async () => {
-        const galleriesId = await getGalleriesIds();
-        const galleryId = generateRandomId(galleriesId);
-        const uploadedKeys = await uploadImages({
-          galleryId,
-          files: data.image,
-        });
-        await createGallery({ ...data, image: uploadedKeys[0], id: galleryId });
-        reset();
-        refetch();
-      })(),
-      {
-        loading: "Enviando imagens...",
-        success: "Evento criado com sucesso!",
-        error: "Erro ao criar evento",
-      },
-    );
+    if (!defaultValues?.id) {
+      toast.promise(
+        (async () => {
+          const galleriesId = await getGalleriesIds();
+          const galleryId = generateRandomId(galleriesId);
+          const uploadedKeys = await uploadImages({
+            galleryId,
+            files: data.image,
+          });
+          await createGallery({
+            ...data,
+            image: uploadedKeys[0],
+            id: galleryId,
+          });
+          reset();
+          refetch();
+        })(),
+        {
+          loading: "Enviando imagens...",
+          success: "Evento criado com sucesso!",
+          error: "Erro ao criar evento",
+        },
+      );
+    }
   };
 
   return (
@@ -57,6 +67,7 @@ export const GalleryForm = () => {
         {...register("title")}
         placeholder="Nome da festa"
         className="rounded bg-foreground p-2 text-white"
+        defaultValue={defaultValues?.title || ""}
       />
       {errors.title && (
         <p className="text-sm text-red-500">{errors.title.message}</p>
@@ -66,6 +77,7 @@ export const GalleryForm = () => {
         {...register("type")}
         placeholder="Tipo de festa"
         className="rounded bg-foreground p-2 text-white"
+        defaultValue={defaultValues?.type || ""}
       />
       {errors.type && (
         <p className="text-sm text-red-500">{errors.type.message}</p>
@@ -75,6 +87,7 @@ export const GalleryForm = () => {
         {...register("location")}
         placeholder="Local da festa"
         className="rounded bg-foreground p-2 text-white"
+        defaultValue={defaultValues?.location || ""}
       />
       {errors.location && (
         <p className="text-sm text-red-500">{errors.location.message}</p>
@@ -83,6 +96,14 @@ export const GalleryForm = () => {
         type="date"
         {...register("date")}
         className="rounded bg-foreground p-2 text-white"
+        defaultValue={
+          defaultValues?.date?.toLocaleDateString("us-EN", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            timeZone: "UTC",
+          }) || ""
+        }
       />
       {errors.date && (
         <p className="text-sm text-red-500">{errors.date.message}</p>
@@ -91,6 +112,7 @@ export const GalleryForm = () => {
         type="file"
         {...register("image")}
         className="rounded bg-foreground p-2 text-white"
+        disabled={defaultValues?.id ? true : false}
       />
       {errors.image?.message && (
         <p className="text-sm text-red-500">{`${errors.image.message}`}</p>

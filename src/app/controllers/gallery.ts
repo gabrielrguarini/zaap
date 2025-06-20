@@ -14,8 +14,8 @@ import { revalidatePath } from "next/cache";
 export interface CreateGalleryProps {
   id: string;
   title: string;
-  type: string;
-  location: string;
+  type: string | null;
+  location: string | null;
   image: string;
   date?: Date | undefined;
 }

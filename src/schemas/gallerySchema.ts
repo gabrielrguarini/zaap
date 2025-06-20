@@ -9,11 +9,13 @@ export const gallerySchema = z.object({
   type: z
     .string()
     .min(3, "O tipo deve ter no mínimo 3 caracteres.")
-    .max(255, "O tipo deve ter no máximo 255 caracteres."),
+    .max(255, "O tipo deve ter no máximo 255 caracteres.")
+    .nullable(),
   location: z
     .string()
     .min(3, "A localização deve ter no mínimo 3 caracteres.")
-    .max(30, "A localização deve ter no máximo 30 caracteres."),
+    .max(30, "A localização deve ter no máximo 30 caracteres.")
+    .nullable(),
   date: z.preprocess((arg) => {
     if (typeof arg === "string" && arg.trim() === "") return undefined;
     return arg;

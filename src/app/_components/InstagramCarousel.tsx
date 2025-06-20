@@ -5,23 +5,28 @@ import Image from "next/image";
 import { Instagram } from "lucide-react";
 import Link from "next/link";
 
-const images = [
-  "/insta1.png",
-  "/insta2.png",
-  "/insta3.png",
-  "/som.png",
-  "/estrutura.png",
-  "/luz.png",
-  "/insta1.png",
-  "/insta2.png",
-  "/insta3.png",
-];
 const IMAGES_PER_PAGE = 3;
 const AUTO_SLIDE_INTERVAL = 4000; // 4s
 
+type InstagramImage = {
+  url: string;
+  link: string;
+};
+
 export default function InstagramCarousel() {
+  const [images, setImages] = useState<InstagramImage[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
   const totalPages = Math.ceil(images.length / IMAGES_PER_PAGE);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      const res = await fetch("/api/instagram");
+      const data = await res.json();
+      setImages(data.images || []);
+    };
+
+    fetchImages();
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -34,6 +39,8 @@ export default function InstagramCarousel() {
   const handleDotClick = (index: number) => {
     setCurrentPage(index);
   };
+
+  if (images.length === 0) return null;
 
   return (
     <div className="bg-[#171717] px-4 py-12 text-center text-white">
@@ -63,16 +70,16 @@ export default function InstagramCarousel() {
                 key={pageIndex}
                 className="flex w-full shrink-0 justify-center gap-6 px-4"
               >
-                {pageImages.map((src, i) => (
+                {pageImages.map((image, i) => (
                   <Link
-                    href="https://www.instagram.com/zaapeventos/"
+                    href={image.link}
                     target="_blank"
                     key={i}
                     className="overflow-hidden rounded-lg border-2 border-orange-500 shadow-lg"
                   >
                     <Image
-                      src={src}
-                      alt={`Imagem ${pageIndex * IMAGES_PER_PAGE + i}`}
+                      src={image.url}
+                      alt={`Instagram ${i}`}
                       width={300}
                       height={300}
                       className="h-[300px] w-[300px] object-cover"

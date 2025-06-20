@@ -3,6 +3,8 @@ import { Dialog, useModal } from "@/app/_components/dialog";
 import UploadForm from "@/app/_components/upload-form";
 import { useDeleteGallery } from "@/hooks/useDeleteGallery";
 import { Trash } from "lucide-react";
+import Link from "next/link";
+import EditButton from "./edit-button";
 
 export const TableRow = ({
   id,
@@ -51,7 +53,7 @@ export const TableRow = ({
   return (
     <tr className={isPublic ? `bg-stone-900` : ``}>
       <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
-        {id}
+        <Link href={`galeria/${id}`}>{id}</Link>
       </td>
       <td className="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
         {name}
@@ -70,6 +72,9 @@ export const TableRow = ({
         >
           <UploadForm galleryId={id} />
         </Dialog>
+      </td>
+      <td className="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
+        <EditButton id={id} />
       </td>
       <td className="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
         <Dialog
