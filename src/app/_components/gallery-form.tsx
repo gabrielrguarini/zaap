@@ -8,19 +8,23 @@ import { useCreateGallery } from "@/hooks/useCreateGallery";
 import { useGalleries } from "@/hooks/useGalleries";
 import { getGalleriesIds } from "../controllers/gallery";
 import { generateRandomId } from "@/utils/generate-random-id";
+import { fileUploadSchema } from "@/schemas/uploadShema";
 
 type GalleryFormProps = {
   defaultValues?: GallerySchema & { id: string };
 };
-
+const editGallerySchema = gallerySchema.extend({
+  image: fileUploadSchema.optional(),
+});
 export const GalleryForm = ({ defaultValues }: GalleryFormProps) => {
+  const isEdit = Boolean(defaultValues?.id);
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm<GallerySchema>({
-    resolver: zodResolver(gallerySchema),
+    resolver: zodResolver(isEdit ? editGallerySchema : gallerySchema),
   });
   const { mutateAsync: uploadImages, isPending: isUploading } =
     useUploadImages();
@@ -34,7 +38,7 @@ export const GalleryForm = ({ defaultValues }: GalleryFormProps) => {
   const isPending = isUploading || isCreating;
 
   const onSubmit = async (data: GallerySchema) => {
-    if (!defaultValues?.id) {
+    if (!isEdit) {
       toast.promise(
         (async () => {
           const galleriesId = await getGalleriesIds();
