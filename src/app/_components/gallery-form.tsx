@@ -17,6 +17,7 @@ const editGallerySchema = gallerySchema.extend({
   image: fileUploadSchema.optional(),
 });
 export const GalleryForm = ({ defaultValues }: GalleryFormProps) => {
+  const buttonText = defaultValues ? "Editar" : "Criar";
   const isEdit = Boolean(defaultValues?.id);
   const {
     register,
@@ -62,6 +63,7 @@ export const GalleryForm = ({ defaultValues }: GalleryFormProps) => {
         },
       );
     }
+    console.log(data);
   };
 
   return (
@@ -132,7 +134,7 @@ export const GalleryForm = ({ defaultValues }: GalleryFormProps) => {
             Enviando...
           </>
         ) : (
-          "Enviar"
+          buttonText
         )}
       </button>
       {galleryMessage && (
