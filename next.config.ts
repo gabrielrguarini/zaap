@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
     ],
     qualities: [20, 30, 75, 100],
   },
+  reactCompiler: true,
 };
 
 export default nextConfig;
