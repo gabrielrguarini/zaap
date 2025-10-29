@@ -26,16 +26,19 @@ const GalleryHeroSlider = ({ event }: HeroSliderProps) => {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    setAnimate(true);
+    const timeoutIn = setTimeout(() => {
+      setAnimate(true);
+    }, 10);
     const timeout = setTimeout(() => {
       setAnimate(false);
     }, 600);
 
-    return () => clearTimeout(timeout);
+    return () => {
+      clearTimeout(timeoutIn);
+      clearTimeout(timeout);
+    };
   }, [event]);
   if (!event) return null;
-  console.log("event position -> ", event.imagePosition);
-  console.log("Função -> ", getImagePositionClass(event.imagePosition));
   return (
     <div className="relative h-[212px] w-full lg:h-[424px]">
       <div
