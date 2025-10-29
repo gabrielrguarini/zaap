@@ -27,7 +27,12 @@ export default function InstagramCarousel() {
 
   useEffect(() => {
     const fetchImages = async () => {
-      const res = await fetch("/api/instagram");
+      const res = await fetch("/api/instagram", {
+        cache: "force-cache",
+        next: {
+          revalidate: false,
+        },
+      });
       const data = await res.json();
       setImages(data.images || []);
     };

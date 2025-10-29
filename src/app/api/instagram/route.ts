@@ -19,7 +19,10 @@ type InstagramApiResponse = {
 export async function GET() {
   try {
     const url = `https://graph.facebook.com/v23.0/${USER_ID}/media?fields=media_type,thumbnail_url,timestamp,permalink&limit=10&access_token=${ACCESS_TOKEN}`;
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      cache: "force-cache",
+      next: { revalidate: false },
+    });
 
     if (!res.ok) {
       return NextResponse.json(
