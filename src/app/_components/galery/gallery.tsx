@@ -27,7 +27,6 @@ const Gallery = () => {
 
   useEffect(() => {
     if (!events) return;
-    setItemSelected(0);
     const interval = setInterval(() => {
       setItemSelected((prev) => (prev >= events.length - 1 ? 0 : prev + 1));
     }, 6000);

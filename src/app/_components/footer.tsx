@@ -1,7 +1,12 @@
+"use client";
 import Link from "next/link";
+import { Suspense } from "react";
 
-const Footer = () => {
+const ThisYear = () => {
   const year = new Date().getFullYear();
+  return <>© {year}</>;
+};
+const Footer = () => {
   return (
     <footer className="mt-8 bg-black p-4 text-center text-white">
       <p>
@@ -12,7 +17,9 @@ const Footer = () => {
         >
           Gabriel Guarini
         </Link>{" "}
-        © {year}
+        <Suspense fallback="....">
+          <ThisYear />
+        </Suspense>
       </p>
     </footer>
   );
