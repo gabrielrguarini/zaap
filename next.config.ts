@@ -1,9 +1,11 @@
 import type { NextConfig } from "next";
+import { env } from "@/env";
 
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
-      { hostname: "zaap-bucket.s3.sa-east-1.amazonaws.com" },
+      { hostname: `${env.AWS_BUCKET_NAME}.s3.${env.AWS_REGION}.amazonaws.com` },
+      { hostname: `zaap-bucket.s3.${env.AWS_REGION}.amazonaws.com` },
       { hostname: "scontent.cdninstagram.com" },
       { hostname: "**.cdninstagram.com" },
     ],

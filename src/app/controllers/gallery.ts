@@ -33,7 +33,7 @@ export async function createGallery(data: CreateGalleryProps) {
       type,
       location,
       date,
-      imageUrl: `https://zaap-bucket.s3.sa-east-1.amazonaws.com/${image}`,
+      imageUrl: `https://${env.AWS_BUCKET_NAME}.s3.sa-east-1.amazonaws.com/${image}`,
       authorId: 1,
     },
   });

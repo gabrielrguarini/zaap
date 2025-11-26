@@ -4,7 +4,7 @@ import { env } from "@/env";
 import { prisma } from "@/utils/prisma";
 import { s3 } from "@/utils/s3Client";
 import { DeleteObjectCommand } from "@aws-sdk/client-s3";
-import { cacheLife, cacheTag, revalidatePath } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 export async function setImagesToGalery({
   galleryId,
@@ -19,7 +19,7 @@ export async function setImagesToGalery({
   }
   await prisma.image.createMany({
     data: files.map((file) => ({
-      url: `https://zaap-bucket.s3.sa-east-1.amazonaws.com/${file}`,
+      url: `https://${env.AWS_BUCKET_NAME}.s3.sa-east-1.amazonaws.com/${file}`,
       description: file,
       galleryId,
     })),
@@ -122,8 +122,6 @@ export async function deleteImage(id: string) {
 }
 
 export async function getImagesByGalleryId(galleryId: string) {
-  cacheLife("max");
-  cacheTag("images");
   const images = await prisma.image.findMany({
     where: {
       galleryId,
