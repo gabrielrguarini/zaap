@@ -3,7 +3,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Image from "next/image";
 import Logo from "../logo";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import GalleryHeroText from "./gallery-hero-text";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -20,6 +20,27 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  const startInterval = useCallback(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    intervalRef.current = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % slides.length);
+    }, 8000);
+  }, [slides.length]);
+
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    startInterval();
+  }, [slides.length, startInterval]);
+
+  const prevSlide = useCallback(() => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + slides.length) % slides.length,
+    );
+    startInterval();
+  }, [slides.length, startInterval]);
+
   useEffect(() => {
     AOS.init({ duration: 800, delay: 100 });
     startInterval();
@@ -29,30 +50,7 @@ const HeroSlider = ({ slides }: HeroSliderProps) => {
         clearInterval(intervalRef.current);
       }
     };
-  }, []);
-
-  const startInterval = () => {
-    intervalRef.current = setInterval(nextSlide, 8000);
-  };
-
-  const resetInterval = () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-    startInterval();
-  };
-
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-    resetInterval();
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + slides.length) % slides.length,
-    );
-    resetInterval();
-  };
+  }, [startInterval]);
 
   const heroTexts = [
     <GalleryHeroText

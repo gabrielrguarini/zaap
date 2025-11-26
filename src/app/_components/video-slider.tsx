@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const videoSlides = [
@@ -12,11 +12,17 @@ const VideoSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
-  useEffect(() => {
-    startVideo();
-  }, [currentIndex]);
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % videoSlides.length);
+  }, []);
 
-  const startVideo = () => {
+  const prevSlide = () => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + videoSlides.length) % videoSlides.length,
+    );
+  };
+
+  const startVideo = useCallback(() => {
     videoRefs.current.forEach((video, index) => {
       if (video) {
         if (index === currentIndex) {
@@ -28,17 +34,11 @@ const VideoSlider = () => {
         }
       }
     });
-  };
+  }, [currentIndex, nextSlide]);
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % videoSlides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + videoSlides.length) % videoSlides.length,
-    );
-  };
+  useEffect(() => {
+    startVideo();
+  }, [startVideo]);
 
   return (
     <div className="relative w-full p-2 md:p-8">

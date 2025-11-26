@@ -1,3 +1,4 @@
+"use client";
 const GalleryHeroText = ({
   string1,
   string2,

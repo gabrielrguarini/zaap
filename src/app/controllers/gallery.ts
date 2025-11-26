@@ -83,7 +83,6 @@ export async function getGalleries({
   isPublicFilter?: boolean;
   take?: number;
 }) {
-  "use cache";
   const galleries = await prisma.gallery.findMany({
     take,
     where: {

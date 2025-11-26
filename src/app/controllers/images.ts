@@ -4,7 +4,7 @@ import { env } from "@/env";
 import { prisma } from "@/utils/prisma";
 import { s3 } from "@/utils/s3Client";
 import { DeleteObjectCommand } from "@aws-sdk/client-s3";
-import { revalidatePath } from "next/cache";
+import { cacheLife, cacheTag, revalidatePath } from "next/cache";
 
 export async function setImagesToGalery({
   galleryId,
@@ -122,6 +122,8 @@ export async function deleteImage(id: string) {
 }
 
 export async function getImagesByGalleryId(galleryId: string) {
+  cacheLife("max");
+  cacheTag("images");
   const images = await prisma.image.findMany({
     where: {
       galleryId,
