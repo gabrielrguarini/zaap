@@ -9,20 +9,41 @@ interface UploadData {
   files: File[];
 }
 
+interface PresignedUrlData {
+  presignedUrl: string;
+  key: string;
+}
+
+async function uploadToS3(
+  compressedFiles: File[],
+  presignedUrls: PresignedUrlData[],
+): Promise<string[]> {
+  const uploadPromises = presignedUrls.map(async (urlData, index) => {
+    const file = compressedFiles[index];
+    return axios
+      .put(urlData.presignedUrl, file, {
+        headers: { "Content-Type": file.type },
+      })
+      .then(() => urlData.key);
+  });
+
+  return Promise.all(uploadPromises);
+}
+
 export const useUploadImages = () => {
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
 
   const mutation = useMutation<string[], Error, UploadData>({
     mutationFn: async ({ galleryId, files }) => {
-      if (files.length === 0) throw new Error("Nenhum arquivo selecionado");
-
+      if (files.length === 0) {
+        throw new Error("Nenhum arquivo selecionado");
+      }
       setStatusMessage("Comprimindo imagens...");
       const compressedFiles = await Promise.all(
         files.map((file) => compressImage({ file })),
       );
-
       setStatusMessage("Obtendo URLs de upload...");
-      const dataUrl = await generatePresignedUrl({
+      const { urls } = await generatePresignedUrl({
         galleryId,
         files: compressedFiles.map((file) => ({
           fileName: file.name,
@@ -30,18 +51,11 @@ export const useUploadImages = () => {
         })),
       });
 
-      if (!dataUrl.urls) throw new Error("Erro ao obter URLs pré-assinadas");
-
+      if (!urls) {
+        throw new Error("Erro ao obter URLs pré-assinadas");
+      }
       setStatusMessage("Enviando imagens...");
-      const uploadPromises = dataUrl.urls.map((urlObj, index) =>
-        axios
-          .put(urlObj.presignedUrl, compressedFiles[index], {
-            headers: { "Content-Type": compressedFiles[index].type },
-          })
-          .then(() => urlObj.key),
-      );
-
-      const uploadedKeys = await Promise.all(uploadPromises);
+      const uploadedKeys = await uploadToS3(compressedFiles, urls);
 
       return uploadedKeys;
     },
