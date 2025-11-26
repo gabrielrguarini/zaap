@@ -1,8 +1,7 @@
 type CompressImageProps = {
   file: File;
   quality?: number;
-  width?: number;
-  height?: number;
+  maxDimension?: number;
 };
 
 const supportedTypes = ["image/jpeg", "image/png", "image/webp"];
@@ -10,8 +9,7 @@ const supportedTypes = ["image/jpeg", "image/png", "image/webp"];
 export function compressImage({
   file,
   quality = 0.99,
-  width = 1920,
-  height = 1920,
+  maxDimension = 1920,
 }: CompressImageProps): Promise<File> {
   return new Promise((resolve, reject) => {
     if (!supportedTypes.includes(file.type)) {
@@ -37,19 +35,16 @@ export function compressImage({
           return;
         }
 
-        const aspectRatio = image.width / image.height;
-        let targetWidth = width;
-        let targetHeight = height;
+        // Calculate target dimensions preserving aspect ratio
+        let targetWidth = image.width;
+        let targetHeight = image.height;
 
-        if (image.width > image.height) {
-          targetHeight = Math.round(targetWidth / aspectRatio);
-        } else {
-          targetWidth = Math.round(targetHeight * aspectRatio);
-        }
-
-        if (targetWidth > image.width && targetHeight > image.height) {
-          targetWidth = image.width;
-          targetHeight = image.height;
+        // Only resize if image is larger than maxDimension
+        const maxImageDimension = Math.max(image.width, image.height);
+        if (maxImageDimension > maxDimension) {
+          const scale = maxDimension / maxImageDimension;
+          targetWidth = Math.round(image.width * scale);
+          targetHeight = Math.round(image.height * scale);
         }
 
         canvas.width = targetWidth;
