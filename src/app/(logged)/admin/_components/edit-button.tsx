@@ -11,10 +11,11 @@ const EditButton = ({ id }: { id: string }) => {
   if (!gallery) return "Galeria não existe";
   const testValues = {
     id,
-    title: gallery.id,
+    title: gallery.title,
     type: gallery.type,
     location: gallery.location,
     image: [],
+    imageUrl: gallery.imageUrl ?? undefined,
   };
   return (
     <Dialog

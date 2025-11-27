@@ -130,3 +130,23 @@ export async function getImagesByGalleryId(galleryId: string) {
 
   return images;
 }
+
+export async function deleteImageByKey(key: string) {
+  const session = await auth();
+  if (!session) {
+    throw new Error("Usuário sem permissão para deletar imagem");
+  }
+  try {
+    const deleteCommand = new DeleteObjectCommand({
+      Bucket: env.AWS_BUCKET_NAME,
+      Key: key,
+    });
+
+    const imageDeleted = await s3.send(deleteCommand);
+    console.log("Imagem deletada do S3:", imageDeleted);
+    return imageDeleted;
+  } catch (error) {
+    console.error("Erro ao excluir imagem do S3:", error);
+    throw new Error("Erro ao excluir a imagem do S3.");
+  }
+}

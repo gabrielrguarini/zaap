@@ -32,6 +32,32 @@ export const fileUploadSchema = z.preprocess(
     }),
 );
 
+export const optionalFileUploadSchema = z.preprocess(
+  (data) => {
+    if (data instanceof FileList) {
+      if (data.length === 0) return undefined;
+      return Array.from(data);
+    }
+    if (data instanceof File) {
+      return [data];
+    }
+    if (Array.isArray(data) && data.length === 0) return undefined;
+    return data;
+  },
+  z
+    .array(z.instanceof(File))
+    .refine((files) => files.length <= 50, {
+      message: "Máximo de 50 arquivos permitidos",
+    })
+    .refine((files) => files.every((file) => allowedTypes[file.type]), {
+      message: "Tipo de arquivo inválido. Tipos permitidos: JPG, PNG",
+    })
+    .refine((files) => files.every((file) => file.size <= fileSizeLimit), {
+      message: "O tamanho do arquivo não deve exceder 5MB",
+    })
+    .optional(),
+);
+
 export const uploadSchema = z.object({
   galeryId: z.string().min(1, "O ID da galeria é obrigatório."),
   files: fileUploadSchema,

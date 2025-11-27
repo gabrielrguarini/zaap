@@ -5,16 +5,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import { useUploadImages } from "@/hooks/useUploadImage";
 import { useCreateGallery } from "@/hooks/useCreateGallery";
+import { useUpdateGallery } from "@/hooks/useUpdateGallery";
 import { useGalleries } from "@/hooks/useGalleries";
 import { getGalleriesIds } from "../controllers/gallery";
+import { deleteImageByKey } from "../controllers/images";
 import { generateRandomId } from "@/utils/generate-random-id";
-import { fileUploadSchema } from "@/schemas/uploadShema";
+import { optionalFileUploadSchema } from "@/schemas/uploadShema";
 
 type GalleryFormProps = {
-  defaultValues?: GallerySchema & { id: string };
+  defaultValues?: GallerySchema & { id: string; imageUrl?: string };
 };
 const editGallerySchema = gallerySchema.extend({
-  image: fileUploadSchema.optional(),
+  image: optionalFileUploadSchema,
 });
 export const GalleryForm = ({ defaultValues }: GalleryFormProps) => {
   const buttonText = defaultValues ? "Editar" : "Criar";
@@ -35,8 +37,11 @@ export const GalleryForm = ({ defaultValues }: GalleryFormProps) => {
     statusMessage: galleryMessage,
   } = useCreateGallery();
 
+  const { mutateAsync: updateGallery, isPending: isUpdating } =
+    useUpdateGallery();
+
   const { refetch } = useGalleries("", undefined);
-  const isPending = isUploading || isCreating;
+  const isPending = isUploading || isCreating || isUpdating;
 
   const onSubmit = async (data: GallerySchema) => {
     if (!isEdit) {
@@ -60,6 +65,46 @@ export const GalleryForm = ({ defaultValues }: GalleryFormProps) => {
           loading: "Enviando imagens...",
           success: "Evento criado com sucesso!",
           error: "Erro ao criar evento",
+        },
+      );
+    } else {
+      toast.promise(
+        (async () => {
+          let imageKey: string | undefined;
+
+          if (data.image && data.image.length > 0) {
+            const uploadedKeys = await uploadImages({
+              galleryId: defaultValues!.id,
+              files: data.image,
+            });
+            imageKey = uploadedKeys[0];
+
+            if (defaultValues?.imageUrl) {
+              try {
+                const urlImage = new URL(defaultValues.imageUrl);
+                const keyCover = decodeURIComponent(urlImage.pathname.slice(1));
+                await deleteImageByKey(keyCover);
+              } catch (e) {
+                console.error("Failed to delete old image", e);
+              }
+            }
+          }
+
+          await updateGallery({
+            id: defaultValues!.id,
+            title: data.title,
+            type: data.type,
+            location: data.location,
+            date: data.date,
+            image: imageKey,
+          });
+
+          refetch();
+        })(),
+        {
+          loading: "Atualizando galeria...",
+          success: "Galeria atualizada com sucesso!",
+          error: "Erro ao atualizar galeria",
         },
       );
     }
@@ -118,7 +163,6 @@ export const GalleryForm = ({ defaultValues }: GalleryFormProps) => {
         type="file"
         {...register("image")}
         className="rounded bg-foreground p-2 text-white"
-        disabled={defaultValues?.id ? true : false}
       />
       {errors.image?.message && (
         <p className="text-sm text-red-500">{`${errors.image.message}`}</p>

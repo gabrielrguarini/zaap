@@ -39,6 +39,38 @@ export async function createGallery(data: CreateGalleryProps) {
   });
 }
 
+export interface UpdateGalleryProps {
+  id: string;
+  title: string;
+  type: string | null;
+  location: string | null;
+  image?: string;
+  date?: Date | undefined;
+}
+
+export async function updateGallery(data: UpdateGalleryProps) {
+  const session = await auth();
+  if (!session) {
+    throw new Error("Usuário sem permissão para atualizar galeria");
+  }
+  const { title, type, location, date, image, id } = data;
+
+  await prisma.gallery.update({
+    where: { id },
+    data: {
+      title,
+      type,
+      location,
+      date,
+      imageUrl: image
+        ? `https://${env.AWS_BUCKET_NAME}.s3.sa-east-1.amazonaws.com/${image}`
+        : undefined,
+    },
+  });
+
+  revalidatePath("/admin");
+}
+
 export async function deleteGalleryFromDb({ id }: { id: string }) {
   const session = await auth();
   if (!session) {
