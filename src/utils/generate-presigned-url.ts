@@ -21,6 +21,7 @@ export async function generatePresignedUrl({ galleryId, files }: FilesProps) {
         Bucket: env.AWS_BUCKET_NAME,
         Key: key,
         ContentType: file.fileType,
+        CacheControl: "public, max-age=31536000, immutable",
       });
 
       const presignedUrl = await getSignedUrl(s3, command, { expiresIn: 3600 });

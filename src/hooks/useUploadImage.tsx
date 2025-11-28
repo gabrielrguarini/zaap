@@ -22,7 +22,10 @@ async function uploadToS3(
     const file = compressedFiles[index];
     return axios
       .put(urlData.presignedUrl, file, {
-        headers: { "Content-Type": file.type },
+        headers: {
+          "Content-Type": file.type,
+          "Cache-Control": "public, max-age=31536000, immutable",
+        },
       })
       .then(() => urlData.key);
   });
